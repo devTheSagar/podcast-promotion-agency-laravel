@@ -55,6 +55,9 @@
         <!-- Reply JS-->
 		<script src="{{ asset('') }}backend/assets/js/reply.js"></script>
 
+        <!--Internal Fileuploads js-->
+		<script src="{{ asset('') }}backend/assets/plugins/fileuploads/js/fileupload.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/fileuploads/js/file-upload.js"></script>
         
         <!-- COLOR THEME JS -->
         <script src="{{ asset('') }}backend/assets/js/themeColors.js"></script>

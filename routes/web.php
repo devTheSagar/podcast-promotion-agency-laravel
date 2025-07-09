@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\auth\LoginController as AdminLoginController;
+use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\frontend\auth\LoginController as UserLoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,9 @@ Route::prefix('admin')->group(function () {
         return view('backend.home');
     })->middleware('auth:admin')->name('admin.dashboard');
     Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout.admin');
+
+
+
+    Route::get('services', [ServiceController::class, 'index'])->name('admin.all-services');
+    Route::get('add-services', [ServiceController::class, 'create'])->name('admin.add-service');
 });

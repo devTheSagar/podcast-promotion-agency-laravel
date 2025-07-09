@@ -35,8 +35,8 @@
                                 </a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Services</a></li>
-                                    <li><a href="add-service.html" class="slide-item">Add Service</a></li>
-                                    <li><a href="all-services.html" class="slide-item">All Services</a></li>
+                                    <li><a href="{{ route('admin.add-service') }}" class="slide-item">Add Service</a></li>
+                                    <li><a href="{{ route('admin.all-services') }}" class="slide-item">All Services</a></li>
                                 </ul>
                             </li>
                             <li class="slide">

@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\backend\AboutUsController;
 use App\Http\Controllers\backend\auth\LoginController as AdminLoginController;
+use App\Http\Controllers\backend\ContactInfoController;
 use App\Http\Controllers\backend\PlanController;
+use App\Http\Controllers\backend\PrivacyPolicyController;
 use App\Http\Controllers\backend\RatingController;
 use App\Http\Controllers\backend\ServiceController;
+use App\Http\Controllers\backend\SocialLinkController;
 use App\Http\Controllers\frontend\auth\LoginController as UserLoginController;
-use App\Models\Plan;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,6 +44,23 @@ Route::prefix('admin')->group(function () {
     Route::get('plans', [PlanController::class, 'index'])->name('admin.all-plans');
     Route::get('add-plans', [PlanController::class, 'create'])->name('admin.add-plan');
 
+    // admin plan ratings
     Route::get('ratings', [RatingController::class, 'index'])->name('admin.all-ratings');
     Route::get('add-ratings', [RatingController::class, 'create'])->name('admin.add-rating');
+
+    // admin contact info
+    Route::get('contact-info', [ContactInfoController::class, 'index'])->name('admin.all-contact-infoes');
+    Route::get('add-contact-info', [ContactInfoController::class, 'create'])->name('admin.add-contact-info');
+
+    // admin social links
+    Route::get('social-links', [SocialLinkController::class, 'index'])->name('admin.all-social-links');
+    Route::get('add-social-links', [SocialLinkController::class, 'create'])->name('admin.add-social-link');
+
+    // admin privacy policy
+    Route::get('privacy-policy', [PrivacyPolicyController::class, 'index'])->name('admin.privacy-policies');
+    Route::get('add-privacy-policy', [PrivacyPolicyController::class, 'create'])->name('admin.add-privacy-policy');
+
+    // admin about us
+    Route::get('about-us', [AboutUsController::class, 'index'])->name('admin.about-us');
+    Route::get('add-about-us', [AboutUsController::class, 'create'])->name('admin.add-about-us');
 });

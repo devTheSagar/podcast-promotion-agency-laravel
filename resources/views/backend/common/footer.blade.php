@@ -43,10 +43,25 @@
         <!-- CHART-CIRCLE JS-->
         <script src="{{ asset('') }}backend/assets/plugins/circle-progress/circle-progress.min.js"></script>
 
+        <!-- DATA TABLE JS-->
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/js/dataTables.buttons.min.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/js/buttons.bootstrap5.min.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/js/jszip.min.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/pdfmake/pdfmake.min.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/pdfmake/vfs_fonts.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/js/buttons.html5.min.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/js/buttons.print.min.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/js/buttons.colVis.min.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/dataTables.responsive.min.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/datatable/responsive.bootstrap5.min.js"></script>
+		<script src="{{ asset('') }}backend/assets/js/table-data.js"></script>
+
         <!-- INTERNAL DATA-TABLES JS-->
-        <script src="{{ asset('') }}backend/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+        {{-- <script src="{{ asset('') }}backend/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
         <script src="{{ asset('') }}backend/assets/plugins/datatable/js/dataTables.bootstrap5.js"></script>
-        <script src="{{ asset('') }}backend/assets/plugins/datatable/dataTables.responsive.min.js"></script>
+        <script src="{{ asset('') }}backend/assets/plugins/datatable/dataTables.responsive.min.js"></script> --}}
 
         <!-- INDEX JS -->
         <script src="{{ asset('') }}backend/assets/js/index1.js"></script>
@@ -67,6 +82,47 @@
 
         <!-- SWITCHER JS -->
         <script src="{{ asset('') }}backend/assets/switcher/js/switcher.js"></script>
+
+        <!-- INTERNAL Summernote Editor js -->
+		<script src="{{ asset('') }}backend/assets/plugins/summernote-editor/summernote1.js"></script>
+		<script src="{{ asset('') }}backend/assets/js/summernote.js"></script>
+
+        <!-- WYSIWYG Editor JS -->
+		<script src="{{ asset('') }}backend/assets/plugins/wysiwyag/jquery.richtext.js"></script>
+		<script src="{{ asset('') }}backend/assets/plugins/wysiwyag/wysiwyag.js"></script>
+
+
+        <!-- dynamic script for adding and removing plan features -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const container = document.getElementById('plan-features-container');
+                const addBtn = document.getElementById('add-feature');
+
+                addBtn.addEventListener('click', function() {
+                    const div = document.createElement('div');
+                    div.className = 'input-group mb-2';
+                    div.innerHTML = `
+                        <input type="text" class="form-control plan-feature-input" name="plan-features[]" required>
+                        <button type="button" class="btn btn-danger remove-feature">Remove</button>
+                    `;
+                    container.appendChild(div);
+                    updateRemoveButtons();
+                });
+
+                container.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('remove-feature')) {
+                        e.target.parentElement.remove();
+                        updateRemoveButtons();
+                    }
+                });
+
+                function updateRemoveButtons() {
+                    const removeBtns = container.querySelectorAll('.remove-feature');
+                    removeBtns.forEach(btn => btn.style.display = 'inline-block');
+                    if (removeBtns.length === 1) removeBtns[0].style.display = 'none';
+                }
+            });
+        </script>
 
     </body>
 

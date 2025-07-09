@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\backend\auth\LoginController as AdminLoginController;
+use App\Http\Controllers\backend\PlanController;
 use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\frontend\auth\LoginController as UserLoginController;
+use App\Models\Plan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,7 +31,11 @@ Route::prefix('admin')->group(function () {
     Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout.admin');
 
 
-
+    // admin services 
     Route::get('services', [ServiceController::class, 'index'])->name('admin.all-services');
     Route::get('add-services', [ServiceController::class, 'create'])->name('admin.add-service');
+
+    // admin plans
+    Route::get('plans', [PlanController::class, 'index'])->name('admin.all-plans');
+    Route::get('add-plans', [PlanController::class, 'create'])->name('admin.add-plan');
 });

@@ -55,8 +55,8 @@
                                     <span class="side-menu__label">Plan Review & Rating</span><i class="angle fa fa-angle-right"></i></a>
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Plan Review & Rating</a></li>
-                                    <li><a href="add-review-rating.html" class="slide-item">Add Review Rating</a></li>
-                                    <li><a href="all-review-rating.html" class="slide-item">Show All</a></li>
+                                    <li><a href="{{ route('admin.add-rating') }}" class="slide-item">Add Review Rating</a></li>
+                                    <li><a href="{{ route('admin.all-ratings') }}" class="slide-item">Show All</a></li>
                                 </ul>
                             </li>
                             <li>

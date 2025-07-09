@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\auth\LoginController as AdminLoginController;
 use App\Http\Controllers\backend\PlanController;
+use App\Http\Controllers\backend\RatingController;
 use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\frontend\auth\LoginController as UserLoginController;
 use App\Models\Plan;
@@ -38,4 +39,7 @@ Route::prefix('admin')->group(function () {
     // admin plans
     Route::get('plans', [PlanController::class, 'index'])->name('admin.all-plans');
     Route::get('add-plans', [PlanController::class, 'create'])->name('admin.add-plan');
+
+    Route::get('ratings', [RatingController::class, 'index'])->name('admin.all-ratings');
+    Route::get('add-ratings', [RatingController::class, 'create'])->name('admin.add-rating');
 });

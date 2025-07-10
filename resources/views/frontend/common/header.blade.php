@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>
+    @yield('title')
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ asset('') }}frontend/assets/css/font-awesome.css">
+  <link rel="stylesheet" href="{{ asset('') }}frontend/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ asset('') }}frontend/assets/css/style.css">
+  <link rel="stylesheet" href="{{ asset('') }}frontend/assets/css/responsive.css">
+  <link rel="stylesheet" class="js-color-style" href="{{ asset('') }}frontend/assets/css/colors/color-1.css">
+  <link rel="stylesheet" class="js-glass-style" href="{{ asset('') }}frontend/assets/css/glass.css" disabled>
+</head>
+<body>
+
+<!-- page loader start -->
+<div class="page-loader js-page-loader">
+  <div></div>
+</div>
+<!-- page loader end -->
+
+<!-- main wrapper start -->
+<div class="main-wrapper">
+  
+  <!-- header start -->
+  <header class="header">
+    <div class="container">
+      <div class="header-main d-flex justify-content-between align-items-center">
+        <div class="header-logo">
+          <a href="{{ route('user.dashboard') }}"><span>podcast</span>promotion</a>
+        </div>
+        <button type="button" class="header-hamburger-btn js-header-menu-toggler">
+          <span></span>
+        </button>
+        <div class="header-backdrop js-header-backdrop"></div>
+        <nav class="header-menu js-header-menu">
+          <button type="button" class="header-close-btn js-header-menu-toggler">
+            <i class="fas fa-times"></i>
+          </button>
+          <ul class="menu">
+            <li class="menu-item"><a href="{{ route('user.dashboard') }}">home</a></li>
+            <li class="menu-item menu-item-has-children">
+              <a href="#" class="js-toggle-sub-menu">services <i class="fas fa-chevron-down"></i></a>
+              <ul class="sub-menu js-sub-menu">
+                 <li class="sub-menu-item"><a href="{{ route('user.service-details') }}">podcast promotion</a></li>
+                 <li class="sub-menu-item"><a href="{{ route('user.service-details') }}">spotify promotion</a></li>
+              </ul>
+            </li>
+            <li class="menu-item"><a href="{{ route('user.message') }}">contact</a></li>
+            <li class="menu-item menu-item-has-children">
+              <a href="#" class="js-toggle-sub-menu">account <i class="fas fa-chevron-down"></i></a>
+              <ul class="sub-menu js-sub-menu">
+                  <li class="sub-menu-item"><a href="log-in.html">log in</a></li>
+                  <li class="sub-menu-item"><a href="sign-up.html">sign up</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- header end -->

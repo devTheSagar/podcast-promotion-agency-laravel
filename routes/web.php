@@ -9,21 +9,41 @@ use App\Http\Controllers\backend\RatingController;
 use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\SocialLinkController;
 use App\Http\Controllers\frontend\auth\LoginController as UserLoginController;
-
+use App\Http\Controllers\frontend\CheckoutController;
+use App\Http\Controllers\frontend\MessageController;
+use App\Http\Controllers\frontend\PlanController as FrontendPlanController;
+use App\Http\Controllers\frontend\ServiceController as FrontendServiceController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 // User Routes
 Route::get('login', [UserLoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [UserLoginController::class, 'login']);
-Route::get('/user/dashboard', function () {
+Route::get('/', function () {
     return view('frontend.home');
 })->middleware('auth')->name('user.dashboard');
 Route::post('logout', [UserLoginController::class, 'logout'])->name('logout.user');
+
+// user services
+Route::get('services', [FrontendServiceController::class, 'index'])->name('user.service-details');
+
+// user plans
+Route::get('plans', [FrontendPlanController::class, 'index'])->name('user.plan-details');
+
+// user message
+Route::get('contact', [MessageController::class, 'index'])->name('user.message');
+
+// user checkout
+Route::get('checkout', [CheckoutController::class, 'index'])->name('user.checkout');
+
+
+
+
+
 
 
 // Admin Routes

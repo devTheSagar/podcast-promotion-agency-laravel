@@ -1,7 +1,7 @@
 @extends('backend.master')
 
 @section('title')
-    All Services
+    All Testimonials
 @endsection
 
 @section('content')
@@ -9,12 +9,12 @@
         <!-- PAGE-HEADER -->
         <div class="page-header">
             <div>
-                <h1 class="page-title">All Services</h1>
+                <h1 class="page-title">Others</h1>
             </div>
             <div class="ms-auto pageheader-btn">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Services</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">All Services</li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Others</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">All Testimonials</li>
                 </ol>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header border-bottom">
-                        <h3 class="card-title">Services DataTable</h3>
+                        <h3 class="card-title">Testimonials DataTable</h3>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -33,19 +33,17 @@
                                 <thead>
                                     <tr>
                                         <th class="wd-15p border-bottom-0">SL</th>
-                                        <th class="wd-15p border-bottom-0">Service name</th>
-                                        <th class="wd-20p border-bottom-0">Service image</th>
-                                        <th class="wd-20p border-bottom-0">Service description</th>
+                                        <th class="wd-15p border-bottom-0">Name</th>
+                                        <th class="wd-20p border-bottom-0">Designation</th>
+                                        <th class="wd-20p border-bottom-0">Designation</th>
                                         <th class="wd-15p border-bottom-0">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Apple podcast promotion</td>
-                                        <td>
-                                            <img src="" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
-                                        </td>
+                                        <td>Alex</td>
+                                        <td>web developer</td>
                                         <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae voluptate dolorem recusandae, laudantium autem molestias perferendis nemo. Esse, laboriosam ipsa.</td>
                                         <td>
                                             <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-edit"></i></a>
@@ -54,10 +52,8 @@
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Spotify promotion</td>
-                                        <td>
-                                            <img src="" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
-                                        </td>
+                                        <td>brown</td>
+                                        <td>web developer</td>
                                         <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae voluptate dolorem recusandae, laudantium autem molestias perferendis nemo. Esse, laboriosam ipsa.</td>
                                         <td>
                                             <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-edit"></i></a>
@@ -66,10 +62,8 @@
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Youtube promotion</td>
-                                        <td>
-                                            <img src="" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
-                                        </td>
+                                        <td>Alex</td>
+                                        <td>web developer</td>
                                         <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae voluptate dolorem recusandae, laudantium autem molestias perferendis nemo. Esse, laboriosam ipsa.</td>
                                         <td>
                                             <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-edit"></i></a>

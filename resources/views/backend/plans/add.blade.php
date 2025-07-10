@@ -74,12 +74,12 @@
                                             <div class="invalid-feedback">Please provide at least one plan feature.</div>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-success btn-sm" id="add-feature"><i class="ion ion-plus"></i> Add more plan</button>
+                                    <button type="button" class="btn btn-success btn-sm" id="add-feature"><i class="ion ion-plus"></i> Add more plan features</button>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="plan-name">Plan Description</label>
+                                    <label for="plan-description">Plan Description</label>
                                     <textarea id="summernote" class="form-control"></textarea>
                                 </div>
                             </div>

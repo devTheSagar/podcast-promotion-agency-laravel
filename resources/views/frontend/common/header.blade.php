@@ -52,8 +52,14 @@
             <li class="menu-item menu-item-has-children">
               <a href="#" class="js-toggle-sub-menu">account <i class="fas fa-chevron-down"></i></a>
               <ul class="sub-menu js-sub-menu">
-                  <li class="sub-menu-item"><a href="log-in.html">log in</a></li>
-                  <li class="sub-menu-item"><a href="sign-up.html">sign up</a></li>
+                  <li class="sub-menu-item"><a href="{{ route('login') }}">log in</a></li>
+                  <li class="sub-menu-item"><a href="{{ route('signup.user') }}">sign up</a></li>
+                  <li class="sub-menu-item">
+                    <form method="POST" action="{{ route('logout.user') }}">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                  </li>
               </ul>
             </li>
           </ul>

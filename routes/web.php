@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\RatingController;
 use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\SocialLinkController;
 use App\Http\Controllers\frontend\auth\LoginController as UserLoginController;
+use App\Http\Controllers\frontend\auth\RegisterController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\MessageController;
 use App\Http\Controllers\frontend\PlanController as FrontendPlanController;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 // User Routes
 Route::get('login', [UserLoginController::class, 'showLoginForm'])->name('login');
+Route::get('sign-up', [RegisterController::class, 'index'])->name('signup.user');
 Route::post('login', [UserLoginController::class, 'login']);
 Route::get('/', function () {
     return view('frontend.home');

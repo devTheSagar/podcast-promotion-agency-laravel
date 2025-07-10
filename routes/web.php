@@ -8,6 +8,7 @@ use App\Http\Controllers\backend\PrivacyPolicyController;
 use App\Http\Controllers\backend\RatingController;
 use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\SocialLinkController;
+use App\Http\Controllers\backend\TeamController;
 use App\Http\Controllers\backend\TestimonialController;
 use App\Http\Controllers\frontend\auth\LoginController as UserLoginController;
 use App\Http\Controllers\frontend\auth\RegisterController;
@@ -99,4 +100,8 @@ Route::prefix('admin')->group(function () {
     // admin testimonial
     Route::get('testimonial', [TestimonialController::class, 'index'])->name('admin.testimonials');
     Route::get('add-testimonial', [TestimonialController::class, 'create'])->name('admin.add-testimonials');
+
+    // admin team
+    Route::get('team', [TeamController::class, 'index'])->name('admin.team');
+    Route::get('add-team', [TeamController::class, 'create'])->name('admin.add-team');
 });

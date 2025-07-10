@@ -33,13 +33,13 @@
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="about-us-image" class="form-label">About us image</label>
-                                    <input type="file" class="dropify" accept="image/*" id="service-image" data-height="200" />
+                                    <input name="about-us-image" type="file" class="dropify" accept="image/*" id="about-us-image" data-height="200" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="about-us">About us details</label>
-                                    <textarea id="summernote" class="form-control"></textarea>
+                                    <textarea name="about-us-details" id="summernote" class="form-control"></textarea>
                                 </div>
                             </div>
                             <button class="btn btn-primary mt-3" type="submit">Add About Us</button>

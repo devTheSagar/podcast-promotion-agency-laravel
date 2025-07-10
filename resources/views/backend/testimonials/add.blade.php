@@ -33,21 +33,21 @@
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" value="" required>
+                                    <input name="name" type="text" class="form-control" id="name" value="" required>
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="designation" class="form-label">Designation</label>
-                                    <input type="text" class="form-control" id="designation" value="" required>
+                                    <input name="designation" type="text" class="form-control" id="designation" value="" required>
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="testimonial">Testimonial</label>
-                                    <textarea id="summernote" class="form-control"></textarea>
+                                    <textarea name="testimonial" id="summernote" class="form-control"></textarea>
                                 </div>
                             </div>
                             <button class="btn btn-primary mt-2" type="submit">Add Testimonial</button>

@@ -33,20 +33,20 @@
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="service-name" class="form-label">Service Name</label>
-                                    <input type="text" class="form-control" id="service-name" value="" required>
+                                    <input name="service-name" type="text" class="form-control" id="service-name" value="" required>
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="service-image" class="form-label">Service Image</label>
-                                    <input type="file" class="dropify" accept="image/*" id="service-image" data-height="200" />
+                                    <input name="service-image" type="file" class="dropify" accept="image/*" id="service-image" data-height="200" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="plan-details">Service Details</label>
-                                    <textarea id="summernote" class="form-control"></textarea>
+                                    <label for="service-details">Service Details</label>
+                                    <textarea name="service-details" id="summernote" class="form-control"></textarea>
                                 </div>
                             </div>
                             <button class="btn btn-primary mt-2" type="submit">Add Service</button>

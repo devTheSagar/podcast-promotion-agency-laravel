@@ -33,19 +33,19 @@
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                    <input name="email" type="email" class="form-control" id="email" required>
                                     <div class="invalid-feedback">Please provide a valid email address.</div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="phone">Phone</label>
-                                    <input type="number" class="form-control" id="phone" required>
+                                    <input name="phone" type="number" class="form-control" id="phone" required>
                                     <div class="invalid-feedback">Please provide a valid phone number.</div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="address">Address</label>
-                                    <textarea id="summernote" class="form-control"></textarea>
+                                    <textarea name="addres-details" id="summernote" class="form-control"></textarea>
                                 </div>
                             </div>
                             <button class="btn btn-primary mt-3" type="submit">Add Contact</button>

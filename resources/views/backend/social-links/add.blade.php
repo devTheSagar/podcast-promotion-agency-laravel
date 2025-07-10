@@ -33,27 +33,27 @@
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="facebook">Facebook link</label>
-                                    <input type="text" class="form-control" id="facebook" required>
+                                    <input name="facebook-link" type="text" class="form-control" id="facebook" required>
                                     <div class="invalid-feedback">Please provide a valid link.</div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="instagram">Instagram link</label>
-                                    <input type="text" class="form-control" id="instagram" required>
+                                    <input name="instagram-link" type="text" class="form-control" id="instagram" required>
                                     <div class="invalid-feedback">Please provide a valid link.</div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="twitter">Twitter link</label>
-                                    <input type="text" class="form-control" id="twitter" required>
+                                    <input name="twitter-link" type="text" class="form-control" id="twitter" required>
                                     <div class="invalid-feedback">Please provide a valid link.</div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="youtube">Youtube link</label>
-                                    <input type="text" class="form-control" id="youtube" required>
+                                    <input name="youtube-link" type="text" class="form-control" id="youtube" required>
                                     <div class="invalid-feedback">Please provide a valid link.</div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="linkedin">Linkedin link</label>
-                                    <input type="text" class="form-control" id="linkedin" required>
+                                    <input name="linkedin-link" type="text" class="form-control" id="linkedin" required>
                                     <div class="invalid-feedback">Please provide a valid link.</div>
                                 </div>
                             </div>

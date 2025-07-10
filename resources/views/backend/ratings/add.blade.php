@@ -45,7 +45,7 @@
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-select">Select Plan</label>
-                                    <select name="service" class="form-control form-select" id="service-select" data-bs-placeholder="Select Plan">
+                                    <select name="plan" class="form-control form-select" id="plan-select" data-bs-placeholder="Select Plan">
                                         <option label="Choose Plan" selected disabled></option>
                                         <option value="">Basic</option>
                                         <option value="">Standard</option>
@@ -57,20 +57,20 @@
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="client-name">Client Name</label>
-                                    <input type="text" class="form-control" id="client-name" required>
+                                    <input name="client-name" type="text" class="form-control" id="client-name" required>
                                     <div class="invalid-feedback">Please provide client name.</div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
-                                    <label for="rating">Rating</label>
-                                    <select name="service" class="form-control form-select" id="service-select" data-bs-placeholder="Rating">
+                                    <label for="plan-rating">Rating</label>
+                                    <select name="plan-rating" class="form-control form-select" id="plan-rating" data-bs-placeholder="Rating">
                                         <option label="Choose Rating" selected disabled></option>
-                                        <option value="">1 star</option>
-                                        <option value="">2 star</option>
-                                        <option value="">3 star</option>
-                                        <option value="">4 star</option>
-                                        <option value="">5 star</option>
+                                        <option value="1">1 star</option>
+                                        <option value="2">2 star</option>
+                                        <option value="3">3 star</option>
+                                        <option value="4">4 star</option>
+                                        <option value="5">5 star</option>
                                     </select>
                                     <div class="invalid-feedback">Please choose your rating.</div>
                                 </div>
@@ -78,7 +78,7 @@
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="client-review">Client Review</label>
-                                    <textarea id="summernote" class="form-control"></textarea>
+                                    <textarea name="client-review" id="summernote" class="form-control"></textarea>
                                 </div>
                             </div>
                             <button class="btn btn-primary mt-3" type="submit">Add Review</button>

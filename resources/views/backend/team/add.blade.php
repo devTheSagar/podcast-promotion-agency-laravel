@@ -45,7 +45,7 @@
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-select">Select Plan</label>
-                                    <select name="service" class="form-control form-select" id="service-select" data-bs-placeholder="Select Plan">
+                                    <select name="plan" class="form-control form-select" id="plan-select" data-bs-placeholder="Select Plan">
                                         <option label="Choose Plan" selected disabled></option>
                                         <option value="">Basic</option>
                                         <option value="">Standard</option>
@@ -59,57 +59,57 @@
                                     <label for="position">Select Position</label>
                                     <select name="position" class="form-control form-select" id="position" data-bs-placeholder="Select Plan">
                                         <option label="Choose Position" selected disabled></option>
-                                        <option value="tem-lead">Team Lead</option>
-                                        <option value="team-member">Team Member</option>
+                                        <option value="1">Team Lead</option>
+                                        <option value="2">Team Member</option>
                                     </select>
                                     <div class="invalid-feedback">Please select position.</div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" required>
+                                    <label for="member-name">Name</label>
+                                    <input name="member-name" type="text" class="form-control" id="member-name" required>
                                     <div class="invalid-feedback">Please provide name.</div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
-                                    <label for="image" class="form-label">Member Image</label>
-                                    <input type="file" class="dropify" accept="image/*" id="image" data-height="200" />
+                                    <label for="member-image" class="form-label">Member Image</label>
+                                    <input name="member-image" type="file" class="dropify" accept="image/*" id="member-image" data-height="200" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
-                                    <label for="rating">Rating</label>
-                                    <select name="" class="form-control form-select" id="service-select" data-bs-placeholder="Rating">
-                                        <option label="Choose Rating" selected disabled></option>
-                                        <option value="">1 star</option>
-                                        <option value="">2 star</option>
-                                        <option value="">3 star</option>
-                                        <option value="">4 star</option>
-                                        <option value="">5 star</option>
+                                    <label for="member-rating">Member Rating</label>
+                                    <select name="member-rating" class="form-control form-select" id="member-rating" data-bs-placeholder="Rating">
+                                        <option label="Choose Member Rating" selected disabled></option>
+                                        <option value="1">1 star</option>
+                                        <option value="2">2 star</option>
+                                        <option value="3">3 star</option>
+                                        <option value="4">4 star</option>
+                                        <option value="5">5 star</option>
                                     </select>
-                                    <div class="invalid-feedback">Please choose your rating.</div>
+                                    <div class="invalid-feedback">Please choose your member rating.</div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="total-review">Total Review (In Number)</label>
-                                    <input type="number" class="form-control" id="total-review" required>
-                                    <div class="invalid-feedback">Please provide valid number.</div>
+                                    <input name="total-review" type="number" class="form-control" id="total-review" required>
+                                    <div class="invalid-feedback">Please provide total review in number.</div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="portfolio-link">Portfolio Link</label>
-                                    <input type="text" class="form-control" id="portfolio-link" required>
+                                    <input name="portfolio-link" type="text" class="form-control" id="portfolio-link" required>
                                     <div class="invalid-feedback">Please provide valid link.</div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="client-review">Description</label>
-                                    <textarea id="summernote" class="form-control"></textarea>
+                                    <label for="member-description">Description</label>
+                                    <textarea name="member-description" id="summernote" class="form-control"></textarea>
                                 </div>
                             </div>
                             <button class="btn btn-primary mt-3" type="submit">Add Team Member</button>

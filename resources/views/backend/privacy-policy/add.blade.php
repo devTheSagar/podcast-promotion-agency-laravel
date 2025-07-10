@@ -32,8 +32,8 @@
                         <form class="needs-validation" novalidate>
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <label for="plan-name">Privacy policy</label>
-                                    <textarea id="summernote" class="form-control"></textarea>
+                                    <label for="privacy-policy">Privacy policy</label>
+                                    <textarea name="privacy-policy" id="summernote" class="form-control"></textarea>
                                 </div>
                             </div>
                             <button class="btn btn-primary mt-3" type="submit">Add Privacy Policy</button>

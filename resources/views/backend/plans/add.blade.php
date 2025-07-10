@@ -45,14 +45,14 @@
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-name">Plan Name</label>
-                                    <input type="text" class="form-control" id="plan-name" required>
+                                    <input name="plan-name" type="text" class="form-control" id="plan-name" required>
                                     <div class="invalid-feedback">Please provide a valid plan name.</div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-price">Plan Price</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text bg-primary-transparent text-primary">$</span>
-                                        <input aria-label="Amount (to the nearest dollar)" class="form-control" placeholder="" id="plan-price" type="number">
+                                        <input name="plan-price" aria-label="Amount (to the nearest dollar)" class="form-control" placeholder="" id="plan-price" type="number">
                                         <span class="input-group-text bg-primary-transparent text-primary">.00</span>
                                     </div>
                                     <div class="invalid-feedback">Please provide a valid price.</div>
@@ -60,7 +60,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-duration">Duration</label>
                                     <div class="input-group mb-3">
-                                        <input aria-describedby="basic-addon1" id="plan-duration" aria-label="Username" class="form-control" placeholder="" type="text">
+                                        <input name="plan-duration" aria-describedby="basic-addon1" id="plan-duration" aria-label="Username" class="form-control" placeholder="" type="text">
                                         <span class="input-group-text bg-primary-transparent text-primary" id="basic-addon1">Days</span>
                                     </div>
                                     <div class="invalid-feedback">Please provide a valid plan duration.</div>
@@ -69,7 +69,7 @@
                                     <label>Plan Features</label>
                                     <div id="plan-features-container">
                                         <div class="input-group mb-2">
-                                            <input type="text" class="form-control plan-feature-input" name="plan-features[]" required>
+                                            <input name="plan-features" type="text" class="form-control plan-feature-input" name="plan-features[]" required>
                                             <button type="button" class="btn btn-danger remove-feature" style="display:none;">Remove</button>
                                             <div class="invalid-feedback">Please provide at least one plan feature.</div>
                                         </div>
@@ -80,7 +80,7 @@
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-description">Plan Description</label>
-                                    <textarea id="summernote" class="form-control"></textarea>
+                                    <textarea name="plan-description" id="summernote" class="form-control"></textarea>
                                 </div>
                             </div>
                             <button class="btn btn-primary mt-3" type="submit">Add Plan</button>

@@ -151,7 +151,7 @@
             </ul>
           </div>
           <div class="pricing-footer">
-            <a href="service-details.html" class="btn">more deatils</a>
+            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
           </div>
         </div>
         <!-- basic plan end -->
@@ -173,7 +173,7 @@
             </ul>
           </div>
           <div class="pricing-footer">
-            <a href="service-details.html" class="btn">more deatils</a>
+            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
           </div>
         </div>
         <!-- standard plan end -->
@@ -195,14 +195,14 @@
             </ul>
           </div>
           <div class="pricing-footer">
-            <a href="service-details.html" class="btn">more deatils</a>
+            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
         <div class="col-12 text-center mt-3">
-          <a href="podcast-promotion.html" class="btn btn-theme">view all</a>
+          <a href="{{ route('user.service-details') }}" class="btn btn-theme">view all</a>
         </div>
       </div>
   </section>
@@ -233,7 +233,7 @@
             </ul>
           </div>
           <div class="pricing-footer">
-            <a href="service-details.html" class="btn">more deatils</a>
+            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
           </div>
         </div>
         <!-- basic plan end -->
@@ -254,7 +254,7 @@
             </ul>
           </div>
           <div class="pricing-footer">
-            <a href="service-details.html" class="btn">more deatils</a>
+            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
           </div>
         </div>
         <!-- standard plan end -->
@@ -275,14 +275,14 @@
             </ul>
           </div>
           <div class="pricing-footer">
-            <a href="service-details.html" class="btn">more deatils</a>
+            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
         <div class="col-12 text-center mt-3">
-          <a href="spotify-promotion.html" class="btn btn-theme">view all</a>
+          <a href="{{ route('user.service-details') }}" class="btn btn-theme">view all</a>
         </div>
       </div>
   </section>

@@ -1369,3 +1369,12 @@ textarea.form-control{
     color: var(--WHITE);
 }
 
+.t-dark table {
+    background-color: #292929c5;
+    color: #f8f9fa;
+}
+
+.t-dark table th,
+.t-dark table td {
+    border-color: #444;
+}

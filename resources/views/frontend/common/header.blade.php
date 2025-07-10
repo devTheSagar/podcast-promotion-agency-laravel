@@ -49,7 +49,7 @@
               </ul>
             </li>
             <li class="menu-item"><a href="{{ route('user.message') }}">contact</a></li>
-            <li class="menu-item menu-item-has-children">
+            {{-- <li class="menu-item menu-item-has-children">
               <a href="#" class="js-toggle-sub-menu">account <i class="fas fa-chevron-down"></i></a>
               <ul class="sub-menu js-sub-menu">
                   <li class="sub-menu-item"><a href="{{ route('login') }}">log in</a></li>
@@ -61,7 +61,45 @@
                     </form>
                   </li>
               </ul>
+            </li> --}}
+
+            <li class="menu-item menu-item-has-children">
+              @auth
+                  <a href="#" class="js-toggle-sub-menu">
+                      {{ Auth::user()->name }} <i class="fas fa-chevron-down"></i>
+                  </a>
+                  <ul class="sub-menu js-sub-menu">
+                      <li class="sub-menu-item">
+                          <a href="{{ route('user.account') }}">My Account</a>
+                      </li>
+                      <li class="sub-menu-item">
+                          <a href="{{ route('user.track-order') }}">Track Order</a>
+                      </li>
+                      <li class="sub-menu-item">
+                        <form method="POST" action="{{ route('logout.user') }}" style="margin: 0;">
+                            @csrf
+                            <button type="submit"
+                                style="background: none; border: none; padding: 0; width: 100%; text-align: left; color: #007bff; display: block; font: inherit; cursor: pointer;"
+                                class="ms-4" >
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                  </ul>
+              @endauth
+
+              @guest
+                  <a href="#" class="js-toggle-sub-menu">
+                      Account <i class="fas fa-chevron-down"></i>
+                  </a>
+                  <ul class="sub-menu js-sub-menu">
+                      <li class="sub-menu-item"><a href="{{ route('login') }}">Log In</a></li>
+                      <li class="sub-menu-item"><a href="{{ route('signup.user') }}">Sign Up</a></li>
+                      <li class="sub-menu-item"><a href="{{ route('user.account') }}">Track Order</a></li>
+                  </ul>
+              @endguest
             </li>
+
           </ul>
         </nav>
       </div>

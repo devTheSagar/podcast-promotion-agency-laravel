@@ -15,6 +15,9 @@ use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\MessageController;
 use App\Http\Controllers\frontend\PlanController as FrontendPlanController;
 use App\Http\Controllers\frontend\ServiceController as FrontendServiceController;
+use App\Http\Controllers\frontend\TrackOrderController;
+use App\Http\Controllers\frontend\UserAccountController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -28,7 +31,7 @@ Route::get('sign-up', [RegisterController::class, 'index'])->name('signup.user')
 Route::post('login', [UserLoginController::class, 'login']);
 Route::get('/', function () {
     return view('frontend.home');
-})->middleware('auth')->name('user.dashboard');
+})->name('user.dashboard');
 Route::post('logout', [UserLoginController::class, 'logout'])->name('logout.user');
 
 // user services
@@ -42,6 +45,12 @@ Route::get('contact', [MessageController::class, 'index'])->name('user.message')
 
 // user checkout
 Route::get('checkout', [CheckoutController::class, 'index'])->name('user.checkout');
+
+// user account
+Route::get('user-account', [UserAccountController::class, 'index'])->middleware('auth')->name('user.account');
+
+// track order
+Route::get('track-order', [TrackOrderController::class, 'index'])->middleware('auth')->name('user.track-order');
 
 
 

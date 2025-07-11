@@ -73,6 +73,9 @@ Route::prefix('admin')->group(function () {
     Route::get('services', [ServiceController::class, 'index'])->name('admin.all-services');
     Route::get('add-services', [ServiceController::class, 'create'])->name('admin.add-service');
     Route::post('add-services', [ServiceController::class, 'store'])->name('admin.store-service');
+    Route::get('edit-service/{id}', [ServiceController::class, 'edit'])->name('admin.edit-service');
+    Route::post('update-service/{id}', [ServiceController::class, 'update'])->name('admin.update-service');
+    Route::delete('delete-service/{id}', [ServiceController::class, 'destroy'])->name('admin.delete-service');
 
     // admin plans
     Route::get('plans', [PlanController::class, 'index'])->name('admin.all-plans');

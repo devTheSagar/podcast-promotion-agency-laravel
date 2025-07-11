@@ -40,42 +40,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Apple podcast promotion</td>
-                                        <td>
-                                            <img src="" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
-                                        </td>
-                                        <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae voluptate dolorem recusandae, laudantium autem molestias perferendis nemo. Esse, laboriosam ipsa.</td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Spotify promotion</td>
-                                        <td>
-                                            <img src="" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
-                                        </td>
-                                        <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae voluptate dolorem recusandae, laudantium autem molestias perferendis nemo. Esse, laboriosam ipsa.</td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Youtube promotion</td>
-                                        <td>
-                                            <img src="" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
-                                        </td>
-                                        <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae voluptate dolorem recusandae, laudantium autem molestias perferendis nemo. Esse, laboriosam ipsa.</td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
+
+                                    @foreach ($services as $service)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $service->serviceName }}</td>
+                                            <td>
+                                                <img src="{{ asset($service->serviceImage) }}" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
+                                            </td>
+                                            <td>{{ Str::limit(strip_tags($service->serviceDetails), 30, '...') }}</td>
+                                            <td>
+                                                <a href="{{ route('admin.edit-service', ['id' => $service]) }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                                {{-- <a href="{{ route('admin.delete-service', ['id' => $service]) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a> --}}
+                                                <form action="{{ route('admin.delete-service', ['id' => $service->id]) }}" method="POST" onsubmit="return confirm('Confirm deleting {{ $service->serviceName }} service?');" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    
                                 </tbody>
                             </table>
                         </div>

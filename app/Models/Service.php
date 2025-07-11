@@ -29,4 +29,25 @@ class Service extends Model
         self::$service->serviceDetails = $request->serviceDetails;
         self::$service->save();
     }
+
+    public static function updateService($request, $id){
+        self::$service = Service::find($id);
+        self::$service->serviceName = $request->serviceName;
+        if($request->hasFile('serviceImage')){
+            if(self::$service->serviceImage !=='uploads/backend/service-images/default_service_image.jpg' && file_exists(self::$service->serviceImage)){
+                unlink(self::$service->serviceImage);
+            }
+            self::$service->serviceImage = self::imageUpload($request);
+        }
+        self::$service->serviceDetails = $request->serviceDetails;
+        self::$service->save();
+    }
+
+    public static function deleteService($id){
+        self::$service = Service::find($id);
+        if(self::$service->serviceImage !== 'uploads/backend/service-images/default_service_image.jpg' && file_exists(self::$service->serviceImage)){
+            unlink(self::$service->serviceImage);
+        }
+        self::$service->delete();
+    }
 }

@@ -32,6 +32,17 @@
                         <form class="needs-validation" novalidate>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <label for="date">Date</label>
+                                    <div class="input-group">
+                                        <div class="input-group-text bg-primary-transparent text-primary">
+                                            <i class="fe fe-calendar text-20"></i>
+                                        </div>
+                                        <input name="date" class="form-control fc-datepicker" id="date" placeholder="DD/MM/YYYY" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="name" class="form-label">Name</label>
                                     <input name="name" type="text" class="form-control" id="name" value="" required>
                                     <div class="valid-feedback">Looks good!</div>
@@ -42,6 +53,20 @@
                                     <label for="designation" class="form-label">Designation</label>
                                     <input name="designation" type="text" class="form-control" id="designation" value="" required>
                                     <div class="valid-feedback">Looks good!</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                    <label for="rating">Rating</label>
+                                    <select name="rating" class="form-control form-select" id="rating" data-bs-placeholder="Rating">
+                                        <option label="Choose Rating" selected disabled></option>
+                                        <option value="1">1 star</option>
+                                        <option value="2">2 star</option>
+                                        <option value="3">3 star</option>
+                                        <option value="4">4 star</option>
+                                        <option value="5">5 star</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please choose your rating.</div>
                                 </div>
                             </div>
                             <div class="form-row">

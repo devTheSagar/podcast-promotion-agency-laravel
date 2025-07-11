@@ -33,6 +33,18 @@
         <!-- STICKY JS -->
         <script src="{{ asset('') }}backend/assets/js/sticky.js"></script>
 
+        <!-- Bootstrap-Date Range Picker js-->
+		<script src="{{ asset('') }}backend/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+		<!-- bootstrap-datepicker js (Date picker Style-01) -->
+		<script src="{{ asset('') }}backend/assets/plugins/bootstrap-datepicker/js/datepicker.js"></script>
+
+		<!-- SELECT2 JS -->
+		<script src="{{ asset('') }}backend/assets/plugins/select2/select2.full.min.js"></script>
+
+		<!-- FORM ELEMENTS JS -->
+		<script src="{{ asset('') }}backend/assets/js/formelementadvnced.js"></script>
+
         
         <!-- APEXCHART JS -->
         <script src="{{ asset('') }}backend/assets/js/apexcharts.js"></script>

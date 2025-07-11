@@ -11,7 +11,9 @@
             <!-- CONTAINER -->
             @yield('content')
             <!-- CONTAINER CLOSED -->
-            
+
+            {{-- sweet alert  --}}
+            @include('sweetalert::alert')
         </div>
     </div>
     

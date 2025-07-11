@@ -72,6 +72,7 @@ Route::prefix('admin')->group(function () {
     // admin services 
     Route::get('services', [ServiceController::class, 'index'])->name('admin.all-services');
     Route::get('add-services', [ServiceController::class, 'create'])->name('admin.add-service');
+    Route::post('add-services', [ServiceController::class, 'store'])->name('admin.store-service');
 
     // admin plans
     Route::get('plans', [PlanController::class, 'index'])->name('admin.all-plans');

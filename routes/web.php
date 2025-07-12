@@ -81,6 +81,9 @@ Route::prefix('admin')->group(function () {
     Route::get('plans', [PlanController::class, 'index'])->name('admin.all-plans');
     Route::get('add-plans', [PlanController::class, 'create'])->name('admin.add-plan');
     Route::post('add-plans', [PlanController::class, 'store'])->name('admin.store-plan');
+    Route::get('edit-plan/{id}', [PlanController::class, 'edit'])->name('admin.edit-plan');
+    Route::post('update-plan/{id}', [PlanController::class, 'update'])->name('admin.update-plan');
+    Route::delete('delete-plan/{id}', [PlanController::class, 'destroy'])->name('admin.delete-plan');
 
     // admin plan ratings
     Route::get('ratings', [RatingController::class, 'index'])->name('admin.all-ratings');

@@ -63,11 +63,13 @@
                                             {{-- <td>{{ $plan->planDescription }}</td> --}}
                                             <td>{{ Str::limit(strip_tags($plan->planDescription), 30, '...') }}</td>
                                             <td>
-                                                <div class="btn-list">
-                                                    <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fe fe-eye"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fe fe-edit"></i></a>
-                                                    <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></a>
-                                                </div>
+                                                <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('admin.edit-plan', ['id' => $plan]) }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+                                                <form action="{{ route('admin.delete-plan', ['id' => $plan]) }}" method="POST" onsubmit="return confirm('Confirm deleting {{ $plan->planName }} plan from {{ $plan->service->serviceName }} service ?');" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -19,6 +19,22 @@ class Plan extends Model
         self::$plan->save();
     }
 
+    public static function updatePlan($request, $id){
+        self::$plan = Plan::find($id);
+        self::$plan->service_id = $request->service;
+        self::$plan->planName = $request->planName;
+        self::$plan->planPrice = $request->planPrice;
+        self::$plan->planDuration = $request->planDuration;
+        self::$plan->planFeatures = json_encode($request->planFeatures);
+        self::$plan->planDescription = $request->planDescription;
+        self::$plan->save();
+    }
+
+    public static function deletePlan($id){
+        self::$plan = Plan::find($id);
+        self::$plan->delete();
+    }
+
     // one to many relationship with Service 
     public function service(){
         return $this->belongsTo(Service::class);

@@ -39,107 +39,38 @@
                                         <th class="border-bottom-0">Price</th>
                                         <th class="border-bottom-0">Duration</th>
                                         <th class="border-bottom-0">Features</th>
-                                        <!-- <th class="border-bottom-0">Description</th> -->
+                                        <th class="border-bottom-0">Description</th>
                                         <th class="border-bottom-0">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Podcast Promotion</td>
-                                        <td>Basic</td>
-                                        <td>$499</td>
-                                        <td>30 days</td>
-                                        <td>
-                                            <ul>
-                                                <li>5k download</li>
-                                                <li>5k listener</li>
-                                                <li>top visibility</li>
-                                            </ul>
-                                        </td>
-                                        <!-- <td>
-                                            <p>We will promote your podcast on our platform, ensuring it reaches a wider audience and gains more visibility.</p>
-                                        </td> -->
-                                        <td>
-                                            <div class="btn-list">
-                                                <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fe fe-eye"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fe fe-edit"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Podcast Promotion</td>
-                                        <td>Premium</td>
-                                        <td>$999</td>
-                                        <td>30 days</td>
-                                        <td>
-                                            <ul>
-                                                <li>15k download</li>
-                                                <li>15k listener</li>
-                                                <li>top visibility</li>
-                                            </ul>
-                                        </td>
-                                        <!-- <td>
-                                            <p>We will promote your podcast on our platform, ensuring it reaches a wider audience and gains more visibility.</p>
-                                        </td> -->
-                                        <td>
-                                            <div class="btn-list">
-                                                <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fe fe-eye"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fe fe-edit"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Spotify Promotion</td>
-                                        <td>Basic</td>
-                                        <td>$499</td>
-                                        <td>30 days</td>
-                                        <td>
-                                            <ul>
-                                                <li>1k download</li>
-                                                <li>1k listener</li>
-                                                <li>top visibility</li>
-                                            </ul>
-                                        </td>
-                                        <!-- <td>
-                                            <p>We will promote your podcast on our platform, ensuring it reaches a wider audience and gains more visibility.</p>
-                                        </td> -->
-                                        <td>
-                                            <div class="btn-list">
-                                                <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fe fe-eye"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fe fe-edit"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Spotify Promotion</td>
-                                        <td>advance</td>
-                                        <td>$699</td>
-                                        <td>30 days</td>
-                                        <td>
-                                            <ul>
-                                                <li>1k download</li>
-                                                <li>1k listener</li>
-                                                <li>top visibility</li>
-                                            </ul>
-                                        </td>
-                                        <!-- <td>
-                                            <p>We will promote your podcast on our platform, ensuring it reaches a wider audience and gains more visibility.</p>
-                                        </td> -->
-                                        <td>
-                                            <div class="btn-list">
-                                                <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fe fe-eye"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fe fe-edit"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    @foreach ($plans as $plan)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $plan->service->serviceName }}</td>
+                                            <td>{{ $plan->planName }}</td>
+                                            <td>{{ $plan->planPrice }}</td>
+                                            <td>{{ $plan->planDuration }}</td>
+                                            <td>
+                                                {{-- json decoded 'planFeatures' in list  --}}
+                                                <ul>
+                                                    @foreach (json_decode($plan->planFeatures, true) as $feature)
+                                                        <li>{{ $feature }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+
+                                            {{-- <td>{{ $plan->planDescription }}</td> --}}
+                                            <td>{{ Str::limit(strip_tags($plan->planDescription), 30, '...') }}</td>
+                                            <td>
+                                                <div class="btn-list">
+                                                    <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fe fe-eye"></i></a>
+                                                    <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fe fe-edit"></i></a>
+                                                    <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

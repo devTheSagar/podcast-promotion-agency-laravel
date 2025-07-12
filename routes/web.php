@@ -80,6 +80,7 @@ Route::prefix('admin')->group(function () {
     // admin plans
     Route::get('plans', [PlanController::class, 'index'])->name('admin.all-plans');
     Route::get('add-plans', [PlanController::class, 'create'])->name('admin.add-plan');
+    Route::post('add-plans', [PlanController::class, 'store'])->name('admin.store-plan');
 
     // admin plan ratings
     Route::get('ratings', [RatingController::class, 'index'])->name('admin.all-ratings');

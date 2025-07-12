@@ -50,4 +50,9 @@ class Service extends Model
         }
         self::$service->delete();
     }
+
+    // one to many relationship with Plan 
+    public function plans(){
+        return $this->hasMany(Plan::class);
+    }
 }

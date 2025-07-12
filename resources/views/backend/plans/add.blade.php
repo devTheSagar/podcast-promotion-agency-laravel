@@ -29,50 +29,71 @@
                         <h3 class="card-title">Add Your Plans</h3>
                     </div>
                     <div class="card-body">
-                        <form class="needs-validation" novalidate>
+                        <form action="{{ route('admin.store-plan') }}" method="POST" class="needs-validation" novalidate>
+                            @csrf
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="service-select">Select Service</label>
-                                    <select name="service" class="form-control form-select" id="service-select" data-bs-placeholder="Select Service">
+                                    <select name="service" class="form-control form-select @error('service') is-invalid @enderror" id="service-select" data-bs-placeholder="Select Service">
                                         <option label="Choose Service" selected disabled></option>
-                                        <option value="">Podcast promotion</option>
-                                        <option value="">Spotify Promotion</option>
-                                        <option value="">Youtube Promotion</option>
+                                        {{-- service data in select  --}}
+                                        @foreach ($services as $service) 
+                                            <option value="{{ $service->id }}" {{ old('service') == $service->id ? 'selected' : '' }}>{{ $service->serviceName }}</option>
+                                        @endforeach
                                     </select>
-                                    <div class="invalid-feedback">Please select a valid service.</div>
+                                    {{-- <div class="invalid-feedback">Please select a valid service.</div> --}}
+                                    @error('service')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-name">Plan Name</label>
-                                    <input name="plan-name" type="text" class="form-control" id="plan-name" required>
-                                    <div class="invalid-feedback">Please provide a valid plan name.</div>
+                                    <input name="planName" type="text" class="form-control @error('planName') is-invalid @enderror" value="{{ old('planName') }}" id="plan-name" required>
+                                    {{-- <div class="invalid-feedback">Please provide a valid plan name.</div> --}}
+                                    @error('planName')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-price">Plan Price</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text bg-primary-transparent text-primary">$</span>
-                                        <input name="plan-price" aria-label="Amount (to the nearest dollar)" class="form-control" placeholder="" id="plan-price" type="number">
+                                        <input name="planPrice" aria-label="Amount (to the nearest dollar)" class="form-control @error('planPrice') is-invalid @enderror" value="{{ old('planPrice') }}" id="plan-price" type="number">
                                         <span class="input-group-text bg-primary-transparent text-primary">.00</span>
+                                        {{-- <div class="invalid-feedback">Please provide a valid price.</div> --}}
+                                        @error('planPrice')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    <div class="invalid-feedback">Please provide a valid price.</div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-duration">Duration</label>
                                     <div class="input-group mb-3">
-                                        <input name="plan-duration" aria-describedby="basic-addon1" id="plan-duration" aria-label="Username" class="form-control" placeholder="" type="text">
+                                        <input name="planDuration" aria-describedby="basic-addon1" id="plan-duration" aria-label="Username" class="form-control @error('planDuration') is-invalid @enderror" value="{{ old('planDuration') }}" type="number" required>
                                         <span class="input-group-text bg-primary-transparent text-primary" id="basic-addon1">Days</span>
+                                        {{-- <div class="invalid-feedback">Please provide a valid plan duration.</div> --}}
+                                        @error('planDuration')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    <div class="invalid-feedback">Please provide a valid plan duration.</div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label>Plan Features</label>
                                     <div id="plan-features-container">
-                                        <div class="input-group mb-2">
-                                            <input name="plan-features" type="text" class="form-control plan-feature-input" name="plan-features[]" required>
-                                            <button type="button" class="btn btn-danger remove-feature" style="display:none;">Remove</button>
-                                            <div class="invalid-feedback">Please provide at least one plan feature.</div>
-                                        </div>
+                                        @php
+                                            $features = old('planFeatures', ['']); // default one empty input
+                                        @endphp
+                                        @foreach($features as $index => $feature)
+                                            <div class="input-group mb-2">
+                                                <input name="planFeatures[]" type="text" class="form-control plan-feature-input @error('planFeatures.' . $index) is-invalid @enderror" value="{{ $feature }}" required>
+                                                <button type="button" class="btn btn-danger remove-feature" style="{{ count($features) === 1 ? 'display: none;' : '' }}">Remove</button>
+                                                @error('planFeatures.' . $index)
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        @endforeach
                                     </div>
                                     <button type="button" class="btn btn-success btn-sm" id="add-feature"><i class="ion ion-plus"></i> Add more plan features</button>
                                 </div>
@@ -80,7 +101,10 @@
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-description">Plan Description</label>
-                                    <textarea name="plan-description" id="summernote" class="form-control"></textarea>
+                                    <textarea name="planDescription" id="summernote" class="form-control @error('planDescription') is-invalid @enderror">{{old('planDescription')}}</textarea>
+                                    @error('planDescription')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <button class="btn btn-primary mt-3" type="submit">Add Plan</button>

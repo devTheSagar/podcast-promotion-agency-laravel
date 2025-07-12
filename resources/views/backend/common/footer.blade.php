@@ -114,7 +114,7 @@
                     const div = document.createElement('div');
                     div.className = 'input-group mb-2';
                     div.innerHTML = `
-                        <input type="text" class="form-control plan-feature-input" name="plan-features[]" required>
+                        <input type="text" class="form-control plan-feature-input" name="planFeatures[]" required>
                         <button type="button" class="btn btn-danger remove-feature">Remove</button>
                     `;
                     container.appendChild(div);

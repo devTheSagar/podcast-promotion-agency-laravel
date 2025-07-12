@@ -21,6 +21,17 @@ class ServiceController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'serviceName'    => 'required|string|max:255',
+            'serviceImage'   => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'serviceDetails' => 'nullable|string',
+        ], [
+            'serviceName.required'  => 'Service name is required.',
+            'serviceImage.image'    => 'The file must be an image.',
+            'serviceImage.mimes'    => 'The image must be a file of type: jpeg, png, jpg, webp.',
+            'serviceImage.max'      => 'The image size must not exceed 2MB.',
+            'serviceDetails.string' => 'Service details must be a string.',
+        ]);
         Service::addService($request);
         Alert::success('Success', 'Service added successfully');
         return back();
@@ -34,6 +45,17 @@ class ServiceController extends Controller
     }
 
     public function update(Request $request, $id){
+        $request->validate([
+            'serviceName'    => 'required|string|max:255',
+            'serviceImage'   => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'serviceDetails' => 'nullable|string',
+        ], [
+            'serviceName.required'  => 'Service name is required.',
+            'serviceImage.image'    => 'The file must be an image.',
+            'serviceImage.mimes'    => 'The image must be a file of type: jpeg, png, jpg, webp.',
+            'serviceImage.max'      => 'The image size must not exceed 2MB.',
+            'serviceDetails.string' => 'Service details must be a string.',
+        ]);
         Service::updateService($request, $id);
         Alert::success('Success', 'Service updated successfully');
         return redirect()->route('admin.all-services');

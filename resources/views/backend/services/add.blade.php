@@ -34,20 +34,33 @@
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="service-name" class="form-label">Service Name</label>
-                                    <input name="serviceName" type="text" class="form-control" id="service-name" value="" required>
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <input name="serviceName" type="text" class="form-control @error('serviceName') is-invalid @enderror" id="service-name" value="{{ old('serviceName') }}" required>
+                                    {{-- <div class="valid-feedback">Looks good!</div> --}}
+                                    @error('serviceName')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="service-image" class="form-label">Service Image</label>
-                                    <input name="serviceImage" type="file" class="dropify" accept="image/*" id="service-image" data-height="200" />
+                                    <input name="serviceImage" type="file" class="dropify" accept="image/*" value="{{ old('serviceImage') }}" id="service-image" data-height="200" />
+                                    {{-- @error('serviceImage')
+                                        <div class=" text-danger invalid-feedback">{{ $message }}</div>
+                                    @enderror --}}
+                                    @error('serviceImage')
+                                        <div class="text-danger mt-1">{{ $message }}</div>
+                                    @enderror
+
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="service-details">Service Details</label>
-                                    <textarea name="serviceDetails" id="summernote" class="form-control"></textarea>
+                                    <textarea name="serviceDetails" id="summernote" class="form-control @error('serviceDetails') is-invalid @enderror">{{ old('serviceDetails') }}</textarea>
+                                    @error('serviceDetails')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <button class="btn btn-primary mt-2" type="submit">Add Service</button>

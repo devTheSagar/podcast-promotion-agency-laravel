@@ -108,7 +108,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <button class="btn btn-primary mt-3" type="submit">Add Plan</button>
+                            <button class="btn btn-primary mt-3" type="submit">Update Plan</button>
                         </form>
                     </div>
                 </div>

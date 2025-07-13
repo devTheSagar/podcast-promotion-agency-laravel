@@ -49,8 +49,8 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $plan->service->serviceName }}</td>
                                             <td>{{ $plan->planName }}</td>
-                                            <td>{{ $plan->planPrice }}</td>
-                                            <td>{{ $plan->planDuration }}</td>
+                                            <td><span>$ </span>{{ $plan->planPrice }}</td>
+                                            <td>{{ $plan->planDuration }}<span> Days</span></td>
                                             <td>
                                                 {{-- json decoded 'planFeatures' in list  --}}
                                                 <ul>
@@ -59,8 +59,6 @@
                                                     @endforeach
                                                 </ul>
                                             </td>
-
-                                            {{-- <td>{{ $plan->planDescription }}</td> --}}
                                             <td>{{ Str::limit(strip_tags($plan->planDescription), 30, '...') }}</td>
                                             <td>
                                                 <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>

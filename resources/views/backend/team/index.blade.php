@@ -54,7 +54,7 @@
                                                 <img src="{{ asset($team->memberImage) }}" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
                                             </td>
                                             <td>
-                                                <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="tooltip" title="Show"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('admin.view-team', ['id' => $team]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="Show"><i class="fa fa-eye"></i></a>
                                                 <a href="{{ route('admin.edit-team', ['id' => $team]) }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
                                                 {{-- <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a> --}}
                                                 <form action="{{ route('admin.delete-team', ['id' => $team]) }}" method="POST" onsubmit="return confirm('Confirm deleting {{ $team->memberName }} from {{ $team->plan->service->serviceName }}s {{$team->plan->planName}} plan team ?');" style="display:inline;">

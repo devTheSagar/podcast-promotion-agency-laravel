@@ -104,4 +104,11 @@ class TeamController extends Controller
         Alert::success('Success', 'Team member deleted successfully');
         return back();
     }
+
+    public function view($id){
+        $team = Team::findOrFail($id);
+        return view('backend.team.view', [
+            'team' => $team,
+        ]);
+    }
 }

@@ -43,36 +43,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Apple podcast promotion</td>
-                                        <td>Basic</td>
-                                        <td>Team Lead</td>
-                                        <td>Digonto</td>
-                                        <td>
-                                            <img src="#" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Apple podcast promotion</td>
-                                        <td>Basic</td>
-                                        <td>Team Member</td>
-                                        <td>Alex</td>
-                                        <td>
-                                            <img src="#" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
+                                    @foreach ($teams as $team)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $team->plan->service->serviceName }}</td>
+                                            <td>{{ $team->plan->planName }}</td>
+                                            <td>{{ $team->position === 1 ? 'Team Lead' : 'Team Member' }}</td>
+                                            <td>{{ $team->memberName }}</td>
+                                            <td>
+                                                <img src="{{ asset($team->memberImage) }}" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="tooltip" title="Show"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('admin.edit-team', ['id' => $team]) }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+                                                {{-- <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a> --}}
+                                                <form action="{{ route('admin.delete-team', ['id' => $team]) }}" method="POST" onsubmit="return confirm('Confirm deleting {{ $team->memberName }} from {{ $team->plan->service->serviceName }}s {{$team->plan->planName}} plan team ?');" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

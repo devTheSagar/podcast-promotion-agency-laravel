@@ -118,4 +118,8 @@ Route::prefix('admin')->group(function () {
     // admin team
     Route::get('team', [TeamController::class, 'index'])->name('admin.team');
     Route::get('add-team', [TeamController::class, 'create'])->name('admin.add-team');
+    Route::post('add-team', [TeamController::class, 'store'])->name('admin.store-team');
+    Route::get('edit-team/{id}', [TeamController::class, 'edit'])->name('admin.edit-team');
+    Route::post('update-team/{id}', [TeamController::class, 'update'])->name('admin.update-team');
+    Route::delete('delete-team/{id}', [TeamController::class, 'destroy'])->name('admin.delete-team');
 });

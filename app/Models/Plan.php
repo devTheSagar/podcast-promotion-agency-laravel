@@ -44,4 +44,9 @@ class Plan extends Model
     public function ratings(){
         return $this->hasMany(Rating::class);
     }
+
+    // one to many relationship with Team
+    public function teams(){
+        return $this->hasMany(Team::class);
+    }
 }

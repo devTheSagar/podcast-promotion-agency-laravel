@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('plan_id')->constrained()->onDelete('cascade');
+            $table->tinyInteger('position');
+            $table->string('memberName');
+            $table->string('memberImage')->nullable();
+            $table->tinyInteger('memberRating');
+            $table->integer('totalReview')->default(0);
+            $table->text('portfolioLink')->nullable();
+            $table->text('memberDescription')->nullable();
             $table->timestamps();
         });
     }

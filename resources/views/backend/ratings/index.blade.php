@@ -38,37 +38,26 @@
                                         <th class="wd-15p border-bottom-0">Plan</th>
                                         <th class="wd-15p border-bottom-0">Client Name</th>
                                         <th class="wd-15p border-bottom-0">Client Rating</th>
-                                        <!-- <th class="wd-15p border-bottom-0">Client Review</th> -->
+                                        <th class="wd-15p border-bottom-0">Client Review</th>
                                         <th class="wd-15p border-bottom-0">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Apple podcast promotion</td>
-                                        <td>Basic</td>
-                                        <td>Alex Bourne</td>
-                                        <td>4</td>
-                                        <!-- <td>good service. thanks a lot</td> -->
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Spotify promotion</td>
-                                        <td>Standard</td>
-                                        <td>John Doe</td>
-                                        <td>5</td>
-                                        <!-- <td>Excellent service, highly recommend!</td> -->
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
+                                    @foreach ($ratings as $rating)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $rating->plan->service->serviceName }}</td>
+                                            <td>{{ $rating->plan->planName }}</td>
+                                            <td>{{ $rating->clientName }}</td>
+                                            <td>{{ $rating->planRating }}</td>
+                                            <td>{{ Str::limit(strip_tags($rating->clientReview), 30, '...') }}</td>
+                                            <td>
+                                                <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

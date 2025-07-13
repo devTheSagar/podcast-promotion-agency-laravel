@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('plan_id')->constrained()->onDelete('cascade');
+            $table->string('clientName');
+            $table->tinyInteger('planRating');
+            $table->text('clientReview');
             $table->timestamps();
         });
     }

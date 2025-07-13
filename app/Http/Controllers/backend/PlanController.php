@@ -96,4 +96,9 @@ class PlanController extends Controller
         Alert::success('Success', 'Plan deleted successfully');
         return back();
     }
+
+    public function getPlansByService($service_id){
+        $plans = Plan::where('service_id', $service_id)->get(['id', 'planName']);
+        return response()->json($plans);
+    }
 }

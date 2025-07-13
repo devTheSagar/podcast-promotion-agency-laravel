@@ -29,56 +29,71 @@
                         <h3 class="card-title">Plan Review & Rating</h3>
                     </div>
                     <div class="card-body">
-                        <form class="needs-validation" novalidate>
+                        <form action="{{ route('admin.store-rating') }}" method="POST" class="needs-validation" novalidate>
+                            @csrf
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="service-select">Select Service</label>
-                                    <select name="service" class="form-control form-select" id="service-select" data-bs-placeholder="Select Service">
+                                    <select name="service" class="form-control form-select @error('service') is-invalid @enderror" id="service-select" data-bs-placeholder="Select Service">
                                         <option label="Choose Service" selected disabled></option>
-                                        <option value="">Podcast promotion</option>
-                                        <option value="">Spotify Promotion</option>
-                                        <option value="">Youtube Promotion</option>
+                                        {{-- service data in select  --}}
+                                        @foreach ($services as $service) 
+                                            <option value="{{ $service->id }}" {{ old('service') == $service->id ? 'selected' : '' }}>{{ $service->serviceName }}</option>
+                                        @endforeach
                                     </select>
-                                    <div class="invalid-feedback">Please select a service.</div>
+                                    {{-- <div class="invalid-feedback">Please select a valid service.</div> --}}
+                                    @error('service')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-select">Select Plan</label>
-                                    <select name="plan" class="form-control form-select" id="plan-select" data-bs-placeholder="Select Plan">
+                                    <select name="plan" class="form-control form-select @error('plan') is-invalid @enderror" id="plan-select" data-bs-placeholder="Select Plan">
                                         <option label="Choose Plan" selected disabled></option>
-                                        <option value="">Basic</option>
-                                        <option value="">Standard</option>
-                                        <option value="">Premium</option>
+                                        {{-- Plan options will be loaded here --}}
                                     </select>
-                                    <div class="invalid-feedback">Please select a plan.</div>
+                                    {{-- <div class="invalid-feedback">Please select a plan.</div> --}}
+                                    @error('plan')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="client-name">Client Name</label>
-                                    <input name="client-name" type="text" class="form-control" id="client-name" required>
-                                    <div class="invalid-feedback">Please provide client name.</div>
+                                    <input name="clientName" type="text" class="form-control @error('clientName') is-invalid @enderror" value="{{ old('clientName') }}" id="client-name" required>
+                                    {{-- <div class="invalid-feedback">Please provide client name.</div> --}}
+                                    @error('clientName')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                                     <label for="plan-rating">Rating</label>
-                                    <select name="plan-rating" class="form-control form-select" id="plan-rating" data-bs-placeholder="Rating">
-                                        <option label="Choose Rating" selected disabled></option>
-                                        <option value="1">1 star</option>
-                                        <option value="2">2 star</option>
-                                        <option value="3">3 star</option>
-                                        <option value="4">4 star</option>
-                                        <option value="5">5 star</option>
+                                    <select name="planRating" class="form-control form-select @error('planRating') is-invalid @enderror" id="plan-rating" data-bs-placeholder="Rating">
+                                        <option label="Choose Rating" {{ old('planRating') ? '' : 'selected' }} disabled></option>
+                                        <option value="1" {{ old('planRating') == 1 ? 'selected' : '' }}>1 star</option>
+                                        <option value="2" {{ old('planRating') == 2 ? 'selected' : '' }}>2 star</option>
+                                        <option value="3" {{ old('planRating') == 3 ? 'selected' : '' }}>3 star</option>
+                                        <option value="4" {{ old('planRating') == 4 ? 'selected' : '' }}>4 star</option>
+                                        <option value="5" {{ old('planRating') == 5 ? 'selected' : '' }}>5 star</option>
                                     </select>
-                                    <div class="invalid-feedback">Please choose your rating.</div>
+                                    {{-- <div class="invalid-feedback">Please choose your rating.</div> --}}
+                                    @error('planRating')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="client-review">Client Review</label>
-                                    <textarea name="client-review" id="summernote" class="form-control"></textarea>
+                                    <textarea name="clientReview" id="" rows="10" class="form-control @error('clientReview') is-invalid @enderror">{{ old('clientReview') }}</textarea>
+                                    @error('clientReview')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <button class="btn btn-primary mt-3" type="submit">Add Review</button>
@@ -91,4 +106,50 @@
 
         
     </div>
+
+    {{-- show related plans in the select box when service is selected  --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const serviceSelect = document.getElementById('service-select');
+            const planSelect = document.getElementById('plan-select');
+
+            // On service change
+            serviceSelect.addEventListener('change', function () {
+                const serviceId = this.value;
+                planSelect.innerHTML = '<option label="Loading..." selected disabled></option>';
+
+                fetch(`{{ url('admin/get-plans-by-service') }}/${serviceId}`)
+                    .then(response => response.json())
+                    .then(plans => {
+                        let options = '<option label="Choose Plan" selected disabled></option>';
+                        plans.forEach(plan => {
+                            options += `<option value="${plan.id}">${plan.planName}</option>`;
+                        });
+                        planSelect.innerHTML = options;
+                    })
+                    .catch(() => {
+                        planSelect.innerHTML = '<option label="No plans found" selected disabled></option>';
+                    });
+            });
+
+            // On page load, if old('service') exists, fetch plans and select old('plan')
+            @if(old('service'))
+                fetch(`{{ url('admin/get-plans-by-service') }}/{{ old('service') }}`)
+                    .then(response => response.json())
+                    .then(plans => {
+                        let options = '<option label="Choose Plan" selected disabled></option>';
+                        let selectedPlan = '{{ old('plan') }}';
+                        plans.forEach(plan => {
+                            let selected = selectedPlan == plan.id ? 'selected' : '';
+                            options += `<option value="${plan.id}" ${selected}>${plan.planName}</option>`;
+                        });
+                        planSelect.innerHTML = options;
+                    })
+                    .catch(() => {
+                        planSelect.innerHTML = '<option label="No plans found" selected disabled></option>';
+                    });
+            @endif
+        });
+    </script>
+    
 @endsection

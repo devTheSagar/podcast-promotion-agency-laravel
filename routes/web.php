@@ -84,10 +84,13 @@ Route::prefix('admin')->group(function () {
     Route::get('edit-plan/{id}', [PlanController::class, 'edit'])->name('admin.edit-plan');
     Route::post('update-plan/{id}', [PlanController::class, 'update'])->name('admin.update-plan');
     Route::delete('delete-plan/{id}', [PlanController::class, 'destroy'])->name('admin.delete-plan');
+    // get plans by service
+    Route::get('/get-plans-by-service/{service_id}', [PlanController::class, 'getPlansByService']);
 
     // admin plan ratings
     Route::get('ratings', [RatingController::class, 'index'])->name('admin.all-ratings');
     Route::get('add-ratings', [RatingController::class, 'create'])->name('admin.add-rating');
+    Route::post('add-ratings', [RatingController::class, 'store'])->name('admin.store-rating');
 
     // admin contact info
     Route::get('contact-info', [ContactInfoController::class, 'index'])->name('admin.all-contact-infoes');

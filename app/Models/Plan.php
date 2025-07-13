@@ -35,8 +35,13 @@ class Plan extends Model
         self::$plan->delete();
     }
 
-    // one to many relationship with Service 
+    // reverse one to many relationship with Service 
     public function service(){
         return $this->belongsTo(Service::class);
+    }
+
+    // one to many relationship with Rating
+    public function ratings(){
+        return $this->hasMany(Rating::class);
     }
 }

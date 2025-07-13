@@ -26,15 +26,14 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header border-bottom">
-                        <h3 class="card-title">View Team Member DataTable</h3>
+                        <h3 class="card-title">View Team Member</h3>
                     </div>
                     <div class="card-body">
                         <div class="col-md-6 mb-3 ps-0">
                             <img src="{{ asset($team->memberImage) }}" alt="image" class="img-fluid" style="width: 150px; height: 150px; border-radius: 5%;">
                         </div>
                         <div class="table-responsive">
-                            <table class="table text-nowrap text-md-nowrap table-bordered">
-                                
+                            <table class="table text-wrap text-md-nowrap table-bordered">
                                 <tbody>
                                     {{-- <tr>
                                         <td><img src="{{ asset($team->memberImage) }}" alt="image" class="img-fluid" style="width: 150px; height: 150px; border-radius: 5%;"></td>
@@ -48,7 +47,7 @@
                                         <td>{{ $team->position === 1 ? 'Team Lead' : 'Team Member' }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Service Name</td>
+                                        <td>Service</td>
                                         <td>{{ $team->plan->service->serviceName }}</td>
                                     </tr>
                                     <tr>
@@ -56,20 +55,20 @@
                                         <td>{{ $team->plan->planName }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Member Rating</td>
-                                        <td>{{ $team->memberRating }}</td>
+                                        <td>Rating</td>
+                                        <td>{{ $team->memberRating }}<span> Star</span></td>
                                     </tr>
                                     <tr>
                                         <td>Total Review</td>
-                                        <td>{{ $team->totalReview }}</td>
+                                        <td>{{ $team->totalReview }}<span> Reviews</span></td>
                                     </tr>
                                     <tr>
                                         <td>Portfolio</td>
-                                        <td><a href="{{ $team->portfolioLink }}">{{ $team->portfolioLink }}</a></td>
+                                        <td><a href="{{ $team->portfolioLink }}" target="_blank">{{ $team->portfolioLink }}</a></td>
                                     </tr>
                                     <tr>
-                                        <td>Review Description</td>
-                                        <td>{{ $team->memberDescription }}</td>
+                                        <td>Review</td>
+                                        <td>{!! $team->memberDescription !!}</td>
                                     </tr>
                                 </tbody>
                             </table>

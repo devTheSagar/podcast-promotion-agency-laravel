@@ -136,7 +136,7 @@
                             <div class="form-row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label for="member-description">Description</label>
-                                    <textarea name="memberDescription" id="summernote" class="form-control @error('portfolioLink') is-invalid @enderror">{{ old('memberDescription', $team->memberDescription) }}</textarea>
+                                    <textarea name="memberDescription" id="summernote" class="form-control @error('memberDescription') is-invalid @enderror">{{ old('memberDescription', $team->memberDescription) }}</textarea>
                                     @error('memberDescription')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

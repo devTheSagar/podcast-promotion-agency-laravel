@@ -36,7 +36,7 @@ class TeamController extends Controller
             'memberRating'          => 'required|integer|min:1|max:5',
             'totalReview'           => 'required|integer|min:0',
             'portfolioLink'         => 'nullable|url',
-            'memberDescription'     => 'nullable|string|max:1000',
+            'memberDescription'     => 'nullable|string|max:5000',
         ],
         [
             'service.required'          => 'Please select a service.',
@@ -50,7 +50,7 @@ class TeamController extends Controller
             'totalReview.required'      => 'Total review count is required.',
             'totalReview.integer'       => 'Total review count must be an integer.',
             'portfolioLink.url'         => 'Portfolio link must be a valid URL.',
-            'memberDescription.max'     => 'Member description must not exceed 1000 characters.',
+            'memberDescription.max'     => 'Member description must not exceed 5000 characters.',
         ]);
 
         Team::addTeamMember($request);
@@ -77,7 +77,7 @@ class TeamController extends Controller
             'memberRating'          => 'required|integer|min:1|max:5',
             'totalReview'           => 'required|integer|min:0',
             'portfolioLink'         => 'nullable|url',
-            'memberDescription'     => 'nullable|string|max:1000',
+            'memberDescription'     => 'nullable|string|max:5000',
         ],
         [
             'service.required'          => 'Please select a service.',
@@ -91,7 +91,7 @@ class TeamController extends Controller
             'totalReview.required'      => 'Total review count is required.',
             'totalReview.integer'       => 'Total review count must be an integer.',
             'portfolioLink.url'         => 'Portfolio link must be a valid URL.',
-            'memberDescription.max'     => 'Member description must not exceed 1000 characters.',
+            'memberDescription.max'     => 'Member description must not exceed 5000 characters.',
         ]);
 
         Team::updateTeamMember($request, $id);

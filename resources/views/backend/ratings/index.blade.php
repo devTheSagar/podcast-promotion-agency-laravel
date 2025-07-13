@@ -49,12 +49,17 @@
                                             <td>{{ $rating->plan->service->serviceName }}</td>
                                             <td>{{ $rating->plan->planName }}</td>
                                             <td>{{ $rating->clientName }}</td>
-                                            <td>{{ $rating->planRating }}</td>
+                                            <td>{{ $rating->planRating }}<span> star</span></td>
                                             <td>{{ Str::limit(strip_tags($rating->clientReview), 30, '...') }}</td>
                                             <td>
                                                 <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                                <a href="{{ route('admin.edit-rating', ['id' => $rating]) }}" class="btn btn-secondary"><i class="fa fa-edit"></i></a>
+                                                {{-- <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a> --}}
+                                                <form action="{{ route('admin.delete-rating', ['id' => $rating]) }}" method="POST" onsubmit="return confirm('Confirm deleting {{ $rating->planRating }}star rating from {{ $rating->plan->service->serviceName }}s {{$rating->plan->planName}} plan ?');" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

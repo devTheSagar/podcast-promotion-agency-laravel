@@ -91,6 +91,9 @@ Route::prefix('admin')->group(function () {
     Route::get('ratings', [RatingController::class, 'index'])->name('admin.all-ratings');
     Route::get('add-ratings', [RatingController::class, 'create'])->name('admin.add-rating');
     Route::post('add-ratings', [RatingController::class, 'store'])->name('admin.store-rating');
+    Route::get('edit-rating/{id}', [RatingController::class, 'edit'])->name('admin.edit-rating');
+    Route::post('update-rating/{id}', [RatingController::class, 'update'])->name('admin.update-rating');
+    Route::delete('delete-rating/{id}', [RatingController::class, 'destroy'])->name('admin.delete-rating');
 
     // admin contact info
     Route::get('contact-info', [ContactInfoController::class, 'index'])->name('admin.all-contact-infoes');

@@ -40,16 +40,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>contact@podcastpromotion.com</td>
-                                        <td>012012455874</td>
-                                        <td>Khoksa, Kushtia, Bangladesh</td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fe fe-eye"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fe fe-edit"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></a>
-                                        </td>
-                                    </tr>
+                                    @foreach ($contactInfos as $contactInfo)
+                                        <tr>
+                                            <td>{{ $contactInfo->email }}</td>
+                                            <td>{{ $contactInfo->phone }}</td>
+                                            <td>{{ Str::limit(strip_tags($contactInfo->addressDetails), 30, '...') }}</td>
+                                            <td>
+                                                <a href="{{ route('admin.view-contact-info', ['id' => $contactInfo]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('admin.edit-contact-info', ['id' => $contactInfo]) }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+                                                {{-- <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a> --}}
+                                                <form action="{{ route('admin.delete-contact-info', ['id' => $contactInfo]) }}" method="POST" onsubmit="return confirm('Confirm deleting the contact information?');" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

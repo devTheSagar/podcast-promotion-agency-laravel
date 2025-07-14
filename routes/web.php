@@ -101,6 +101,11 @@ Route::prefix('admin')->group(function () {
     // admin contact info
     Route::get('contact-info', [ContactInfoController::class, 'index'])->name('admin.all-contact-infoes');
     Route::get('add-contact-info', [ContactInfoController::class, 'create'])->name('admin.add-contact-info');
+    Route::post('add-contact-info', [ContactInfoController::class, 'store'])->name('admin.store-contact-info');
+    Route::get('edit-contact-info/{id}', [ContactInfoController::class, 'edit'])->name('admin.edit-contact-info');
+    Route::post('update-contact-info/{id}', [ContactInfoController::class, 'update'])->name('admin.update-contact-info');
+    Route::delete('delete-contact-info/{id}', [ContactInfoController::class, 'destroy'])->name('admin.delete-contact-info');
+    Route::get('view-contact-info/{id}', [ContactInfoController::class, 'view'])->name('admin.view-contact-info');
 
     // admin social links
     Route::get('social-links', [SocialLinkController::class, 'index'])->name('admin.all-social-links');

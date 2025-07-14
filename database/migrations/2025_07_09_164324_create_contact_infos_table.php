@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('contact_infos', function (Blueprint $table) {
             $table->id();
+            $table->string('email');
+            $table->string('phone');
+            $table->text('addressDetails');
             $table->timestamps();
         });
     }

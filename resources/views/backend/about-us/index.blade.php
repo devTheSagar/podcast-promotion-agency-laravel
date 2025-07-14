@@ -33,21 +33,28 @@
                             <table class="table table-bordered text-nowrap border-bottom w-100" id="responsive-datatable">
                                 <thead>
                                     <tr>
-                                        <th class="wd-15p border-bottom-0">About Us</th>
                                         <th class="wd-15p border-bottom-0">Image</th>
+                                        <th class="wd-15p border-bottom-0">About Us</th>
                                         <th class="wd-10p border-bottom-0">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>lorem ipsm</td>
-                                        <td><img src="" alt="image" height="50px" width="50px" style="border-radius: 50%;"></td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fe fe-eye"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fe fe-edit"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></a>
-                                        </td>
-                                    </tr>
+                                    @foreach ($aboutUs as $aboutUs)
+                                        <tr>
+                                            <td><img src="{{ asset($aboutUs->aboutUsImage) }}" alt="image" height="50px" width="50px" style="border-radius: 50%;"></td>
+                                            <td>{!! Str::limit(strip_tags($aboutUs->aboutUsDetails), 30, '...') !!}</td>
+                                            <td>
+                                                <a href="{{ route('admin.view-about-us', ['id' => $aboutUs]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('admin.edit-about-us', ['id' => $aboutUs]) }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+                                                {{-- <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a> --}}
+                                                <form action="{{ route('admin.delete-about-us', ['id' => $aboutUs]) }}" method="POST" onsubmit="return confirm('Confirm deleting about us ?');" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

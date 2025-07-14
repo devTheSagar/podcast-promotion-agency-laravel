@@ -128,6 +128,11 @@ Route::prefix('admin')->group(function () {
     // admin about us
     Route::get('about-us', [AboutUsController::class, 'index'])->name('admin.about-us');
     Route::get('add-about-us', [AboutUsController::class, 'create'])->name('admin.add-about-us');
+    Route::post('add-about-us', [AboutUsController::class, 'store'])->name('admin.store-about-us');
+    Route::get('edit-about-us/{id}', [AboutUsController::class, 'edit'])->name('admin.edit-about-us');
+    Route::post('update-about-us/{id}', [AboutUsController::class, 'update'])->name('admin.update-about-us');
+    Route::delete('delete-about-us/{id}', [AboutUsController::class, 'destroy'])->name('admin.delete-about-us');
+    Route::get('view-about-us/{id}', [AboutUsController::class, 'view'])->name('admin.view-about-us');
 
     // admin testimonial
     Route::get('testimonial', [TestimonialController::class, 'index'])->name('admin.testimonials');

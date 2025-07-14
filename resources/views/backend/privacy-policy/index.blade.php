@@ -38,14 +38,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>lorem ipsm</td>
+                                    @foreach ($privacyPolicies as $privacyPolicy)
+                                        <tr>
+                                        <td>{!! Str::limit(strip_tags($privacyPolicy->privacyPolicy), 30, '...') !!}</td>
                                         <td>
-                                            <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fe fe-eye"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fe fe-edit"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></a>
+                                            <a href="{{ route('admin.view-privacy-policy', ['id' => $privacyPolicy]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
+                                            <a href="{{ route('admin.edit-privacy-policy', ['id' => $privacyPolicy]) }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+                                            {{-- <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a> --}}
+                                            <form action="{{ route('admin.delete-privacy-policy', ['id' => $privacyPolicy]) }}" method="POST" onsubmit="return confirm('Confirm deleting privacy policy ?');" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                                            </form>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

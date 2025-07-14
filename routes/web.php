@@ -119,6 +119,11 @@ Route::prefix('admin')->group(function () {
     // admin privacy policy
     Route::get('privacy-policy', [PrivacyPolicyController::class, 'index'])->name('admin.privacy-policies');
     Route::get('add-privacy-policy', [PrivacyPolicyController::class, 'create'])->name('admin.add-privacy-policy');
+    Route::post('add-privacy-policy', [PrivacyPolicyController::class, 'store'])->name('admin.store-privacy-policy');
+    Route::get('edit-privacy-policy/{id}', [PrivacyPolicyController::class, 'edit'])->name('admin.edit-privacy-policy');
+    Route::post('update-privacy-policy/{id}', [PrivacyPolicyController::class, 'update'])->name('admin.update-privacy-policy');
+    Route::delete('delete-privacy-policy/{id}', [PrivacyPolicyController::class, 'destroy'])->name('admin.delete-privacy-policy');
+    Route::get('view-privacy-policy/{id}', [PrivacyPolicyController::class, 'view'])->name('admin.view-privacy-policy');
 
     // admin about us
     Route::get('about-us', [AboutUsController::class, 'index'])->name('admin.about-us');

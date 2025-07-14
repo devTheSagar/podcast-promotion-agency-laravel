@@ -50,7 +50,8 @@
                                             </td>
                                             <td>{{ Str::limit(strip_tags($service->serviceDetails), 30, '...') }}</td>
                                             <td>
-                                                <a href="{{ route('admin.edit-service', ['id' => $service]) }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ route('admin.view-service', ['id' => $service]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="Show"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('admin.edit-service', ['id' => $service]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
                                                 {{-- <a href="{{ route('admin.delete-service', ['id' => $service]) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a> --}}
                                                 <form action="{{ route('admin.delete-service', ['id' => $service->id]) }}" method="POST" onsubmit="return confirm('Confirm deleting {{ $service->serviceName }} service?');" style="display:inline;">
                                                     @csrf

@@ -84,4 +84,11 @@ class RatingController extends Controller
         Alert::success('Success', 'Rating deleted successfully');
         return redirect()->route('admin.all-ratings');
     }
+
+    public function view($id){
+        $rating = Rating::findOrFail($id);
+        return view('backend.ratings.view', [
+            'rating' => $rating,
+        ]);
+    }
 }

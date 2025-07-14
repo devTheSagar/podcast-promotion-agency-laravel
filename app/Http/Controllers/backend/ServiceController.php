@@ -61,6 +61,13 @@ class ServiceController extends Controller
         return redirect()->route('admin.all-services');
     }
 
+    public function view($id){
+        $service = Service::findOrFail($id);
+        return view('backend.services.view', [
+            'service' => $service
+        ]);
+    }
+
     public function destroy($id){
         Service::deleteService($id);
         Alert::success('Success', 'Service deleted successfully');

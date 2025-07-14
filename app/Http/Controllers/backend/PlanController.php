@@ -97,6 +97,13 @@ class PlanController extends Controller
         return back();
     }
 
+    public function view($id){
+        $plan = Plan::findOrFail($id);
+        return view('backend.plans.view', [
+            'plan' => $plan,
+        ]);
+    }
+
     public function getPlansByService($service_id){
         $plans = Plan::where('service_id', $service_id)->get(['id', 'planName']);
         return response()->json($plans);

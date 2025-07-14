@@ -61,7 +61,7 @@
                                             </td>
                                             <td>{{ Str::limit(strip_tags($plan->planDescription), 30, '...') }}</td>
                                             <td>
-                                                <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('admin.view-plan', ['id' => $plan]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
                                                 <a href="{{ route('admin.edit-plan', ['id' => $plan]) }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
                                                 <form action="{{ route('admin.delete-plan', ['id' => $plan]) }}" method="POST" onsubmit="return confirm('Confirm deleting {{ $plan->planName }} plan from {{ $plan->service->serviceName }} service ?');" style="display:inline;">
                                                     @csrf

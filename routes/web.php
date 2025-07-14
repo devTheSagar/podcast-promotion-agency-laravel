@@ -76,6 +76,7 @@ Route::prefix('admin')->group(function () {
     Route::get('edit-service/{id}', [ServiceController::class, 'edit'])->name('admin.edit-service');
     Route::post('update-service/{id}', [ServiceController::class, 'update'])->name('admin.update-service');
     Route::delete('delete-service/{id}', [ServiceController::class, 'destroy'])->name('admin.delete-service');
+    Route::get('view-service/{id}', [ServiceController::class, 'view'])->name('admin.view-service');
 
     // admin plans
     Route::get('plans', [PlanController::class, 'index'])->name('admin.all-plans');
@@ -86,6 +87,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('delete-plan/{id}', [PlanController::class, 'destroy'])->name('admin.delete-plan');
     // get plans by service
     Route::get('/get-plans-by-service/{service_id}', [PlanController::class, 'getPlansByService']);
+    Route::get('view-plan/{id}', [PlanController::class, 'view'])->name('admin.view-plan');
 
     // admin plan ratings
     Route::get('ratings', [RatingController::class, 'index'])->name('admin.all-ratings');
@@ -94,6 +96,7 @@ Route::prefix('admin')->group(function () {
     Route::get('edit-rating/{id}', [RatingController::class, 'edit'])->name('admin.edit-rating');
     Route::post('update-rating/{id}', [RatingController::class, 'update'])->name('admin.update-rating');
     Route::delete('delete-rating/{id}', [RatingController::class, 'destroy'])->name('admin.delete-rating');
+    Route::get('view-rating/{id}', [RatingController::class, 'view'])->name('admin.view-rating');
 
     // admin contact info
     Route::get('contact-info', [ContactInfoController::class, 'index'])->name('admin.all-contact-infoes');

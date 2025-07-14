@@ -1,7 +1,7 @@
 @extends('backend.master')
 
 @section('title')
-    All Team Member
+    View Team Member
 @endsection
 
 @section('content')

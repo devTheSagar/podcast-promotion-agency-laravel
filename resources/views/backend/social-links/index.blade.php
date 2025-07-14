@@ -42,18 +42,45 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>facebook.com</td>
-                                        <td>instagram.com</td>
-                                        <td>twitter.com</td>
-                                        <td>youtube.com</td>
-                                        <td>linkedin.com</td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fe fe-eye"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fe fe-edit"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></a>
-                                        </td>
-                                    </tr>
+                                    @foreach ($socialLinks as $socialLink)
+                                        <tr>
+                                            <td>
+                                                @if (!empty($socialLink->facebookLink))
+                                                    <a href="{{ $socialLink->facebookLink }}" target="_blank">Facebook</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if (!empty($socialLink->instagramLink))
+                                                    <a href="{{ $socialLink->instagramLink }}" target="_blank">Instagram</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if (!empty($socialLink->twitterLink))
+                                                    <a href="{{ $socialLink->twitterLink }}" target="_blank">Twitter</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if (!empty($socialLink->youtubeLink))
+                                                    <a href="{{ $socialLink->youtubeLink }}" target="_blank">Youtube</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if (!empty($socialLink->linkedinLink))
+                                                    <a href="{{ $socialLink->linkedinLink }}" target="_blank">Linkedin</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.view-social-link', ['id' => $socialLink]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('admin.edit-social-link', ['id' => $socialLink]) }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+                                                {{-- <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a> --}}
+                                                <form action="{{ route('admin.delete-social-link', ['id' => $socialLink]) }}" method="POST" onsubmit="return confirm('Confirm deleting socail links records ?');" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -110,6 +110,11 @@ Route::prefix('admin')->group(function () {
     // admin social links
     Route::get('social-links', [SocialLinkController::class, 'index'])->name('admin.all-social-links');
     Route::get('add-social-links', [SocialLinkController::class, 'create'])->name('admin.add-social-link');
+    Route::post('add-social-links', [SocialLinkController::class, 'store'])->name('admin.store-social-link');
+    Route::get('edit-social-link/{id}', [SocialLinkController::class, 'edit'])->name('admin.edit-social-link');
+    Route::post('update-social-link/{id}', [SocialLinkController::class, 'update'])->name('admin.update-social-link');
+    Route::delete('delete-social-link/{id}', [SocialLinkController::class, 'destroy'])->name('admin.delete-social-link');
+    Route::get('view-social-link/{id}', [SocialLinkController::class, 'view'])->name('admin.view-social-link');
 
     // admin privacy policy
     Route::get('privacy-policy', [PrivacyPolicyController::class, 'index'])->name('admin.privacy-policies');

@@ -93,21 +93,24 @@
       </div>
       <div class="row">
         <!-- service item start -->
-        <div class="col-md-6 col-lg-3 mx-5">
-          <div class="courses-item">
-            <a href="{{ route('user.service-details') }}" class="link">
-              <div class="courses-item-inner">
-                <div class="img-box">
-                  <img src="{{ asset('') }}frontend/assets/img/services/apple_podcast_transparent.png" alt="course img">
+        @foreach ($services as $service)
+          <div class="col-md-6 col-lg-3 mx-5">
+            <div class="courses-item">
+              <a href="{{ route('user.service-details') }}" class="link">
+                <div class="courses-item-inner">
+                  <div class="img-box">
+                    <img src="{{ asset($service->serviceImage) }}" alt="service img">
+                  </div>
+                  <h3 class="title text-center">{{ $service->serviceName }}</h3>
                 </div>
-                <h3 class="title text-center">podcast promotion</h3>
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
-        </div>
+        @endforeach
+        
         <!-- service item end -->
         <!-- service item start -->
-        <div class="col-md-6 col-lg-3 mx-5">
+        {{-- <div class="col-md-6 col-lg-3 mx-5">
           <div class="courses-item">
             <a href="{{ route('user.service-details') }}" class="link">
               <div class="courses-item-inner">
@@ -118,7 +121,7 @@
               </div>
             </a>
           </div>
-        </div>
+        </div> --}}
         <!-- service item end -->
       </div>
     </div>

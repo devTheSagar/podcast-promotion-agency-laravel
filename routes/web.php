@@ -136,6 +136,11 @@ Route::prefix('admin')->group(function () {
     // admin testimonial
     Route::get('testimonial', [TestimonialController::class, 'index'])->name('admin.testimonials');
     Route::get('add-testimonial', [TestimonialController::class, 'create'])->name('admin.add-testimonials');
+    Route::post('add-testimonial', [TestimonialController::class, 'store'])->name('admin.store-testimonial');
+    Route::get('edit-testimonial/{id}', [TestimonialController::class, 'edit'])->name('admin.edit-testimonial');
+    Route::post('update-testimonial/{id}', [TestimonialController::class, 'update'])->name('admin.update-testimonial');
+    Route::delete('delete-testimonial/{id}', [TestimonialController::class, 'destroy'])->name('admin.delete-testimonial');
+    Route::get('view-testimonial/{id}', [TestimonialController::class, 'view'])->name('admin.view-testimonial');
 
     // admin team
     Route::get('team', [TeamController::class, 'index'])->name('admin.team');

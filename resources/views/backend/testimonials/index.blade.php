@@ -33,43 +33,36 @@
                                 <thead>
                                     <tr>
                                         <th class="wd-15p border-bottom-0">SL</th>
+                                        <th class="wd-15p border-bottom-0">Date</th>
                                         <th class="wd-15p border-bottom-0">Name</th>
                                         <th class="wd-20p border-bottom-0">Designation</th>
-                                        <th class="wd-20p border-bottom-0">Designation</th>
+                                        <th class="wd-20p border-bottom-0">Rating</th>
+                                        <th class="wd-20p border-bottom-0">Testimonial</th>
                                         <th class="wd-15p border-bottom-0">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Alex</td>
-                                        <td>web developer</td>
-                                        <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae voluptate dolorem recusandae, laudantium autem molestias perferendis nemo. Esse, laboriosam ipsa.</td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>brown</td>
-                                        <td>web developer</td>
-                                        <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae voluptate dolorem recusandae, laudantium autem molestias perferendis nemo. Esse, laboriosam ipsa.</td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Alex</td>
-                                        <td>web developer</td>
-                                        <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae voluptate dolorem recusandae, laudantium autem molestias perferendis nemo. Esse, laboriosam ipsa.</td>
-                                        <td>
-                                            <a href="javascript:void(0)" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                                        </td>
-                                    </tr>
+                                    @foreach ($testimonials as $testimonial)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            {{-- <td>{{ \Carbon\Carbon::parse($testimonial->date)->format('d/m/Y') }}</td> --}}
+                                            <td>{{ \Carbon\Carbon::parse($testimonial->date)->format('d F Y') }}</td>
+                                            <td>{{ $testimonial->name }}</td>
+                                            <td>{{ $testimonial->designation }}</td>
+                                            <td>{{ $testimonial->rating }}<span> Star</span></td>
+                                            <td>{{ Str::limit(strip_tags($testimonial->testimonial), 30, '...') }}</td>
+                                            <td>
+                                                <a href="{{ route('admin.view-testimonial', ['id' => $testimonial]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="View"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('admin.edit-testimonial', ['id' => $testimonial]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+                                                {{-- <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash"></i></a> --}}
+                                                <form action="{{ route('admin.delete-testimonial', ['id' =>$testimonial]) }}" method="POST" onsubmit="return confirm('Confirm deleting the testimonial ?');" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

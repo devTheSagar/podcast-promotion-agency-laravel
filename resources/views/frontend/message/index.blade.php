@@ -30,17 +30,29 @@
             <div class="contact-item">
               <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
               <h3>Address</h3>
-              <p>34 glassmorphism street, display flex city, New Delhi</p>
+              @if ($contactInfo && $contactInfo->addressDetails)
+                  <p>{!! $contactInfo->addressDetails !!}</p>
+              @else
+                  <p>No address found.</p>
+              @endif
             </div>
             <div class="contact-item">
               <div class="icon-box"><i class="fas fa-phone"></i></div>
               <h3>Phone</h3>
-              <p>91 9654 *** 000</p>
+              @if ($contactInfo && $contactInfo->phone)
+                  <p>{!! $contactInfo->phone !!}</p>
+              @else
+                  <p>No phone found.</p>
+              @endif
             </div>
             <div class="contact-item">
               <div class="icon-box"><i class="fas fa-envelope"></i></div>
               <h3>Email</h3>
-              <p>info@gmail.com</p>
+              @if ($contactInfo && $contactInfo->email)
+                  <p>{!! $contactInfo->email !!}</p>
+              @else
+                  <p>No email found.</p>
+              @endif
             </div>
           </div>
         </div>

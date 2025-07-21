@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('service_id')->constrained()->onDelete('cascade');
-            $table->string('planName')->unique();
+            $table->string('planName');
             $table->integer('planPrice');
             $table->integer('planDuration');
             $table->text('planFeatures');

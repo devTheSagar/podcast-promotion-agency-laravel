@@ -35,7 +35,7 @@ Route::get('/', [HomeController::class, 'index'])->name('user.dashboard');
 Route::post('logout', [UserLoginController::class, 'logout'])->name('logout.user');
 
 // user services
-Route::get('services', [FrontendServiceController::class, 'index'])->name('user.service-details');
+Route::get('services/{id}', [FrontendServiceController::class, 'index'])->name('user.service-details');
 
 // user plans
 Route::get('plans', [FrontendPlanController::class, 'index'])->name('user.plan-details');

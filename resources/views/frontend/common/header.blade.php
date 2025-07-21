@@ -44,8 +44,13 @@
             <li class="menu-item menu-item-has-children">
               <a href="#" class="js-toggle-sub-menu">services <i class="fas fa-chevron-down"></i></a>
               <ul class="sub-menu js-sub-menu">
-                 <li class="sub-menu-item"><a href="{{ route('user.service-details') }}">podcast promotion</a></li>
-                 <li class="sub-menu-item"><a href="{{ route('user.service-details') }}">spotify promotion</a></li>
+                @foreach ($services as $service)
+                  <li class="sub-menu-item">
+                    <a href="{{ route('user.service-details', ['id' => $service->id]) }}">
+                      {{ $service->serviceName }}
+                    </a>
+                  </li>
+                @endforeach
               </ul>
             </li>
             <li class="menu-item"><a href="{{ route('user.message') }}">contact</a></li>

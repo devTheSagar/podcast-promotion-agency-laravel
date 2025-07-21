@@ -96,7 +96,7 @@
         @foreach ($services as $service)
           <div class="col-md-6 col-lg-3 mx-5">
             <div class="courses-item">
-              <a href="{{ route('user.service-details') }}" class="link">
+              <a href="{{ route('user.service-details', ['id' => $service->id]) }}" class="link">
                 <div class="courses-item-inner">
                   <div class="img-box">
                     <img src="{{ asset($service->serviceImage) }}" alt="service img">
@@ -107,189 +107,52 @@
             </div>
           </div>
         @endforeach
-        
-        <!-- service item end -->
-        <!-- service item start -->
-        {{-- <div class="col-md-6 col-lg-3 mx-5">
-          <div class="courses-item">
-            <a href="{{ route('user.service-details') }}" class="link">
-              <div class="courses-item-inner">
-                <div class="img-box">
-                  <img src="{{ asset('') }}frontend/assets/img/services/spotify_transparent.png" alt="course img">
-                </div>
-                <h3 class="title text-center">spotify promotion</h3>
-              </div>
-            </a>
-          </div>
-        </div> --}}
-        <!-- service item end -->
+
       </div>
     </div>
   </section>
   <!-- services section end -->
 
 
-  <!-- podcast pricing section start -->
-  <section class="service-pricing" id="pricing">
+  {{-- loop to get services  --}}
+  @foreach ($services as $service)
+    <section class="service-pricing" id="pricing">
     <div class="container">
       <div class="section-title text-center">
         <span class="title" data-aos="fade-up" data-aos-duration="600">pricing</span>
-        <h2 class="sub-title" data-aos="fade-up" data-aos-duration="600">podcast promotion pricing plans</h2>
+        <h2 class="sub-title" data-aos="fade-up" data-aos-duration="600">{{$service->serviceName}} pricing plans</h2>
       </div>
       <div class="grid">
-        <!-- basic plan start -->
-        <div class="pricing-item" data-aos="fade-up" data-aos-duration="1000">
-          <div class="pricing-header">
-            <h3>basic</h3>
-            <div class="service-price"><span>$499</span> 30 days</div>
-          </div>
-          <div class="pricing-body">
-            <ul>
-              <li><i class="fas fa-check"></i> 10K-15K traffic</li>
-              <li><i class="fas fa-check"></i> 5K-10K download</li>
-              <li><i class="fas fa-check"></i> rank in top 200</li>
-              <li><i class="fas fa-check"></i> increased follower</li>
-              <li><i class="fas fa-check"></i> choose your country</li>
-              <!-- <li><i class="fas fa-times"></i> bathroom cleaning</li> -->
-            </ul>
-          </div>
-          <div class="pricing-footer">
-            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
-          </div>
-        </div>
-        <!-- basic plan end -->
 
-        <!-- standard plan start -->
-        <div class="pricing-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-          <div class="pricing-header">
-            <h3>standard</h3>
-            <div class="service-price"><span>$699</span> 30 days</div>
+        {{-- loop to et plan under each service  --}}
+        @foreach ($service->plans as $plan)
+          <div class="pricing-item" data-aos="fade-up" data-aos-duration="1000">
+            <div class="pricing-header">
+              <h3>basic</h3>
+              <div class="service-price"><span>$ {{ $plan->planPrice }}</span> {{$plan->planDuration}} days</div>
+            </div>
+            <div class="pricing-body">
+              <ul>
+                @foreach (json_decode($plan->planFeatures, true) as $feature)
+                  <li><i class="fas fa-check"></i> {{ $feature }}</li>
+                @endforeach
+              </ul>
+            </div>
+            <div class="pricing-footer">
+              <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
+            </div>
           </div>
-          <div class="pricing-body">
-            <ul>
-              <li><i class="fas fa-check"></i> 14K-21K traffic</li>
-              <li><i class="fas fa-check"></i> 7K-14K download</li>
-              <li><i class="fas fa-check"></i> rank in top 150</li>
-              <li><i class="fas fa-check"></i> increased follower</li>
-              <li><i class="fas fa-check"></i> choose your country</li>
-              <!-- <li><i class="fas fa-times"></i> bathroom cleaning</li> -->
-            </ul>
-          </div>
-          <div class="pricing-footer">
-            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
-          </div>
-        </div>
-        <!-- standard plan end -->
-
-        <!-- premium plan start -->
-        <div class="pricing-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-          <div class="pricing-header">
-            <h3>premium</h3>
-            <div class="service-price"><span>$999</span> 30 days</div>
-          </div>
-          <div class="pricing-body">
-            <ul>
-              <li><i class="fas fa-check"></i> 20K-30K traffic</li>
-              <li><i class="fas fa-check"></i> 10K-20K download</li>
-              <li><i class="fas fa-check"></i> rank in top 100</li>
-              <li><i class="fas fa-check"></i> increased follower</li>
-              <li><i class="fas fa-check"></i> choose your country</li>
-              <!-- <li><i class="fas fa-times"></i> bathroom cleaning</li> -->
-            </ul>
-          </div>
-          <div class="pricing-footer">
-            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
-          </div>
-        </div>
+        @endforeach
+        
       </div>
     </div>
     <div class="row">
         <div class="col-12 text-center mt-3">
-          <a href="{{ route('user.service-details') }}" class="btn btn-theme">view all</a>
+          <a href="{{ route('user.service-details', ['id' => $service->id]) }}" class="btn btn-theme">view all</a>
         </div>
       </div>
   </section>
-  <!-- podcast pricing section end -->
-
-
-  <!-- spotify pricing section start -->
-  <section class="service-pricing mt-5" id="pricing">
-    <div class="container">
-      <div class="section-title text-center">
-        <!-- <span class="title" data-aos="fade-up" data-aos-duration="600">pricing</span> -->
-        <h2 class="sub-title" data-aos="fade-up" data-aos-duration="600">spotify promotion pricing plans</h2>
-      </div>
-      <div class="grid">
-        <!-- basic plan start -->
-        <div class="pricing-item" data-aos="fade-up" data-aos-duration="1000">
-          <div class="pricing-header">
-            <h3>basic</h3>
-            <div class="service-price"><span>$499</span> 30 days</div>
-          </div>
-          <div class="pricing-body">
-            <ul>
-              <li><i class="fas fa-check"></i> 5K-10K traffic</li>
-              <li><i class="fas fa-check"></i> 2K-8K download</li>
-              <li><i class="fas fa-check"></i> rank in top 50</li>
-              <li><i class="fas fa-check"></i> increased follower</li>
-              <li><i class="fas fa-check"></i> choose your country</li>
-            </ul>
-          </div>
-          <div class="pricing-footer">
-            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
-          </div>
-        </div>
-        <!-- basic plan end -->
-
-        <!-- standard plan start -->
-        <div class="pricing-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-          <div class="pricing-header">
-            <h3>standard</h3>
-            <div class="service-price"><span>$699</span> 30 days</div>
-          </div>
-          <div class="pricing-body">
-            <ul>
-              <li><i class="fas fa-check"></i> 7K-14K traffic</li>
-              <li><i class="fas fa-check"></i> 3K-12K download</li>
-              <li><i class="fas fa-check"></i> rank in top 40</li>
-              <li><i class="fas fa-check"></i> increased follower</li>
-              <li><i class="fas fa-check"></i> choose your country</li>
-            </ul>
-          </div>
-          <div class="pricing-footer">
-            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
-          </div>
-        </div>
-        <!-- standard plan end -->
-
-        <!-- premium plan start -->
-        <div class="pricing-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-          <div class="pricing-header">
-            <h3>premium</h3>
-            <div class="service-price"><span>$999</span> 30 days</div>
-          </div>
-          <div class="pricing-body">
-            <ul>
-              <li><i class="fas fa-check"></i> 10K-20K traffic</li>
-              <li><i class="fas fa-check"></i> 5K-17K download</li>
-              <li><i class="fas fa-check"></i> rank in top 30</li>
-              <li><i class="fas fa-check"></i> increased follower</li>
-              <li><i class="fas fa-check"></i> choose your country</li>
-            </ul>
-          </div>
-          <div class="pricing-footer">
-            <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-        <div class="col-12 text-center mt-3">
-          <a href="{{ route('user.service-details') }}" class="btn btn-theme">view all</a>
-        </div>
-      </div>
-  </section>
-  <!-- spotify pricing section end -->
+  @endforeach
 
 
   <!-- testimonials section start -->

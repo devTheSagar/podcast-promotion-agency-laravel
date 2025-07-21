@@ -40,7 +40,7 @@
               </ul>
             </div>
             <div class="pricing-footer">
-              <a href="{{ route('user.plan-details') }}" class="btn">more deatils</a>
+              <a href="{{ route('user.plan-details', ['id' => $plan->id]) }}" class="btn">more deatils</a>
             </div>
           </div>
         @endforeach

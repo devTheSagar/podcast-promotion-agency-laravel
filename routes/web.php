@@ -38,7 +38,7 @@ Route::post('logout', [UserLoginController::class, 'logout'])->name('logout.user
 Route::get('services/{id}', [FrontendServiceController::class, 'index'])->name('user.service-details');
 
 // user plans
-Route::get('plans', [FrontendPlanController::class, 'index'])->name('user.plan-details');
+Route::get('plans/{id}', [FrontendPlanController::class, 'index'])->name('user.plan-details');
 
 // user message
 Route::get('contact', [MessageController::class, 'index'])->name('user.message');

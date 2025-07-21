@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\AboutUsController;
 use App\Http\Controllers\backend\auth\LoginController as AdminLoginController;
 use App\Http\Controllers\backend\ContactInfoController;
+use App\Http\Controllers\backend\MessageController as BackendMessageController;
 use App\Http\Controllers\backend\PlanController;
 use App\Http\Controllers\backend\PrivacyPolicyController;
 use App\Http\Controllers\backend\RatingController;
@@ -151,4 +152,7 @@ Route::prefix('admin')->group(function () {
     Route::post('update-team/{id}', [TeamController::class, 'update'])->name('admin.update-team');
     Route::delete('delete-team/{id}', [TeamController::class, 'destroy'])->name('admin.delete-team');
     Route::get('view-team/{id}', [TeamController::class, 'view'])->name('admin.view-team');
+
+
+    Route::get('messages', [BackendMessageController::class, 'showMessages'])->name('admin.show-messages');
 });

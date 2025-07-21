@@ -59,18 +59,19 @@
         <div class="col-md-6">
           <div class="contact-form box">
             <h2 class="form-title text-center">Leave a Message</h2>
-            <form action="">
+            <form action="{{ route('user.send-message') }}" method="POST">
+              @csrf
               <div class="form-group">
-                <input name="sender-name" type="text" class="form-control" placeholder="Name">
+                <input name="senderName" type="text" class="form-control" placeholder="Name">
               </div>
               <div class="form-group">
-                <input name="sender-email" type="text" class="form-control" placeholder="Email">
+                <input name="senderEmail" type="email" class="form-control" placeholder="Email">
               </div>
               <div class="form-group">
-                <input name="sender-phone" type="text" class="form-control" placeholder="Phone">
+                <input name="senderPhone" type="number" class="form-control" placeholder="Phone">
               </div>
               <div class="form-group">
-                <textarea name="sender-message" class="form-control" placeholder="Message"></textarea>
+                <textarea name="senderMessage" class="form-control" placeholder="Message"></textarea>
               </div>
               <button type="submit" class="btn btn-block btn-theme btn-form">send message</button>
             </form>

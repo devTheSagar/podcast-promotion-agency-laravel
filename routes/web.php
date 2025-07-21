@@ -42,6 +42,7 @@ Route::get('plans/{id}', [FrontendPlanController::class, 'index'])->name('user.p
 
 // user message
 Route::get('contact', [MessageController::class, 'index'])->name('user.message');
+Route::post('contact', [MessageController::class, 'message'])->name('user.send-message');
 
 // user checkout
 Route::get('checkout', [CheckoutController::class, 'index'])->name('user.checkout');

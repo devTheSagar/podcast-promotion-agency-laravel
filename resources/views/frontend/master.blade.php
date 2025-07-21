@@ -2,4 +2,6 @@
 
     @yield('content')
 
+    {{-- sweet alert  --}}
+    @include('sweetalert::alert')
 @include('frontend.common.footer')

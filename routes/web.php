@@ -153,6 +153,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('delete-team/{id}', [TeamController::class, 'destroy'])->name('admin.delete-team');
     Route::get('view-team/{id}', [TeamController::class, 'view'])->name('admin.view-team');
 
-
+    // admin messages
     Route::get('messages', [BackendMessageController::class, 'showMessages'])->name('admin.show-messages');
+    Route::get('view-messages/{id}', [BackendMessageController::class, 'viewMessage'])->name('admin.view-message');
 });

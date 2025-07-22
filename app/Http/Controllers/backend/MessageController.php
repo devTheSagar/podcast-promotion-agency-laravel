@@ -14,4 +14,11 @@ class MessageController extends Controller
             'messages' => $messages
         ]);
     }
+
+    public function viewMessage($id){
+        $message = Message::find($id);
+        return view('backend.messages.view', [
+            'message' => $message
+        ]);
+    }
 }

@@ -46,20 +46,19 @@
                                     @foreach ($messages as $message)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $message->created_at->format('d M, Y h:i A') }}</td>
+                                            <td>{{ $message->created_at->timezone('Asia/Dhaka')->format('d M, Y h:i A') }}</td>
                                             <td>{{ $message->senderName }}</td>
                                             <td>{{ $message->senderEmail }}</td>
                                             <td>{{ $message->senderPhone }}</td>
                                             <td>{{ Str::limit(strip_tags($message->senderMessage), 30, '...') }}</td>
                                             <td>
-                                                <a href="#" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
-                                                <a href="#" class="btn btn-secondary" data-bs-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
-                                                {{-- <a href="javascript:void(0);" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a> --}}
-                                                <form action="#" method="POST" onsubmit="return confirm('Confirm deleting the contact information?');" style="display:inline;">
+                                                <a href="{{ route('admin.view-message', ['id' => $message->id]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
+                                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $message->senderEmail }}&su=Reply to your message&body=Hi {{ $message->senderName }},%0D%0A%0D%0A" target="_blank" class="btn btn-secondary" data-bs-toggle="tooltip" title="Send Mail"><i class="fa fa-envelope"></i></a>
+                                                {{-- <form action="#" method="POST" onsubmit="return confirm('Confirm deleting the contact information?');" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
-                                                </form>
+                                                </form> --}}
                                             </td>
                                         </tr>
                                     @endforeach

@@ -16,6 +16,7 @@ use App\Http\Controllers\frontend\auth\RegisterController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\MessageController;
+use App\Http\Controllers\frontend\OrderController;
 use App\Http\Controllers\frontend\PlanController as FrontendPlanController;
 use App\Http\Controllers\frontend\ServiceController as FrontendServiceController;
 use App\Http\Controllers\frontend\TrackOrderController;
@@ -51,9 +52,12 @@ Route::post('contact', [MessageController::class, 'message'])->name('user.send-m
 // user checkout
 Route::get('checkout/{id}', [CheckoutController::class, 'index'])->middleware('auth')->name('user.checkout');
 
+Route::post('checkout', [OrderController::class, 'store'])->middleware('auth')->name('user.order');
+
 
 // user account
 Route::get('user-account', [UserAccountController::class, 'index'])->middleware('auth')->name('user.account');
+
 
 // track order
 Route::get('track-order', [TrackOrderController::class, 'index'])->middleware('auth')->name('user.track-order');

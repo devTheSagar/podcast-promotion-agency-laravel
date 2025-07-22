@@ -51,72 +51,71 @@
                 <h3 class="text-capitalize mb-4">place order</h3>
                 <h3 class="text-capitalize mb-4">to place order, you have to pay <b>${{ $plan->planPrice }}</b> in this paypal account and put the transaction id in the transaction id box</h3>
                 <!-- order start -->
-                <form action="#">
+                <form action="{{ route('user.order') }}" method="POST">
+                  @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name">
+                        <input type="text" name="name" value="{{ auth()->user()->name }}" class="form-control" id="name">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email">
+                        <input type="email" name="email" value="{{ auth()->user()->email }}" class="form-control" id="email">
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone Number</label>
-                        <input type="number" class="form-control" id="phone">
+                        <input type="number" name="phone" class="form-control" id="phone">
                     </div>
                     <div class="mb-3">
                         <label for="transaction-id" class="form-label">Transaction Id</label>
-                        <input type="text" class="form-control" id="transaction-id">
+                        <input type="text" name="transactionId" class="form-control" id="transaction-id">
                     </div>
                     <div class="mb-3">
                         <label for="transaction-id" class="form-label">Your Podcast Link</label>
-                        <input type="text" class="form-control" id="transaction-id">
+                        <input type="text" name="link" class="form-control" id="transaction-id">
                     </div>
                     <div class="mb-3">
                       <label for="targeted-country" class="form-label">Your Targeted Country (Any Three)</label>
                       <div class="row">
                         <div class="col-md-6">
+                              {{-- hidden field to pass plan id  --}}
+                              <input type="hidden" name="planId" value="{{ $plan->id }}">
+
                               <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="USA" id="usa">
+                                  <input class="form-check-input" name="country[]" type="checkbox" value="USA" id="usa">
                                   <label class="form-check-label" for="usa">USA</label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="Canada" id="canada">
+                                  <input class="form-check-input" name="country[]" type="checkbox" value="Canada" id="canada">
                                   <label class="form-check-label" for="canada">Canada</label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="UK" id="uk">
+                                  <input class="form-check-input" name="country[]" type="checkbox" value="UK" id="uk">
                                   <label class="form-check-label" for="uk">UK</label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="Australia" id="australia">
+                                  <input class="form-check-input" name="country[]" type="checkbox" value="Australia" id="australia">
                                   <label class="form-check-label" for="australia">Australia</label>
                               </div>
                         </div>
                         <div class="col-md-6">
                               <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="Germany" id="germany">
+                                  <input class="form-check-input" name="country[]" type="checkbox" value="Germany" id="germany">
                                   <label class="form-check-label" for="germany">Germany</label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="Finland" id="finland">
+                                  <input class="form-check-input" name="country[]" type="checkbox" value="Finland" id="finland">
                                   <label class="form-check-label" for="finland">Finland</label>
                               </div>
                               <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="India" id="india">
+                                  <input class="form-check-input" name="country[]" type="checkbox" value="India" id="india">
                                   <label class="form-check-label" for="india">India</label>
                               </div>
                           </div>
                       </div>
                     </div>
-
-
-                    
-
-
                     <div class="mb-3">
                         <label for="additional-text" class="form-label">Additonal Text</label>
-                        <textarea class="form-control" id="additional-text" rows="3"></textarea>
+                        <textarea name="additionalText" class="form-control" id="additional-text" rows="3"></textarea>
                     </div>
                     <div  class="mb-3">
                         <input class="form-check-input" type="checkbox" value="" id="checkDefault">
@@ -125,7 +124,7 @@
                         </label>
                     </div>
                     <div class="btn-wrap">
-                        <button type="button" class="btn btn-theme btn-block">Confirm Order</button>
+                        <button type="submit" class="btn btn-theme btn-block">Confirm Order</button>
                         <!-- <a href="#" type="button" class="btn btn-theme btn-block">enroll now</a> -->
                     </div>
                 </form>

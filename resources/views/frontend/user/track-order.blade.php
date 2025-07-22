@@ -38,30 +38,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Podcast Promotion</td>
-                            <td>Premium</td>
-                            <td>$999</td>
-                            <td>10 jul 2025</td>
-                            <td>10 aug 2025</td>
-                            <td>pending</td>
-                            <td>
-                                <button class="btn-primary">View</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Podcast Promotion</td>
-                            <td>Premium</td>
-                            <td>$999</td>
-                            <td>10 jul 2025</td>
-                            <td>10 aug 2025</td>
-                            <td>pending</td>
-                            <td>
-                                <button class="btn-primary">View</button>
-                            </td>
-                        </tr>
+                        @foreach ($orders as $order)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $order->plan->service->serviceName }}</td>
+                                <td>{{ $order->plan->planName }}</td>
+                                <td>${{ $order->plan->planPrice }}</td>
+                                <td>{{ $order->created_at->timezone('Asia/Dhaka')->format('d M, Y') }}</td>
+                                <td>{{ $order->created_at->copy()->addDays($order->plan->planDuration)->timezone('Asia/Dhaka')->format('d M, Y ') }}</td>
+                                <td>pending</td>
+                                <td>
+                                    <button class="btn-primary">View</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                        
                     </tbody>
                 </table>
             </div>

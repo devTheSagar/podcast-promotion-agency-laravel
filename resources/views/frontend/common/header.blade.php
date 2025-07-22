@@ -100,7 +100,7 @@
                   <ul class="sub-menu js-sub-menu">
                       <li class="sub-menu-item"><a href="{{ route('login') }}">Log In</a></li>
                       <li class="sub-menu-item"><a href="{{ route('signup.user') }}">Sign Up</a></li>
-                      <li class="sub-menu-item"><a href="{{ route('user.account') }}">Track Order</a></li>
+                      <li class="sub-menu-item"><a href="{{ route('user.track-order') }}">Track Order</a></li>
                   </ul>
               @endguest
             </li>

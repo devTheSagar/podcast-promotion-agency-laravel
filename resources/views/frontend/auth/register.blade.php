@@ -25,15 +25,16 @@
          <div class="col-md-7 col-lg-6 col-xl-5">
            <div class="signup-form box">
               <h2 class="form-title text-center">Create Your Account</h2>
-              <form action="">
+              <form action="{{ route('register.user') }}" method="POST">
+                @csrf
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Full Name">
+                  <input type="text" name="name" class="form-control" placeholder="Full Name">
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Email">
+                  <input type="text" name="email" class="form-control" placeholder="Email">
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Password">
+                  <input type="password" name="password" class="form-control" placeholder="Password">
                 </div>
                 <button type="submit" class="btn btn-block btn-theme btn-form">sign up</button>
                 <p class="text-center mt-4 mb-0">Already have an account ? <a href="{{ route('login') }}">Log In</a></p>

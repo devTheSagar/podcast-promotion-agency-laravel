@@ -35,6 +35,9 @@ Route::post('login', [UserLoginController::class, 'login']);
 Route::get('/', [HomeController::class, 'index'])->name('user.dashboard');
 Route::post('logout', [UserLoginController::class, 'logout'])->name('logout.user');
 
+Route::get('sign-up', [RegisterController::class, 'index'])->name('signup.user');
+Route::post('sign-up', [RegisterController::class, 'register'])->name('register.user');
+
 // user services
 Route::get('services/{id}', [FrontendServiceController::class, 'index'])->name('user.service-details');
 

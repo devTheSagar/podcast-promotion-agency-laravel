@@ -25,8 +25,8 @@
         <div class="col-lg-12">
             <p>Welcome to your dashboard, where you can manage your orders and account settings.</p>
             <br>
-            <p><b>Name:</b> User</p>
-            <p><b>Email:</b> user@gmail.com</p>
+            <p><b>Name:</b> {{ Auth::user()->name }}</p>
+            <p><b>Email:</b> {{ Auth::user()->email }}</p>
             <a href="#">Change Password</a>
         </div>
     </div>

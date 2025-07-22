@@ -14,7 +14,7 @@ class LoginController extends Controller
 
     public function login(Request $request) {
         if (Auth::guard('web')->attempt($request->only('email', 'password'))) {
-            return redirect()->route('user.dashboard');
+            return redirect()->intended(route('user.dashboard'));
         }
         return back()->withErrors(['email' => 'Invalid Credentials']);
     }

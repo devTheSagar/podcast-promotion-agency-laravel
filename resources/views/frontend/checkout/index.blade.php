@@ -27,19 +27,18 @@
         <div class="col-lg-4">
           <!-- course sidebar start -->
           <div class="course-sidebar box">
+            <h2>{{ $plan->service->serviceName }} {{$plan->planName}} Plan</h2>
             <div class="price d-flex align-items-center mb-3">
-              <span class="price-old text-decoration-line-through">$100</span>
-              <span class="price-new">$49</span>
-              <span class="price-discount">51% Off</span>
+              {{-- <span class="price-old text-decoration-line-through">$100</span> --}}
+              <span>Total</span>
+              <span class="price-new">${{ $plan->planPrice }}</span>
+              {{-- <span class="price-discount">51% Off</span> --}}
             </div>
-            <h3 class="mb-3">Course Features</h3>
+            <h3 class="mb-3">Plan Features</h3>
             <ul class="features-list">
-              <li>Total 15 lessons</li>
-              <li>Other feature</li>
-              <li>Other feature</li>
-              <li>Other feature</li>
-              <li>Other feature</li>
-              <li>Other feature</li>
+              @foreach (json_decode($plan->planFeatures, true) as $feature)
+                <li><i class=""></i> {{ $feature }}</li>
+              @endforeach
             </ul>
           </div>
           <!-- course sidebar end -->
@@ -50,7 +49,7 @@
             <div class="tab-pane fade show active" id="course-curriculum" role="tabpanel" aria-labelledby="course-curriculum-tab">
               <div class="course-curriculum box">
                 <h3 class="text-capitalize mb-4">place order</h3>
-                <h3 class="text-capitalize mb-4">to place order, you have to pay in this paypal account and put the transaction id in the transaction id box</h3>
+                <h3 class="text-capitalize mb-4">to place order, you have to pay <b>${{ $plan->planPrice }}</b> in this paypal account and put the transaction id in the transaction id box</h3>
                 <!-- order start -->
                 <form action="#">
                     <div class="mb-3">
@@ -67,21 +66,54 @@
                     </div>
                     <div class="mb-3">
                         <label for="transaction-id" class="form-label">Transaction Id</label>
-                        <input type="text" class="form-control" id="transaction-id" placeholder="xxx-xxxx-xxxx-xxxx">
+                        <input type="text" class="form-control" id="transaction-id">
                     </div>
                     <div class="mb-3">
                         <label for="transaction-id" class="form-label">Your Podcast Link</label>
                         <input type="text" class="form-control" id="transaction-id">
                     </div>
                     <div class="mb-3">
-                        <label for="targeted-country" class="form-label">Your Targeted Country</label>
-                       <select class="form-control" id="targeted-country" aria-label="Default select example">
-                            <option selected disabled>select</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                      <label for="targeted-country" class="form-label">Your Targeted Country (Any Three)</label>
+                      <div class="row">
+                        <div class="col-md-6">
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="USA" id="usa">
+                                  <label class="form-check-label" for="usa">USA</label>
+                              </div>
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="Canada" id="canada">
+                                  <label class="form-check-label" for="canada">Canada</label>
+                              </div>
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="UK" id="uk">
+                                  <label class="form-check-label" for="uk">UK</label>
+                              </div>
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="Australia" id="australia">
+                                  <label class="form-check-label" for="australia">Australia</label>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="Germany" id="germany">
+                                  <label class="form-check-label" for="germany">Germany</label>
+                              </div>
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="Finland" id="finland">
+                                  <label class="form-check-label" for="finland">Finland</label>
+                              </div>
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="India" id="india">
+                                  <label class="form-check-label" for="india">India</label>
+                              </div>
+                          </div>
+                      </div>
                     </div>
+
+
+                    
+
+
                     <div class="mb-3">
                         <label for="additional-text" class="form-label">Additonal Text</label>
                         <textarea class="form-control" id="additional-text" rows="3"></textarea>

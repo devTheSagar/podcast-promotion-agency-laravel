@@ -49,7 +49,8 @@ Route::get('contact', [MessageController::class, 'index'])->name('user.message')
 Route::post('contact', [MessageController::class, 'message'])->name('user.send-message');
 
 // user checkout
-Route::get('checkout', [CheckoutController::class, 'index'])->name('user.checkout');
+Route::get('checkout/{id}', [CheckoutController::class, 'index'])->middleware('auth')->name('user.checkout');
+
 
 // user account
 Route::get('user-account', [UserAccountController::class, 'index'])->middleware('auth')->name('user.account');

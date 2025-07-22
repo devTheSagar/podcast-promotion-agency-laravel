@@ -236,7 +236,7 @@
             </ul>
             <div class="btn-wrap">
               <!-- <button type="button" class="btn btn-theme btn-block">enroll now</button> -->
-              <a href="{{ route('user.checkout') }}" type="button" class="btn btn-theme btn-block">enroll now</a>
+              <a href="{{ route('user.checkout', ['id' => $planDetails->id]) }}" type="button" class="btn btn-theme btn-block">buy this plan</a>
             </div>
           </div>
           <!-- course sidebar end -->

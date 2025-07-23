@@ -20,6 +20,7 @@ use App\Http\Controllers\frontend\MessageController;
 use App\Http\Controllers\frontend\OrderController;
 use App\Http\Controllers\frontend\PlanController as FrontendPlanController;
 use App\Http\Controllers\frontend\ServiceController as FrontendServiceController;
+use App\Http\Controllers\frontend\TestimonialController as FrontendTestimonialController;
 use App\Http\Controllers\frontend\TrackOrderController;
 use App\Http\Controllers\frontend\UserAccountController;
 use App\Models\User;
@@ -64,6 +65,9 @@ Route::get('user-account', [UserAccountController::class, 'index'])->middleware(
 Route::get('track-order', [TrackOrderController::class, 'index'])->middleware('auth')->name('user.track-order');
 Route::get('order-details/{id}', [TrackOrderController::class, 'orderDetails'])->middleware('auth')->name('user.order-details');
 
+
+// user testimonials
+Route::get('testimonials', [FrontendTestimonialController::class, 'index'])->name('user.testimonials');
 
 
 

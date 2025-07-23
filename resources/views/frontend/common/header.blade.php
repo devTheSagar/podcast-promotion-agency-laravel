@@ -54,6 +54,7 @@
               </ul>
             </li>
             <li class="menu-item"><a href="{{ route('user.message') }}">contact</a></li>
+            <li class="menu-item"><a href="{{ route('user.testimonials') }}">Testimonials</a></li>
             {{-- <li class="menu-item menu-item-has-children">
               <a href="#" class="js-toggle-sub-menu">account <i class="fas fa-chevron-down"></i></a>
               <ul class="sub-menu js-sub-menu">

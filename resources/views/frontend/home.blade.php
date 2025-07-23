@@ -179,32 +179,17 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
-          <!-- <div class="img-box rounded-circle position-relative">
-            <img src="img/testimonial/1.png" class="w-100 js-testimonial-img rounded-circle" alt="testimonial img">
-          </div> -->
           <div id="carouselOne" class="carousel slide text-center" data-bs-ride="carousel">
             <div class="carousel-inner mb-4">
-              <div class="carousel-item active">
-                <div class="testimonials-item">
-                  <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
-                  <h3>john doe</h3>
-                  <p class="text-2">web developer</p>
+              @foreach ($testimonials as $testimonial)
+                <div class="carousel-item {{$loop->iteration == 1 ? 'active' : ''}}">
+                  <div class="testimonials-item">
+                    <p class="text-1">{{ $testimonial->testimonial }}</p>
+                    <h3>{{ $testimonial->name }}</h3>
+                    <p class="text-2">{{ $testimonial->designation }}</p>
+                  </div>
                 </div>
-              </div>
-              <div class="carousel-item">
-                <div class="testimonials-item">
-                  <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
-                  <h3>john doe</h3>
-                  <p class="text-2">web developer</p>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="testimonials-item">
-                  <p class="text-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus et nisi fuga, repudiandae vero id sint necessitatibus eveniet? At, labore.</p>
-                  <h3>john doe</h3>
-                  <p class="text-2">web developer</p>
-                </div>
-              </div>
+              @endforeach
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselOne" data-bs-slide="prev">
               <i class="fas fa-arrow-left"></i>

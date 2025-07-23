@@ -55,26 +55,41 @@
                   @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" value="{{ auth()->user()->name }}" class="form-control" id="name">
+                        <input type="text" name="name" value="{{ auth()->user()->name }}" class="form-control @error('name') is-invalid @enderror" id="name">
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
-                        <input type="email" name="email" value="{{ auth()->user()->email }}" class="form-control" id="email">
+                        <input type="email" name="email" value="{{ auth()->user()->email }}" class="form-control @error('email') is-invalid @enderror" id="email">
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone Number</label>
-                        <input type="number" name="phone" class="form-control" id="phone">
+                        <input type="number" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" id="phone">
+                        @error('number')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="transaction-id" class="form-label">Transaction Id</label>
-                        <input type="text" name="transactionId" class="form-control" id="transaction-id">
+                        <input type="text" name="transactionId" class="form-control @error('transactionId') is-invalid @enderror" value="{{ old('transactionId') }}" id="transaction-id">
+                        @error('transactionId')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="transaction-id" class="form-label">Your Podcast Link</label>
-                        <input type="text" name="link" class="form-control" id="transaction-id">
+                        <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" value="{{ old('link') }}" id="transaction-id">
+                        @error('link')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                      <label for="targeted-country" class="form-label">Your Targeted Country (Any Three)</label>
+                      <label for="targeted-country" class="form-label">Your Targeted Country</label>
                       <div class="row">
                         <div class="col-md-6">
                               {{-- hidden field to pass plan id  --}}
@@ -112,18 +127,28 @@
                               </div>
                           </div>
                       </div>
+                      @error('country')
+                          <div class="text-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                     <div class="mb-3">
                         <label for="additional-text" class="form-label">Additonal Text</label>
-                        <textarea name="additionalText" class="form-control" id="additional-text" rows="3"></textarea>
+                        <textarea name="additionalText" class="form-control @error('additionalText') is-invalid @enderror" id="additional-text" rows="3">{{old('additionalText')}}</textarea>
+                        @error('additionalText')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <div  class="mb-3">
-                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                    </div>
+                    {{-- <div  class="mb-3">
+                        <input class="form-check-input" type="checkbox" name="agree" id="checkDefault">
                         <label class="form-check-label" for="checkDefault">
                             I agree to the <a href="#">terms and conditions</a> and <a href="#">privacy policy</a>
                         </label>
-                    </div>
-                    <div class="btn-wrap">
+                        @error('agree')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div> --}}
+                    <div class="btn-wrap mt-3">
                         <button type="submit" class="btn btn-theme btn-block">Confirm Order</button>
                         <!-- <a href="#" type="button" class="btn btn-theme btn-block">enroll now</a> -->
                     </div>

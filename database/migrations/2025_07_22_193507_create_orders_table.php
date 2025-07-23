@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('transactionId');
+            $table->string('transactionId')->unique();
             $table->longText('link');
             $table->longText('country');
             $table->string('status')->default('received');

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('transactionId');
             $table->longText('link');
             $table->longText('country');
+            $table->string('status')->default('received');
             $table->longText('additionalText');
             $table->timestamps();
         });

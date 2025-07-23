@@ -15,4 +15,11 @@ class TrackOrderController extends Controller
             'orders' => $orders
         ]);
     }
+
+    public function orderDetails($id){
+        $order = Order::findOrFail($id);
+        return view('frontend.user.order-details', [
+            'order' => $order
+        ]);
+    }
 }

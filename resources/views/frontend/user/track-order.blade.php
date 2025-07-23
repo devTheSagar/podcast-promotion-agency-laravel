@@ -32,8 +32,8 @@
                             <th>Plan</th>
                             <th>Price</th>
                             <th>purchace date</th>
-                            <th>delivery date</th>
-                            <th>status</th>
+                            <th>Delivery Date</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -46,9 +46,9 @@
                                 <td>${{ $order->plan->planPrice }}</td>
                                 <td>{{ $order->created_at->timezone('Asia/Dhaka')->format('d M, Y') }}</td>
                                 <td>{{ $order->created_at->copy()->addDays($order->plan->planDuration)->timezone('Asia/Dhaka')->format('d M, Y ') }}</td>
-                                <td>pending</td>
+                                <td>{{ $order->status }}</td>
                                 <td>
-                                    <button class="btn-primary">View</button>
+                                    <a href="{{ route('user.order-details', ['id' => $order->id]) }}" type="submit">View Details</a>
                                 </td>
                             </tr>
                         @endforeach

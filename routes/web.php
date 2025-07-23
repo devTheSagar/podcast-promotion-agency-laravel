@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\AboutUsController;
 use App\Http\Controllers\backend\auth\LoginController as AdminLoginController;
 use App\Http\Controllers\backend\ContactInfoController;
 use App\Http\Controllers\backend\MessageController as BackendMessageController;
+use App\Http\Controllers\backend\OrderController as BackendOrderController;
 use App\Http\Controllers\backend\PlanController;
 use App\Http\Controllers\backend\PrivacyPolicyController;
 use App\Http\Controllers\backend\RatingController;
@@ -61,6 +62,7 @@ Route::get('user-account', [UserAccountController::class, 'index'])->middleware(
 
 // track order
 Route::get('track-order', [TrackOrderController::class, 'index'])->middleware('auth')->name('user.track-order');
+Route::get('order-details/{id}', [TrackOrderController::class, 'orderDetails'])->middleware('auth')->name('user.order-details');
 
 
 
@@ -164,4 +166,10 @@ Route::prefix('admin')->group(function () {
     // admin messages
     Route::get('messages', [BackendMessageController::class, 'showMessages'])->name('admin.show-messages');
     Route::get('view-messages/{id}', [BackendMessageController::class, 'viewMessage'])->name('admin.view-message');
+
+    // admin orders
+    Route::get('orders', [BackendOrderController::class, 'index'])->name('admin.orders');
+    Route::get('view-order/{id}', [BackendOrderController::class, 'viewOrder'])->name('admin.view-order');
+    Route::post('update-order-status/{id}', [BackendOrderController::class, 'updateStatus'])->name('admin.update-order-status');
+
 });

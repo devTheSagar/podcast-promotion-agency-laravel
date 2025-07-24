@@ -12,6 +12,7 @@ use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\SocialLinkController;
 use App\Http\Controllers\backend\TeamController;
 use App\Http\Controllers\backend\TestimonialController;
+use App\Http\Controllers\frontend\AboutUsController as FrontendAboutUsController;
 use App\Http\Controllers\frontend\auth\LoginController as UserLoginController;
 use App\Http\Controllers\frontend\auth\RegisterController;
 use App\Http\Controllers\frontend\CheckoutController;
@@ -19,6 +20,8 @@ use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\MessageController;
 use App\Http\Controllers\frontend\OrderController;
 use App\Http\Controllers\frontend\PlanController as FrontendPlanController;
+use App\Http\Controllers\frontend\PricingController;
+use App\Http\Controllers\frontend\PrivacyPolicyController as FrontendPrivacyPolicyController;
 use App\Http\Controllers\frontend\ServiceController as FrontendServiceController;
 use App\Http\Controllers\frontend\TestimonialController as FrontendTestimonialController;
 use App\Http\Controllers\frontend\TrackOrderController;
@@ -68,6 +71,15 @@ Route::get('order-details/{id}', [TrackOrderController::class, 'orderDetails'])-
 
 // user testimonials
 Route::get('testimonials', [FrontendTestimonialController::class, 'index'])->name('user.testimonials');
+
+// user footer about us
+Route::get('about-us', [FrontendAboutUsController::class, 'index'])->name('user.about-us');
+
+// user footer privacy policy
+Route::get('privacy-policy', [FrontendPrivacyPolicyController::class, 'index'])->name('user.privacy-policy');
+
+// user footer pricing
+Route::get('pricing', [PricingController::class, 'index'])->name('user.pricing');
 
 
 

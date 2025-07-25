@@ -35,6 +35,28 @@ use Illuminate\Support\Facades\Route;
 
 
 // User Routes
+// Routes that require user to be authenticated
+Route::middleware(['auth'])->group(function () {
+
+    // User Checkout
+    Route::get('checkout/{id}', [CheckoutController::class, 'index'])->middleware('verified')->name('user.checkout');
+    Route::post('checkout', [OrderController::class, 'store'])->middleware('verified')->name('user.order');
+
+    // User Account
+    Route::get('user-account', [UserAccountController::class, 'index'])->middleware('verified')->name('user.account');
+
+    // Track Order
+    Route::get('track-order', [TrackOrderController::class, 'index'])->middleware('verified')->name('user.track-order');
+    Route::get('order-details/{id}', [TrackOrderController::class, 'orderDetails'])->middleware('verified')->name('user.order-details');
+
+    // The Email Verification Notice
+    Route::get('/email/verify', [RegisterController::class, 'verifyNotice'])->name('verification.notice');
+    // The Email Verification Handler
+    Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'verifyEmail'])->middleware(['signed'])->name('verification.verify');
+    // Resending the Verification Email
+    Route::post('/email/verification-notification', [RegisterController::class, 'verifyHandler'])->middleware(['throttle:6,1'])->name('verification.send');
+});
+
 Route::get('login', [UserLoginController::class, 'showLoginForm'])->name('login');
 Route::get('sign-up', [RegisterController::class, 'index'])->name('signup.user');
 Route::post('login', [UserLoginController::class, 'login']);
@@ -54,19 +76,19 @@ Route::get('plans/{id}', [FrontendPlanController::class, 'index'])->name('user.p
 Route::get('contact', [MessageController::class, 'index'])->name('user.message');
 Route::post('contact', [MessageController::class, 'message'])->name('user.send-message');
 
-// user checkout
-Route::get('checkout/{id}', [CheckoutController::class, 'index'])->middleware('auth')->name('user.checkout');
+// // user checkout
+// Route::get('checkout/{id}', [CheckoutController::class, 'index'])->middleware('auth')->name('user.checkout');
 
-Route::post('checkout', [OrderController::class, 'store'])->middleware('auth')->name('user.order');
-
-
-// user account
-Route::get('user-account', [UserAccountController::class, 'index'])->middleware('auth')->name('user.account');
+// Route::post('checkout', [OrderController::class, 'store'])->middleware('auth')->name('user.order');
 
 
-// track order
-Route::get('track-order', [TrackOrderController::class, 'index'])->middleware('auth')->name('user.track-order');
-Route::get('order-details/{id}', [TrackOrderController::class, 'orderDetails'])->middleware('auth')->name('user.order-details');
+// // user account
+// Route::get('user-account', [UserAccountController::class, 'index'])->middleware('auth')->name('user.account');
+
+
+// // track order
+// Route::get('track-order', [TrackOrderController::class, 'index'])->middleware('auth')->name('user.track-order');
+// Route::get('order-details/{id}', [TrackOrderController::class, 'orderDetails'])->middleware('auth')->name('user.order-details');
 
 
 // user testimonials

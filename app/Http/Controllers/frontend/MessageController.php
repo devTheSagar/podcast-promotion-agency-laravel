@@ -18,6 +18,12 @@ class MessageController extends Controller
     }
 
     public function message(Request $request){
+        $request->validate([
+            'senderName'        => 'required',
+            'senderEmail'       => 'required',
+            'senderPhone'       => 'nullable',
+            'senderMessage'     => 'required'
+        ]);
         Message::storeMessage($request);
         Alert::success('Success', 'Message sent successfully.');
         return back();

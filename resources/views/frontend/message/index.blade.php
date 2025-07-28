@@ -62,16 +62,28 @@
             <form action="{{ route('user.send-message') }}" method="POST">
               @csrf
               <div class="form-group">
-                <input name="senderName" type="text" class="form-control" placeholder="Name">
+                <input name="senderName" type="text" class="form-control @error('senderName') is-invalid @enderror" placeholder="Name" value="{{ old('senderName', Auth::check() ? Auth::user()->name : '') }}">
+                @error('senderName')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
               <div class="form-group">
-                <input name="senderEmail" type="email" class="form-control" placeholder="Email">
+                <input name="senderEmail" type="email" class="form-control @error('senderEmail') is-invalid @enderror" placeholder="Email" value="{{ old('senderEmail', Auth::check() ? Auth::user()->email : '') }}">
+                @error('senderEmail')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
               <div class="form-group">
-                <input name="senderPhone" type="number" class="form-control" placeholder="Phone">
+                <input name="senderPhone" type="number" class="form-control @error('senderPhone') is-invalid @enderror" placeholder="Phone">
+                @error('senderPhone')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
               <div class="form-group">
-                <textarea name="senderMessage" class="form-control" placeholder="Message"></textarea>
+                <textarea name="senderMessage" class="form-control @error('senderMessage') is-invalid @enderror" placeholder="Message"></textarea>
+                @error('senderMessage')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
               </div>
               <button type="submit" class="btn btn-block btn-theme btn-form">send message</button>
             </form>

@@ -27,7 +27,7 @@
             <br>
             <p><b>Name:</b> {{ Auth::user()->name }}</p>
             <p><b>Email:</b> {{ Auth::user()->email }}</p>
-            <a href="#">Change Password</a>
+            <a href="{{ route('password.request') }}">Change Password</a>
         </div>
     </div>
   </div>

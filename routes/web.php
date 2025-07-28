@@ -15,6 +15,7 @@ use App\Http\Controllers\backend\TestimonialController;
 use App\Http\Controllers\frontend\AboutUsController as FrontendAboutUsController;
 use App\Http\Controllers\frontend\auth\LoginController as UserLoginController;
 use App\Http\Controllers\frontend\auth\RegisterController;
+use App\Http\Controllers\frontend\auth\ResetPasswordController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\MessageController;
@@ -104,7 +105,18 @@ Route::get('privacy-policy', [FrontendPrivacyPolicyController::class, 'index'])-
 Route::get('pricing', [PricingController::class, 'index'])->name('user.pricing');
 
 
+// user reset password
+// The Password Reset Link Request Form
+Route::view('/forgot-password', 'frontend/auth/forgot-password')->name('password.request');
 
+// Handling the Form Submission
+Route::post('/forgot-password', [ResetPasswordController::class, 'passwordEmail'])->name('password.email');
+
+// The Password Reset Form
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'passwordReset'])->name('password.reset');
+
+// Handling the Form Submission
+Route::post('/reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('password.update');
 
 
 

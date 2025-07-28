@@ -1,20 +1,19 @@
 
 <style>
   .alert {
-            background: #d4edda;
-            color: #155724;
-            padding: 10px 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            border: 1px solid #c3e6cb;
-        }
+    background: #d4edda;
+    color: #155724;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+  }
 </style>
-
 
 @extends('frontend.master')
 
 @section('title')
-    Login 
+    Password Reset 
 @endsection
 
 @section('content')
@@ -24,13 +23,12 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb mb-0">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Log In</li>
+          <li class="breadcrumb-item active" aria-current="page">Reset Password</li>
         </ol>
       </nav>
     </div>
   </div>
   <!-- breadcrumb end -->
-
 
   <div id="message-area">
       @if(session('status'))
@@ -49,24 +47,16 @@
             @error('loginError')
                     <div class="text-danger text-center">{{ $message }}</div>
                 @enderror
-            <h2 class="form-title text-center">Log In to Your Account</h2>
-            <form method="POST" action="{{ route('login') }}">
+            <h2 class="form-title text-center">Reset Password</h2>
+            <form method="POST" action="{{ route('password.request') }}">
                 @csrf
               <div class="form-group">
-                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ old('email', Auth::check() ? Auth::user()->email : '') }}"">
                 @error('email')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
               </div>
-              <div class="form-group">
-                <div class="d-flex mb-2 justify-content-end"><a href="{{ route('password.request') }}">Forgot Password ?</a></div>
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
-                @error('password')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-              </div>
-              <button type="submit" class="btn btn-theme btn-block btn-form">log in</button>
-              <p class="text-center mt-4 mb-0">Don't have an account ? <a href="{{ route('signup.user') }}">Sign Up</a></p>
+              <button type="submit" class="btn btn-theme btn-block btn-form">Get Reset Link</button>
             </form>
           </div>
         </div>

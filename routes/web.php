@@ -222,6 +222,7 @@ Route::prefix('admin')->group(function () {
     Route::get('view-order/{id}', [BackendOrderController::class, 'viewOrder'])->name('admin.view-order');
     Route::post('update-order-status/{id}', [BackendOrderController::class, 'updateStatus'])->name('admin.update-order-status');
     Route::get('/admin/orders/{id}/download-invoice', [BackendOrderController::class, 'downloadInvoice'])->name('admin.download-invoice');
+    Route::post('/admin/order/{id}/send-invoice', [BackendOrderController::class, 'sendInvoice'])->name('admin.send-invoice');
 
 
 });

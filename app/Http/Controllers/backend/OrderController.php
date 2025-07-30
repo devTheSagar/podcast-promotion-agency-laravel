@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -30,4 +31,12 @@ class OrderController extends Controller
         Alert::success('Success', 'Order status updated successfully');
         return back();
     }
+
+    // for generating and download invoice from the backend 
+    public function downloadInvoice($id){
+        $order = Order::with('user', 'plan')->findOrFail($id);
+        $pdf = Pdf::loadView('backend.orders.invoice', compact('order'));
+        return $pdf->download('invoice_' . $order->id . '_' . $order->name . '.pdf');
+    }
+
 }

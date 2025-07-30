@@ -63,7 +63,8 @@
 
                                             <td>
                                                 <a href="{{ route('admin.view-order', ['id' => $order->id]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
-                                                
+                                                <a href="{{ route('admin.download-invoice', ['id' => $order->id]) }}" class="btn btn-sm btn-secondary">Download Invoice</a>
+
                                                 {{-- <form action="#" method="POST" onsubmit="return confirm('Confirm deleting the contact information?');" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')

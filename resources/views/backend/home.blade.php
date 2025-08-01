@@ -98,177 +98,46 @@
         <!-- ROW-1 END-->
 
         <!-- ROW-2 -->
+        {{-- dynamic sales data in chart  --}}
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-xl-4 col-lg-6">
-                <div class="row">
-                    <div class="col-lg-12 col-xl-12 col-md-6 col-sm-12">
-                        <div class="card">
-                            <div class="card-body pb-2">
-                                <div class="title-head mb-3">
-                                    <h3 class="mb-5 card-title">Revenue By channel</h3>
-                                    <div class="storage-percent">
-                                        <div class="progress fileprogress h-auto ps-0 shadow1">
-                                            <span class="progress-bar progress-bar-xs wd-15p received" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></span>
-                                            <span class="progress-bar progress-bar-xs wd-15p download" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></span>
-                                            <span class="progress-bar progress-bar-xs wd-15p shared" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></span>
-                                            <span class="progress-bar progress-bar-xs wd-15p my-images" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></span>
-                                        </div>
-                                        <div class="remaining-storage">
-                                            <div class="text-muted fs-13 mb-1 mt-3">Total Revenue Earned</div>
-                                            <div class="fw-semibold fs-14 mb-1 mt-3">$345,3467.72</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="content-main mt-5">
-                                    <ul class="task-list1 row mx-auto">
-                                        <li class="col-xl-6">
-                                            <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-primary me-3"></i>Direct</span>
-                                            <span class="text-success fw-semibold fs-12">
-                                                <span class="mx-1"><i class="fa fa-caret-up"></i></span>
-                                                <span class="">(42.34%)</span>
-                                            </span>
-                                        </li>
-                                        <li class="col-xl-6">
-                                            <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-secondary"></i>Referral</span>
-                                            <span class="text-danger fw-semibold fs-12">
-                                                <span class="mx-1"><i class="fa fa-caret-down"></i></span>
-                                                <span class="">(13%)</span>
-                                            </span>
-                                        </li>
-                                        <li class="col-xl-6">
-                                            <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-custom-yellow"></i>Social</span>
-                                            <span class="text-success fw-semibold fs-12">
-                                                <span class="mx-1"><i class="fa fa-caret-up"></i></span>
-                                                <span class="">(62%)</span>
-                                            </span>
-                                        </li>
-                                        <li class="col-xl-6 mb-xl-0">
-                                            <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-teritary"></i>Organic Search</span>
-                                            <span class="text-success fw-semibold fs-12">
-                                                <span class="mx-1"><i class="fa fa-caret-up"></i></span>
-                                                <span class="">(22.46%)</span>
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
-                        <div class="card overflow-hidden">
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title fw-semibold">Latest Transactions</h4>
-                                <a href="#" class="ms-auto">View All</a>
-                            </div>
-                            <div class="card-body p-0 customers mt-1">
-                                <div class="list-group py-1">
-                                    <a href="javascript:void(0);" class="border-0">
-                                        <div class="list-group-item border-0">
-                                            <div class="media mt-0 align-items-center">
-                                                <div class="transaction-icon"><i class="fe fe-chevrons-right"></i>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="mt-0">
-                                                            <h5 class="mb-1 fs-13 fw-normal text-dark">To Bel Bcron Bank<span class="fs-13 fw-semibold ms-1">Savings Section</span></h5>
-                                                            <p class="mb-0 fs-12 text-muted">Transfer 4.53pm</p>
-                                                        </div>
-                                                        <span class="ms-auto fs-13">
-                                                            <span class="float-end text-dark">-$2,543</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="javascript:void(0);" class="border-0">
-                                        <div class="list-group-item border-0">
-                                            <div class="media mt-0 align-items-center">
-                                                <div class="transaction-icon">
-                                                    <i class="fe fe-briefcase"></i>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="mt-0">
-                                                            <h5 class="mb-1 fs-13 fw-normal text-dark">Payment For <span class="fs-13 fw-semibold ms-1">Day Job</span></h5>
-                                                            <p class="mb-0 fs-12 text-muted">Received 2.45pm</p>
-                                                        </div>
-                                                        <span class="ms-auto fs-13">
-                                                            <span class="float-end text-dark">+$32,543</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="javascript:void(0);" class="border-0">
-                                        <div class="list-group-item border-0">
-                                            <div class="media mt-0 align-items-center">
-                                                <div class="transaction-icon"><i class="fe fe-dollar-sign"></i>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="mt-0">
-                                                            <h5 class="mb-1 fs-13 fw-normal text-dark">Bought items from<span class="fs-13 fw-semibold ms-1">Ecommerce site</span></h5>
-                                                            <p class="mb-0 fs-12 text-muted">Payment 8.00am</p>
-                                                        </div>
-                                                        <span class="ms-auto fs-13">
-                                                            <span class="float-end text-dark">-$256</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="javascript:void(0);" class="border-0">
-                                        <div class="list-group-item border-0">
-                                            <div class="media mt-0 align-items-center">
-                                                <div class="transaction-icon"><i class="fe fe-file-text"></i>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="mt-0">
-                                                            <h5 class="mb-1 fs-13 fw-normal text-dark">Paid Monthly Expenses<span class="fs-13 fw-semibold ms-1">Bills & Loans</span></h5>
-                                                            <p class="mb-0 fs-12 text-muted">Payment 6.43am</p>
-                                                        </div>
-                                                        <span class="ms-auto fs-13">
-                                                            <span class="float-end text-dark">-$1,298</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-8">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="card">
                     <div class="card-header border-bottom">
                         <h3 class="card-title">Sales</h3>
-                        <div class="ms-auto">
-                            <div class="btn-group p-0 ms-auto">
-                                <button class="btn btn-primary-light btn-sm disabled" type="button">2021</button>
-                                <button class="btn btn-primary-light btn-sm" type="button">2022</button>
-                                <button class="btn btn-primary-light btn-sm disabled" type="button">2023</button>
-                            </div>
+                        @php
+                            $startYear = now()->year -2;
+                            $endYear = now()->year; // 2 years ahead (or more)
+                            $years = range($startYear, $endYear);
+                        @endphp
+
+                        <div class="btn-group p-0 ms-auto" role="group" aria-label="Year selection">
+                            @foreach($years as $year)
+                                <a href="{{ route('admin.dashboard', ['year' => $year]) }}" 
+                                class="btn btn-primary-light btn-sm {{ $selectedYear == $year ? 'disabled' : '' }}">
+                                {{ $year }}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
+
                     <div class="card-body">
                         <div class="sales-stats d-flex">
                             <div>
                                 <div class="text-muted fs-13">Total Sales
-                                    <span class="p-2 br-5 text-success"><i class="fe fe-arrow-up-right"></i></span>
+                                    <span class="p-2 br-5 {{ $salesIsIncrease ? 'text-success' : 'text-danger' }}">
+                                        <i class="fe {{ $salesIsIncrease ? 'fe-arrow-up-right' : 'fe-arrow-down-right' }}"></i>
+                                    </span>
                                 </div>
-                                <h3 class="fw-semibold">$582,857.97</h3>
-                                <div><span class="text-success fs-13 me-1">32%</span>Increase Since last Year</div>
+                                <h3 class="fw-semibold">${{ number_format($totalSalesCurrentYear, 2) }}</h3>
+                                <div>
+                                    <span class="{{ $salesIsIncrease ? 'text-success' : 'text-danger' }} fs-13 me-1">
+                                        {{ $salesPercentageChange }}%
+                                    </span>
+                                    {{ $salesIsIncrease ? 'Increase' : 'Decrease' }} Since Last Year
+                                </div>
                             </div>
                         </div>
-                        <div id="chartD"></div>
+                        <div id="sales-chart"></div>
                     </div>
                 </div>
             </div>
@@ -727,4 +596,165 @@
 
         
     </div>
+
+    {{-- chart scripts to show sales data  --}}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        const options = {
+            chart: {
+                type: 'area',
+                height: 350,
+                zoom: {
+                    enabled: true,
+                    type: 'x',
+                    autoScaleYaxis: true,
+                    zoomedArea: {
+                        fill: {
+                            color: '#90CAF9',
+                            opacity: 0.4
+                        },
+                        stroke: {
+                            color: '#0D47A1',
+                            opacity: 0.4,
+                            width: 1
+                        }
+                    }
+                },
+                toolbar: {
+                    show: true,
+                    offsetX: 0,
+                    offsetY: 0,
+                    tools: {
+                        download: true,
+                        selection: true,
+                        zoom: true,
+                        zoomin: true,
+                        zoomout: true,
+                        pan: true,
+                        reset: true,
+                    },
+                    autoSelected: 'zoom' // toolbar auto-selected zoom tool
+                },
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800,
+                    animateGradually: {
+                        enabled: true,
+                        delay: 150
+                    },
+                    dynamicAnimation: {
+                        enabled: true,
+                        speed: 350
+                    }
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function(val) {
+                    return "$" + val.toFixed(2);
+                },
+                style: {
+                    fontSize: '12px',
+                    colors: ['#304758']
+                },
+                background: {
+                    enabled: true,
+                    foreColor: '#fff',
+                    borderRadius: 3,
+                    padding: 4,
+                    opacity: 0.8,
+                    borderWidth: 1,
+                    borderColor: '#555'
+                }
+            },
+            markers: {
+                size: 5,
+                colors: ['#00ab55'],
+                strokeColors: '#fff',
+                strokeWidth: 2,
+                hover: {
+                    size: 7
+                }
+            },
+            series: [{
+                name: "Total Sales",
+                data: @json(array_values($monthlySales->toArray()))
+            }],
+            xaxis: {
+                categories: @json(array_keys($monthlySales->toArray())),
+                tooltip: {
+                    enabled: true
+                },
+                labels: {
+                    rotate: -45,
+                    style: {
+                        fontSize: '12px',
+                        fontWeight: 600
+                    }
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#78909C'
+                },
+                axisTicks: {
+                    show: true,
+                    color: '#78909C'
+                }
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (val) {
+                        return '$' + val.toFixed(0);
+                    }
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#78909C'
+                },
+                axisTicks: {
+                    show: true,
+                    color: '#78909C'
+                }
+            },
+            grid: {
+                borderColor: '#e0e0e0',
+                row: {
+                    colors: ['#f3f3f3', 'transparent'],
+                    opacity: 0.5
+                }
+            },
+            tooltip: {
+                enabled: true,
+                theme: 'dark',
+                x: {
+                    format: 'MMM'
+                },
+                y: {
+                    formatter: function (val) {
+                        return '$' + val.toFixed(2);
+                    }
+                }
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.1,
+                    stops: [0, 90, 100]
+                }
+            },
+            colors: ['#00ab55'],
+            legend: {
+                position: 'top',
+                horizontalAlign: 'left',
+                fontWeight: 600
+            }
+        };
+
+        const chart = new ApexCharts(document.querySelector("#sales-chart"), options);
+        chart.render();
+    </script>
+
 @endsection

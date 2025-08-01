@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Message;
 use App\Models\Order;
 use App\Models\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function dashboard(){
+    public function dashboard(Request $request){
         $services = Service::with('plans')->get();
         $orders = Order::with('plan')->get();
         $messages = Message::all();
@@ -55,7 +56,7 @@ class DashboardController extends Controller
         }
 
 
-        
+
 
         // Total order earnings (sum of all order plan prices)
         $totalEarn = Order::with('plan')->get()->sum(function ($order) {
@@ -95,6 +96,57 @@ class DashboardController extends Controller
 
 
 
+
+        // Total earnings this year
+        $totalSalesCurrentYear = Order::with('plan')
+            ->whereYear('created_at', now()->year)
+            ->get()
+            ->sum(fn($order) => optional($order->plan)->planPrice ?? 0);
+
+        // Total earnings last year
+        $totalSalesLastYear = Order::with('plan')
+            ->whereYear('created_at', now()->subYear()->year)
+            ->get()
+            ->sum(fn($order) => optional($order->plan)->planPrice ?? 0);
+
+        // Percentage change
+        $salesPercentageChange = 0;
+        $salesIsIncrease = true;
+
+        if ($totalSalesLastYear > 0) {
+            $change = $totalSalesCurrentYear - $totalSalesLastYear;
+            $salesPercentageChange = round(($change / $totalSalesLastYear) * 100);
+            $salesIsIncrease = $change >= 0;
+        } elseif ($totalSalesCurrentYear > 0) {
+            $salesPercentageChange = 100;
+            $salesIsIncrease = true;
+        } else {
+            $salesPercentageChange = 0;
+            $salesIsIncrease = false;
+        }
+        
+
+
+
+        // data to show sales data in the dashboard 
+        $year = $request->input('year', now()->year);
+
+        $monthlySalesRaw = Order::with('plan')
+            ->whereYear('created_at', $year)
+            ->get()
+            ->groupBy(function ($order) {
+                return Carbon::parse($order->created_at)->format('M'); // Jan, Feb, etc.
+            })
+            ->map(function ($orders) {
+                return (float) $orders->sum(fn($order) => optional($order->plan)->planPrice ?? 0);
+            });
+
+        // Ensure all 12 months are included with zero fallback
+        $months = collect(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']);
+        $monthlySales = $months->mapWithKeys(fn($month) => [$month => $monthlySalesRaw->get($month, 0)]);
+
+
+        
         return view('backend.home', [
             'services' => $services,
             'orderPercentageChange' => $orderPercentageChange,
@@ -107,7 +159,12 @@ class DashboardController extends Controller
             'messageCurrentMonthCount' => $messageCurrentMonthCount,
             'totalEarn' => $totalEarn,
             'totalEarnPercentageChange' => $totalEarnPercentageChange,
-            'totalEarnIsIncrease' => $totalEarnIsIncrease
+            'totalEarnIsIncrease' => $totalEarnIsIncrease,
+            'totalSalesCurrentYear' => $totalSalesCurrentYear,
+            'salesPercentageChange' => $salesPercentageChange,
+            'salesIsIncrease' => $salesIsIncrease,
+            'monthlySales' => $monthlySales,
+            'selectedYear' => $year,
         ]);
     }
 }

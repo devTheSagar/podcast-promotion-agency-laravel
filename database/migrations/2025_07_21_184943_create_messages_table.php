@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('senderName');
             $table->string('senderEmail');
-            $table->string('senderPhone');
+            $table->string('senderPhone')->nullable();
             $table->longText('senderMessage');
             $table->timestamps();
         });

@@ -23,22 +23,23 @@
         <!-- ROW-1 -->
         <div class="row">
             <div class="col-lg-6 col-sm-12 col-md-6 col-xl-3">
-                <div class="card overflow-hidden">
+                <div class="card overflow-hidden" onclick="window.location='{{ route('admin.orders') }}'" style="cursor: pointer;">
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h3 class="mb-2 fw-semibold">1,12,324</h3>
-                                <p class="text-muted fs-13 mb-0">Daily Visitors</p>
+                                <h3 class="mb-2 fw-semibold">{{ $orderCurrentMonthCount }}</h3>
+                                <p class="text-muted fs-13 mb-0">Total Orders Current Month</p>
                                 <p class="text-muted mb-0 mt-2 fs-12">
-                                    <span class="icn-box text-success fw-semibold fs-13 me-1">
-                                        <i class='fa fa-long-arrow-up'></i>
-                                        42%</span>
+                                    <span class="icn-box {{ $orderIsIncrease ? 'text-success' : 'text-danger' }} fw-semibold fs-13 me-1">
+                                        <i class="fa fa-long-arrow-{{ $orderIsIncrease ? 'up' : 'down' }}"></i>
+                                        {{ $orderPercentageChange }}%
+                                    </span>
                                     since last month
                                 </p>
                             </div>
                             <div class="col col-auto top-icn dash">
-                                <div class="counter-icon bg-primary dash ms-auto box-shadow-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="fill-white" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M12,8c-2.2091675,0-4,1.7908325-4,4s1.7908325,4,4,4c2.208252-0.0021973,3.9978027-1.791748,4-4C16,9.7908325,14.2091675,8,12,8z M12,15c-1.6568604,0-3-1.3431396-3-3s1.3431396-3,3-3c1.6561279,0.0018311,2.9981689,1.3438721,3,3C15,13.6568604,13.6568604,15,12,15z M21.960022,11.8046875C19.9189453,6.9902344,16.1025391,4,12,4s-7.9189453,2.9902344-9.960022,7.8046875c-0.0537109,0.1246948-0.0537109,0.2659302,0,0.390625C4.0810547,17.0097656,7.8974609,20,12,20s7.9190063-2.9902344,9.960022-7.8046875C22.0137329,12.0706177,22.0137329,11.9293823,21.960022,11.8046875z M12,19c-3.6396484,0-7.0556641-2.6767578-8.9550781-7C4.9443359,7.6767578,8.3603516,5,12,5s7.0556641,2.6767578,8.9550781,7C19.0556641,16.3232422,15.6396484,19,12,19z"/></svg>
+                                <div class="counter-icon bg-info dash ms-auto box-shadow-info">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="fill-white" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M7.5,12C7.223877,12,7,12.223877,7,12.5v5.0005493C7.0001831,17.7765503,7.223999,18.0001831,7.5,18h0.0006104C7.7765503,17.9998169,8.0001831,17.776001,8,17.5v-5C8,12.223877,7.776123,12,7.5,12z M19,2H5C3.3438721,2.0018311,2.0018311,3.3438721,2,5v14c0.0018311,1.6561279,1.3438721,2.9981689,3,3h14c1.6561279-0.0018311,2.9981689-1.3438721,3-3V5C21.9981689,3.3438721,20.6561279,2.0018311,19,2z M21,19c-0.0014038,1.1040039-0.8959961,1.9985962-2,2H5c-1.1040039-0.0014038-1.9985962-0.8959961-2-2V5c0.0014038-1.1040039,0.8959961-1.9985962,2-2h14c1.1040039,0.0014038,1.9985962,0.8959961,2,2V19z M12,6c-0.276123,0-0.5,0.223877-0.5,0.5v11.0005493C11.5001831,17.7765503,11.723999,18.0001831,12,18h0.0006104c0.2759399-0.0001831,0.4995728-0.223999,0.4993896-0.5v-11C12.5,6.223877,12.276123,6,12,6z M16.5,10c-0.276123,0-0.5,0.223877-0.5,0.5v7.0005493C16.0001831,17.7765503,16.223999,18.0001831,16.5,18h0.0006104C16.7765503,17.9998169,17.0001831,17.776001,17,17.5v-7C17,10.223877,16.776123,10,16.5,10z"/></svg>
                                 </div>
                             </div>
                         </div>
@@ -46,16 +47,17 @@
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12 col-md-6 col-xl-3">
-                <div class="card overflow-hidden">
+                <div class="card overflow-hidden" onclick="window.location='{{ route('admin.show-messages') }}'" style="cursor: pointer;">
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h3 class="mb-2 fw-semibold">12,563</h3>
-                                <p class="text-muted fs-13 mb-0">Total Orders</p>
+                                <h3 class="mb-2 fw-semibold">{{ $messageCurrentMonthCount }}</h3>
+                                <p class="text-muted fs-13 mb-0">Total Messages This Month</p>
                                 <p class="text-muted mb-0 mt-2 fs-12">
-                                    <span class="icn-box text-danger fw-semibold fs-13 me-1">
-                                        <i class='fa fa-long-arrow-down'></i>
-                                        12%</span>
+                                    <span class="icn-box {{ $messageIsIncrease ? 'text-success' : 'text-danger' }} fw-semibold fs-13 me-1">
+                                        <i class="fa fa-long-arrow-{{ $messageIsIncrease ? 'up' : 'down' }}"></i>
+                                        {{ $messagePercentageChange }}%
+                                    </span>
                                     since last month
                                 </p>
                             </div>
@@ -73,35 +75,13 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h3 class="mb-2 fw-semibold">$5,178</h3>
-                                <p class="text-muted fs-13 mb-0">Conversion Rate</p>
+                                <h3 class="mb-2 fw-semibold">${{ number_format($totalEarn) }}</h3>
+                                <p class="text-muted fs-13 mb-0">Total Earn Current Month</p>
                                 <p class="text-muted mb-0 mt-2 fs-12">
-                                    <span class="icn-box text-success fw-semibold fs-13 me-1">
-                                        <i class='fa fa-long-arrow-up'></i>
-                                        27%</span>
-                                    since last month
-                                </p>
-                            </div>
-                            <div class="col col-auto top-icn dash">
-                                <div class="counter-icon bg-info dash ms-auto box-shadow-info">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="fill-white" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M7.5,12C7.223877,12,7,12.223877,7,12.5v5.0005493C7.0001831,17.7765503,7.223999,18.0001831,7.5,18h0.0006104C7.7765503,17.9998169,8.0001831,17.776001,8,17.5v-5C8,12.223877,7.776123,12,7.5,12z M19,2H5C3.3438721,2.0018311,2.0018311,3.3438721,2,5v14c0.0018311,1.6561279,1.3438721,2.9981689,3,3h14c1.6561279-0.0018311,2.9981689-1.3438721,3-3V5C21.9981689,3.3438721,20.6561279,2.0018311,19,2z M21,19c-0.0014038,1.1040039-0.8959961,1.9985962-2,2H5c-1.1040039-0.0014038-1.9985962-0.8959961-2-2V5c0.0014038-1.1040039,0.8959961-1.9985962,2-2h14c1.1040039,0.0014038,1.9985962,0.8959961,2,2V19z M12,6c-0.276123,0-0.5,0.223877-0.5,0.5v11.0005493C11.5001831,17.7765503,11.723999,18.0001831,12,18h0.0006104c0.2759399-0.0001831,0.4995728-0.223999,0.4993896-0.5v-11C12.5,6.223877,12.276123,6,12,6z M16.5,10c-0.276123,0-0.5,0.223877-0.5,0.5v7.0005493C16.0001831,17.7765503,16.223999,18.0001831,16.5,18h0.0006104C16.7765503,17.9998169,17.0001831,17.776001,17,17.5v-7C17,10.223877,16.776123,10,16.5,10z"/></svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-12 col-md-6 col-xl-3">
-                <div class="card overflow-hidden">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <h3 class="mb-2 fw-semibold">$43,987</h3>
-                                <p class="text-muted fs-13 mb-0">Avg Orders</p>
-                                <p class="text-muted mb-0 mt-2 fs-12">
-                                    <span class="icn-box text-success fw-semibold fs-13 me-1">
-                                        <i class='fa fa-long-arrow-up'></i>
-                                        9%</span>
+                                    <span class="icn-box {{ $totalEarnIsIncrease ? 'text-success' : 'text-danger' }} fw-semibold fs-13 me-1">
+                                        <i class="fa fa-long-arrow-{{ $totalEarnIsIncrease ? 'up' : 'down' }}"></i>
+                                        {{ $totalEarnPercentageChange }}%
+                                    </span>
                                     since last month
                                 </p>
                             </div>

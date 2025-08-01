@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\AboutUsController;
 use App\Http\Controllers\backend\auth\LoginController as AdminLoginController;
 use App\Http\Controllers\backend\ContactInfoController;
+use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\MessageController as BackendMessageController;
 use App\Http\Controllers\backend\OrderController as BackendOrderController;
 use App\Http\Controllers\backend\PlanController;
@@ -124,9 +125,11 @@ Route::post('/reset-password', [ResetPasswordController::class, 'passwordUpdate'
 Route::prefix('admin')->group(function () {
     Route::get('login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login', [AdminLoginController::class, 'login']);
-    Route::get('/dashboard', function () {
-        return view('backend.home');
-    })->middleware('auth:admin')->name('admin.dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('backend.home');
+    // })->middleware('auth:admin')->name('admin.dashboard');
+    
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
     Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout.admin');
 
 

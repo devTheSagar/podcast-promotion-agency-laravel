@@ -17,12 +17,12 @@ return new class extends Migration
             $table->foreignId('plan_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('email');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('transactionId')->unique();
             $table->longText('link');
             $table->longText('country');
             $table->string('status')->default('received');
-            $table->longText('additionalText');
+            $table->longText('additionalText')->nullable();
             $table->timestamps();
         });
     }

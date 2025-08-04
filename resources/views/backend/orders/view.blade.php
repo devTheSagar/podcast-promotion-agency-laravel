@@ -89,4 +89,21 @@
         </div>
         <!-- End Row -->
     </div>
+
+    {{-- order view korar pore unseen order er counter decrease korar jonno code  --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const isNew = {{ $order->seen ? 'false' : 'true' }};
+            if (isNew) {
+                const badge = document.getElementById('order-counter');
+                if (badge) {
+                    let count = parseInt(badge.innerText);
+                    if (!isNaN(count) && count > 0) {
+                        badge.innerText = count - 1;
+                    }
+                }
+            }
+        });
+    </script>
+
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Order;
 use App\Models\Service;
 use App\Models\SocialLink;
 use Illuminate\Support\Facades\View;
@@ -31,6 +32,17 @@ class AppServiceProvider extends ServiceProvider
         View::composer('frontend.common.footer', function ($view) {
             $socialLinks = SocialLink::first(); // just get the one row
             $view->with('socialLinks', $socialLinks);
+        });
+
+        // For backend header
+        View::composer('backend.common.header', function ($view) {
+            $unseenOrders = Order::with('plan.service')
+                ->where('seen', false)
+                ->latest()
+                ->take(5)
+                ->get();
+
+            $view->with('unseenOrders', $unseenOrders);
         });
     }
 }

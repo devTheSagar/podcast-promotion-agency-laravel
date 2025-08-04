@@ -5,6 +5,21 @@
 @endsection
 
 @section('content')
+{{-- unseen orders tr background stye for ligt and dark theme  --}}
+<style>
+    .bg-unseen-warning {
+        background-color: #fff3ca !important; /* Light mode default */
+        color: #000 !important;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .bg-unseen-warning {
+            background-color: #4a3e1e !important; /* Darker yellow-brown shade */
+            color: #fff !important;
+        }
+    }
+</style>
+
     <div class="main-container container-fluid">
                  
         <!-- PAGE-HEADER -->
@@ -44,7 +59,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($orders as $order)
-                                        <tr>
+                                        <tr class="{{ $order->seen ? '' : 'bg-unseen-warning' }}">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $order->plan->service->serviceName }} {{ $order->plan->planName }} Plan</td>
                                             <td>{{ $order->plan->planPrice }}</td>

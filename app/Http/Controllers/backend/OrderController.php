@@ -7,6 +7,7 @@ use App\Mail\InvoiceMail;
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -21,6 +22,12 @@ class OrderController extends Controller
 
     public function viewOrder($id){
         $order = Order::find($id);
+
+        if (!$order->seen) {
+            $order->seen = true;
+            $order->save();
+        }
+
         return view('backend.orders.view', [
             'order' => $order
         ]);
@@ -52,6 +59,36 @@ class OrderController extends Controller
         Mail::to($order->email)->send(new InvoiceMail($order, $pdf->output()));
         Alert::success('Success', 'Email send successfully');
         return back();
+    }
+
+    // mark as seen 
+    public function markSeen($id)
+    {
+        try {
+            $order = \App\Models\Order::findOrFail($id);
+            if (!$order->seen) {
+                $order->seen = true;
+                $order->save();
+            }
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            Log::error('Order markSeen failed: ' . $e->getMessage());
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
+    }
+
+
+    // real time unseen count 
+    public function getUnseenCount(){
+        $count = Order::where('seen', false)->count();
+        return response()->json(['unseenCount' => $count]);
+    }
+
+    // real time unseen dropdown list 
+    public function unseenDropdown(){
+        $unseenOrders = Order::where('seen', false)->latest()->get();
+        return view('backend.common.unseen-orders-dropdown', compact('unseenOrders'))->render();
     }
 
 }

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->longText('country');
             $table->string('status')->default('received');
             $table->longText('additionalText')->nullable();
+            $table->boolean('seen')->default(false);
             $table->timestamps();
         });
     }

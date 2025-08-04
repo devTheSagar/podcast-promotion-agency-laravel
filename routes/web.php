@@ -215,6 +215,15 @@ Route::prefix('admin')->group(function () {
         Route::get('orders/{id}/download-invoice', [BackendOrderController::class, 'downloadInvoice'])->name('admin.download-invoice');
         Route::post('order/{id}/send-invoice', [BackendOrderController::class, 'sendInvoice'])->name('admin.send-invoice');
 
+
+
+        // for real time order counter and lists 
+        Route::post('orders/mark-seen/{id}', [BackendOrderController::class, 'markSeen'])->name('admin.orders.markSeen');
+        Route::get('orders/unseen-count', [BackendOrderController::class, 'getUnseenCount'])->name('admin.orders.unseenCount');
+        Route::get('orders/unseen-dropdown', [BackendOrderController::class, 'unseenDropdown'])->name('admin.orders.unseenDropdown');
+
+        // Route::post('/admin/orders/mark-seen/{id}', [BackendOrderController::class, 'markSeen'])->name('admin.orders.markSeen');
+
     });
     
 

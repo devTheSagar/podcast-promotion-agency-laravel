@@ -5,6 +5,19 @@
 @endsection
 
 @section('content')
+<style>
+    .bg-unseen-warning {
+        background-color: #fff3ca !important; /* Light mode default */
+        color: #000 !important;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .bg-unseen-warning {
+            background-color: #4a3e1e !important; /* Darker yellow-brown shade */
+            color: #fff !important;
+        }
+    }
+</style>
     <div class="main-container container-fluid">
                  
         <!-- PAGE-HEADER -->
@@ -44,7 +57,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($messages as $message)
-                                        <tr>
+                                        <tr class="{{ $message->seen ? '' : 'bg-unseen-warning' }}">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $message->created_at->timezone('Asia/Dhaka')->format('d M, Y h:i A') }}</td>
                                             <td>{{ $message->senderName }}</td>

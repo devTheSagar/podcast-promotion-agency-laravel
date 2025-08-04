@@ -204,9 +204,16 @@ Route::prefix('admin')->group(function () {
         Route::delete('delete-team/{id}', [TeamController::class, 'destroy'])->name('admin.delete-team');
         Route::get('view-team/{id}', [TeamController::class, 'view'])->name('admin.view-team');
 
+
+        
         // admin messages
         Route::get('messages', [BackendMessageController::class, 'showMessages'])->name('admin.show-messages');
         Route::get('view-messages/{id}', [BackendMessageController::class, 'viewMessage'])->name('admin.view-message');
+        // for real time message counter and lists 
+        Route::get('messages/unseen-count', [BackendMessageController::class, 'getUnseenCount'])->name('admin.messages.unseenCount');
+        Route::get('messages/unseen-dropdown', [BackendMessageController::class, 'unseenDropdown'])->name('admin.messages.unseenDropdown');
+        Route::post('messages/mark-seen/{id}', [BackendMessageController::class, 'markSeen'])->name('admin.messages.markSeen');
+
 
         // admin orders
         Route::get('orders', [BackendOrderController::class, 'index'])->name('admin.orders');
@@ -214,15 +221,10 @@ Route::prefix('admin')->group(function () {
         Route::post('update-order-status/{id}', [BackendOrderController::class, 'updateStatus'])->name('admin.update-order-status');
         Route::get('orders/{id}/download-invoice', [BackendOrderController::class, 'downloadInvoice'])->name('admin.download-invoice');
         Route::post('order/{id}/send-invoice', [BackendOrderController::class, 'sendInvoice'])->name('admin.send-invoice');
-
-
-
         // for real time order counter and lists 
         Route::post('orders/mark-seen/{id}', [BackendOrderController::class, 'markSeen'])->name('admin.orders.markSeen');
         Route::get('orders/unseen-count', [BackendOrderController::class, 'getUnseenCount'])->name('admin.orders.unseenCount');
         Route::get('orders/unseen-dropdown', [BackendOrderController::class, 'unseenDropdown'])->name('admin.orders.unseenDropdown');
-
-        // Route::post('/admin/orders/mark-seen/{id}', [BackendOrderController::class, 'markSeen'])->name('admin.orders.markSeen');
 
     });
     

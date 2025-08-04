@@ -423,10 +423,10 @@
                                             </div>
                                         </div>
                                         <!-- CART -->
-										<div class="dropdown d-md-flex message">
+										<div class="dropdown d-md-flex shopping-cart">
 											<a href="javascript:void(0);" class="nav-link icon text-center" data-bs-toggle="dropdown" aria-expanded="false">
 												<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M17.4541016,11H6.5458984c-0.276123,0-0.5,0.223877-0.5,0.5s0.223877,0.5,0.5,0.5h10.9082031c0.276123,0,0.5-0.223877,0.5-0.5S17.7302246,11,17.4541016,11z M19.5,2h-15C3.119812,2.0012817,2.0012817,3.119812,2,4.5v11c0.0012817,1.380188,1.119812,2.4987183,2.5,2.5h12.7930298l3.8534546,3.8535156C21.2402344,21.9473267,21.3673706,22,21.5,22c0.276123,0,0.5-0.223877,0.5-0.5v-17C21.9987183,3.119812,20.880188,2.0012817,19.5,2z M21,20.2929688l-3.1464844-3.1464844C17.7597656,17.0526733,17.6326294,17,17.5,17h-13c-0.828064-0.0009155-1.4990845-0.671936-1.5-1.5v-11C3.0009155,3.671936,3.671936,3.0009155,4.5,3h15c0.828064,0.0009155,1.4990845,0.671936,1.5,1.5V20.2929688z M17.4541016,8H6.5458984c-0.276123,0-0.5,0.223877-0.5,0.5s0.223877,0.5,0.5,0.5h10.9082031c0.276123,0,0.5-0.223877,0.5-0.5S17.7302246,8,17.4541016,8z"/></svg>
-												<span class="pulse-danger"></span>
+												<span class="badge bg-pink message-header-badge">{{ $unseenMessages->count() }}</span>
 											</a>
 											<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" data-bs-popper="none">
 												<div class="drop-heading border-bottom">
@@ -438,53 +438,15 @@
 													</div>
 												</div>
 												<div class="message-menu ps2 overflow-hidden">
-													<a class="dropdown-item d-flex" href="chat.html">
-														<span class="avatar avatar-md brround me-3 align-self-center cover-image" data-bs-image-src="assets/images/users/1.jpg"></span>
-														<div class="wd-90p">
-															<div class="d-flex">
-																<h5 class="mb-1">Hawaii Hilton</h5>
-																<small class="text-muted ms-auto text-end"> 11.07 am </small>
-															</div>
-															<span class="fs-12 text-muted">Wanted to submit project by tomorrow....</span>
-														</div>
-													</a>
-													<a class="dropdown-item d-flex" href="chat.html">
-														<span class="avatar avatar-md brround me-3 align-self-center cover-image" data-bs-image-src="assets/images/users/15.jpg">
-														</span>
-														<div class="wd-90p">
-															<div class="d-flex">
-																<h5 class="mb-1">Hermoini</h5>
-																<small class="text-muted ms-auto text-end"> 12.32 am </small>
-															</div>
-															<span class="fs-12 text-muted">Planning for next big update......</span>
-														</div>
-													</a>
-													<a class="dropdown-item d-flex" href="chat.html">
-														<span class="avatar avatar-md brround me-3 align-self-center cover-image" data-bs-image-src="assets/images/users/12.jpg">
-														</span>
-														<div class="wd-90p">
-															<div class="d-flex">
-																<h5 class="mb-1">Buenda osas</h5>
-																<small class="text-muted ms-auto text-end"> 2:17 am </small>
-															</div>
-															<span class="fs-12 text-muted">Ready to submit future data...</span>
-														</div>
-													</a>
-													<a class="dropdown-item d-flex" href="chat.html">
-														<span class="avatar avatar-md brround me-3 align-self-center cover-image" data-bs-image-src="assets/images/users/4.jpg">
-														</span>
-														<div class="wd-90p">
-															<div class="d-flex">
-																<h5 class="mb-1">Gabby gibson</h5>
-																<small class="text-muted ms-auto text-end"> 7:55 am </small>
-															</div>
-															<span class="fs-12 text-muted">Cleared all statistics from last year......</span>
-														</div>
-													</a>
-												</div>
+                                                    {{-- Live unseen messages will be inserted here --}}
+                                                    <div id="message-dropdown">
+                                                        @include('backend.common.unseen-messages-dropdown', ['unseenMessages' => $unseenMessages])
+                                                    </div>
+                                                </div>
+
 												<div class="dropdown-divider m-0"></div>
 												<div class="text-center p-3">
-													<a class="btn btn-primary">View All Messages</a>
+													<a class="btn btn-primary" href="{{ route('admin.show-messages') }}">View All Messages</a>
 												</div>
 											</div>
 										</div>
@@ -587,6 +549,75 @@
                     }, 10000);
                 });
             </script>
+
+            <script>
+function bindMessageLinks() {
+    $('.message-link').off('click').on('click', function(e) {
+        e.preventDefault();
+        const messageId = $(this).data('id');
+        const redirectUrl = $(this).data('url');
+
+        $.ajax({
+            url: `/admin/messages/mark-seen/${messageId}`,
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function(data) {
+                if(data.success) {
+                    let count = parseInt($('.message-header-badge').text());
+                    if(count > 0) {
+                        $('.message-header-badge').text(count - 1);
+                    }
+                    window.location.href = redirectUrl;
+                } else {
+                    alert('Something went wrong.');
+                }
+            },
+            error: function() {
+                alert('Request failed.');
+            }
+        });
+    });
+}
+
+function fetchUnseenMessageCount() {
+    $.ajax({
+        url: "{{ route('admin.messages.unseenCount') }}",
+        type: 'GET',
+        success: function(data) {
+            $('.message-header-badge').text(data.unseenCount);
+        },
+        error: function() {
+            console.error('Failed to fetch unseen message count');
+        }
+    });
+}
+
+function fetchUnseenMessagesDropdown() {
+    $.ajax({
+        url: "{{ route('admin.messages.unseenDropdown') }}",
+        type: 'GET',
+        success: function(html) {
+            $('.message-menu').html(html);
+            bindMessageLinks();
+        },
+        error: function() {
+            console.error('Failed to fetch unseen messages dropdown');
+        }
+    });
+}
+
+$(document).ready(function() {
+    fetchUnseenMessageCount();
+    fetchUnseenMessagesDropdown();
+    setInterval(() => {
+        fetchUnseenMessageCount();
+        fetchUnseenMessagesDropdown();
+    }, 10000);
+});
+</script>
+
 
 
 

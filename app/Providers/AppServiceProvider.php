@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Message;
 use App\Models\Order;
 use App\Models\Service;
 use App\Models\SocialLink;
@@ -43,6 +44,10 @@ class AppServiceProvider extends ServiceProvider
                 ->get();
 
             $view->with('unseenOrders', $unseenOrders);
+        });
+
+        View::composer('backend.common.header', function ($view) {
+            $view->with('unseenMessages', Message::where('seen', false)->latest()->take(5)->get());
         });
     }
 }

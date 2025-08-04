@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\AboutUsController;
 use App\Http\Controllers\backend\auth\LoginController as AdminLoginController;
 use App\Http\Controllers\backend\ContactInfoController;
 use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\backend\FaqController;
 use App\Http\Controllers\backend\MessageController as BackendMessageController;
 use App\Http\Controllers\backend\OrderController as BackendOrderController;
 use App\Http\Controllers\backend\PlanController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\frontend\auth\LoginController as UserLoginController;
 use App\Http\Controllers\frontend\auth\RegisterController;
 use App\Http\Controllers\frontend\auth\ResetPasswordController;
 use App\Http\Controllers\frontend\CheckoutController;
+use App\Http\Controllers\frontend\FaqController as FrontendFaqController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\MessageController;
 use App\Http\Controllers\frontend\OrderController;
@@ -73,6 +75,9 @@ Route::get('services/{id}', [FrontendServiceController::class, 'index'])->name('
 
 // user plans
 Route::get('plans/{id}', [FrontendPlanController::class, 'index'])->name('user.plan-details');
+
+// user faq
+Route::get('faqs', [FrontendFaqController::class, 'index'])->name('user.faqs');
 
 // user message
 Route::get('contact', [MessageController::class, 'index'])->name('user.message');
@@ -205,7 +210,7 @@ Route::prefix('admin')->group(function () {
         Route::get('view-team/{id}', [TeamController::class, 'view'])->name('admin.view-team');
 
 
-        
+
         // admin messages
         Route::get('messages', [BackendMessageController::class, 'showMessages'])->name('admin.show-messages');
         Route::get('view-messages/{id}', [BackendMessageController::class, 'viewMessage'])->name('admin.view-message');
@@ -226,6 +231,16 @@ Route::prefix('admin')->group(function () {
         Route::get('orders/unseen-count', [BackendOrderController::class, 'getUnseenCount'])->name('admin.orders.unseenCount');
         Route::get('orders/unseen-dropdown', [BackendOrderController::class, 'unseenDropdown'])->name('admin.orders.unseenDropdown');
 
+
+
+        // admin faqs
+        Route::get('faqs', [FaqController::class, 'index'])->name('admin.all-faq');
+        Route::get('add-faqs', [FaqController::class, 'create'])->name('admin.add-faq');
+        Route::post('add-faqs', [FaqController::class, 'store'])->name('admin.store-faq');
+        Route::get('view-faq/{id}', [FaqController::class, 'view'])->name('admin.view-faq');
+        Route::get('edit-faq/{id}', [FaqController::class, 'edit'])->name('admin.edit-faq');
+        Route::post('update-faq/{id}', [FaqController::class, 'update'])->name('admin.update-faq');
+        Route::delete('delete-faq/{id}', [FaqController::class, 'delete'])->name('admin.delete-faq');
     });
     
 

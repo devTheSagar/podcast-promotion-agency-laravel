@@ -22,7 +22,7 @@
                 {{-- <li><a href="#">get the app</a></li> --}}
                 <li><a href="{{ route('user.testimonials') }}">testimonials</a></li>
                 <li><a href="{{ route('user.pricing') }}">pricing</a></li>
-                <li><a href="#">faq</a></li>
+                <li><a href="{{ route('user.faqs') }}">faq</a></li>
               </ul>
             </div>
           </div>

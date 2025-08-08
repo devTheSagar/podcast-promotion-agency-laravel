@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ReplyToMessage;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
@@ -53,5 +55,44 @@ class MessageController extends Controller
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
+
+    public function showReplyForm($id)
+    {
+        $message = Message::findOrFail($id);
+
+        return view('backend.messages.reply', compact('message'));
+    }
+
+    public function sendReply(Request $request, $id)
+    {
+        $message = Message::findOrFail($id);
+
+        $request->validate([
+            'to' => 'required|email',
+            'subject' => 'required|string',
+            'reply_body' => 'required|string',
+            'attachments.*' => 'file|mimes:jpg,jpeg,png,pdf,doc,docx|max:10240', // adjust as needed
+        ]);
+
+        $attachments = [];
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                if ($file->isValid()) {
+                    $attachments[] = $file;
+                }
+            }
+        }
+
+        Mail::send(new ReplyToMessage(
+            $request->to,
+            $request->subject,
+            $request->reply_body,
+            $attachments
+        ));
+
+        return redirect()->back()->with('success', 'Reply sent successfully!');
+    }
+
+
 
 }

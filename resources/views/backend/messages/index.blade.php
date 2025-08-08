@@ -66,7 +66,11 @@
                                             <td>{{ Str::limit(strip_tags($message->senderMessage), 30, '...') }}</td>
                                             <td>
                                                 <a href="{{ route('admin.view-message', ['id' => $message->id]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
-                                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $message->senderEmail }}&su=Reply to your message&body=Hi {{ $message->senderName }},%0D%0A%0D%0A" target="_blank" class="btn btn-secondary" data-bs-toggle="tooltip" title="Send Mail"><i class="fa fa-envelope"></i></a>
+                                                {{-- <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $message->senderEmail }}&su=Reply to your message&body=Hi {{ $message->senderName }},%0D%0A%0D%0A" target="_blank" class="btn btn-secondary" data-bs-toggle="tooltip" title="Send Mail"><i class="fa fa-envelope"></i></a> --}}
+                                                <a href="{{ route('messages.replyForm', $message->id) }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="Send Mail">
+                                                    <i class="fa fa-envelope"></i>
+                                                </a>
+
                                                 {{-- <form action="#" method="POST" onsubmit="return confirm('Confirm deleting the contact information?');" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')

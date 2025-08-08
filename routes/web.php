@@ -220,6 +220,9 @@ Route::prefix('admin')->group(function () {
         Route::get('messages/unseen-count', [BackendMessageController::class, 'getUnseenCount'])->name('admin.messages.unseenCount');
         Route::get('messages/unseen-dropdown', [BackendMessageController::class, 'unseenDropdown'])->name('admin.messages.unseenDropdown');
         Route::post('messages/mark-seen/{id}', [BackendMessageController::class, 'markSeen'])->name('admin.messages.markSeen');
+        Route::get('messages/{id}/reply', [BackendMessageController::class, 'showReplyForm'])->name('messages.replyForm');
+        Route::post('messages/{id}/send-reply', [BackendMessageController::class, 'sendReply'])->name('messages.sendReply');
+
 
 
         // admin orders

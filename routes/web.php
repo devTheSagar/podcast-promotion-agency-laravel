@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\AboutUsController;
 use App\Http\Controllers\backend\auth\LoginController as AdminLoginController;
 use App\Http\Controllers\backend\ContactInfoController;
+use App\Http\Controllers\backend\CustomInvoiceController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\FaqController;
 use App\Http\Controllers\backend\MessageController as BackendMessageController;
@@ -241,6 +242,20 @@ Route::prefix('admin')->group(function () {
         Route::get('edit-faq/{id}', [FaqController::class, 'edit'])->name('admin.edit-faq');
         Route::post('update-faq/{id}', [FaqController::class, 'update'])->name('admin.update-faq');
         Route::delete('delete-faq/{id}', [FaqController::class, 'delete'])->name('admin.delete-faq');
+
+        // admin custom invoice
+        Route::get('custom-invoices', [CustomInvoiceController::class, 'index'])->name('admin.custom-invoices');
+        Route::get('create-custom-invoice', [CustomInvoiceController::class, 'create'])->name('admin.create-custom-invoice');
+        Route::post('store-custom-invoice', [CustomInvoiceController::class, 'store'])->name('admin.store-custom-invoice');
+        Route::get('edit-custom-invoice/{id}', [CustomInvoiceController::class, 'edit'])->name('admin.edit-custom-invoice');
+        Route::post('update-custom-invoice/{id}', [CustomInvoiceController::class, 'update'])->name('admin.update-custom-invoice');
+        Route::delete('delete-custom-invoice/{id}', [CustomInvoiceController::class, 'destroy'])->name('admin.delete-custom-invoice');
+        Route::get('view-custom -invoice/{id}', [CustomInvoiceController::class, 'view'])->name('admin.view-custom-invoice');
+        // Route::get('download-custom-invoice/{invoice}', [CustomInvoiceController::class, 'download'])->name('admin.download-custom-invoice');
+        // Route::get('custom-invoices/{id}/send-invoice', [CustomInvoiceController::class, 'sendInvoice'])->name('admin.send-custom-invoice');
+        // Route::get('custom-invoices/{id}/download-pdf', [CustomInvoiceController::class, 'downloadPdf'])->name('admin.download-custom-invoice-pdf');
+        Route::get('custom-invoice/download/{id}', [CustomInvoiceController::class, 'downloadInvoice'])->name('custom-invoice.download');
+
     });
     
 

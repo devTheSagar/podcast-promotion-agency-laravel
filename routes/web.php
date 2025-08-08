@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\AboutUsController;
 use App\Http\Controllers\backend\auth\LoginController as AdminLoginController;
 use App\Http\Controllers\backend\ContactInfoController;
+use App\Http\Controllers\backend\CustomEmailController;
 use App\Http\Controllers\backend\CustomInvoiceController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\FaqController;
@@ -255,6 +256,12 @@ Route::prefix('admin')->group(function () {
         // Route::get('custom-invoices/{id}/send-invoice', [CustomInvoiceController::class, 'sendInvoice'])->name('admin.send-custom-invoice');
         // Route::get('custom-invoices/{id}/download-pdf', [CustomInvoiceController::class, 'downloadPdf'])->name('admin.download-custom-invoice-pdf');
         Route::get('custom-invoice/download/{id}', [CustomInvoiceController::class, 'downloadInvoice'])->name('custom-invoice.download');
+
+
+        // admin custom email 
+        Route::get('/custom-email', [CustomEmailController::class, 'create'])->name('admin.custom-email.create');
+        Route::post('/custom-email', [CustomEmailController::class, 'send'])->name('admin.custom-email.send');
+
 
     });
     

@@ -128,7 +128,7 @@
         @foreach ($service->plans as $plan)
           <div class="pricing-item" data-aos="fade-up" data-aos-duration="1000">
             <div class="pricing-header">
-              <h3>basic</h3>
+              <h3>{{ $plan->planName }}</h3>
               <div class="service-price"><span>$ {{ $plan->planPrice }}</span> {{$plan->planDuration}} days</div>
             </div>
             <div class="pricing-body">
@@ -139,7 +139,12 @@
               </ul>
             </div>
             <div class="pricing-footer">
-              <a href="{{ route('user.plan-details', ['id' => $plan->id]) }}" class="btn">more deatils</a>
+              {{-- <a href="{{ route('user.plan-details', ['id' => $plan->id]) }}" class="btn">more deatils</a> --}}
+              @if (Str::contains(strtolower($plan->planName), 'custom'))
+                <a href="{{ route('user.message') }}" class="btn">Contact Us</a>
+              @else
+                <a href="{{ route('user.plan-details', ['id' => $plan->id]) }}" class="btn">More Details</a>
+              @endif
             </div>
           </div>
         @endforeach

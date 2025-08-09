@@ -28,15 +28,19 @@
           <div class="course-header box">
             <h2 class="text-capitalize">{{$planDetails->planName}}</h2>
             <div class="rating">
-              <span class="average-rating">(4.5)</span>
+              <span class="average-rating">({{ number_format($averageRating, 1) }})</span>
               <span class="average-stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
+                @for ($i = 1; $i <= 5; $i++)
+                    @if ($averageRating >= $i)
+                        <i class="fas fa-star"></i> {{-- Full star --}}
+                    @elseif ($averageRating >= ($i - 0.5))
+                        <i class="fas fa-star-half-alt"></i> {{-- Half star --}}
+                    @else
+                        <i class="far fa-star"></i> {{-- Empty star --}}
+                    @endif
+                @endfor
               </span>
-              <span class="reviews">({{count($planDetails->ratings)}})</span>
+              {{-- <span class="reviews">({{count($planDetails->ratings)}})</span> --}}
             </div>
             <ul>
               <li>total clients - <span>{{count($planDetails->ratings)}}</span></li>
@@ -90,7 +94,7 @@
             <!-- course instructor start -->
             <div class="tab-pane fade " id="course-instructor" role="tabpanel" aria-labelledby="course-instructor-tab">
               @foreach ($planDetails->teams as $team)
-                <div class="course-instructor box">
+                <div class="course-instructor box mb-4">
                 <h3 class="mb-3 text-capitalize">{{ $team->position === 1 ? 'Team Lead' : 'Team Member' }}</h3>
                 <div class="instructor-details">
                   <div class="details-wrap d-flex align-items-center flex-wrap">
@@ -102,9 +106,9 @@
                     <div class="right-box">
                       <h4>{{ $team->memberName }} </h4>
                       <ul>
-                        <li><i class="fas fa-star"></i> {{$team->memberRating}}</li>
-                        <li><i class="fas fa-play-circle"></i> 10 Courses</li>
-                        <li><i class="fas fa-certificate"></i> {{ $team->totalReview }}</li>
+                        <li><i class="fas fa-star"></i> {{$team->memberRating}} Star</li>
+                        {{-- <li><i class="fas fa-play-circle"></i> 10 Courses</li> --}}
+                        <li><i class="fas fa-certificate"></i> {{ $team->totalReview }} Reviews</li>
                       </ul>
                     </div>
                   </div>
@@ -128,11 +132,15 @@
                       <div class="rating-box">
                         <div class="average-rating">{{ number_format($averageRating, 1) }}</div>
                         <div class="average-stars">
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star-half-alt"></i>
+                          @for ($i = 1; $i <= 5; $i++)
+                              @if ($averageRating >= $i)
+                                  <i class="fas fa-star"></i> {{-- Full star --}}
+                              @elseif ($averageRating >= ($i - 0.5))
+                                  <i class="fas fa-star-half-alt"></i> {{-- Half star --}}
+                              @else
+                                  <i class="far fa-star"></i> {{-- Empty star --}}
+                              @endif
+                          @endfor
                         </div>
                         <div class="reviews">{{count($planDetails->ratings)}} Reviews</div>
                       </div>
@@ -158,55 +166,46 @@
                 <!-- reviews filter start -->
                 <div class="reviews-filter">
                   <h3 class="mb-4 text-capitalize">reviews</h3>
-                  <form action="">
-                    <div class="form-group">
-                      <i class="fas fa-chevron-down select-icon"></i>
-                      <select class="form-control">
-                        <option value="">All Reviews</option>
-                        <option value="1">1 Star</option>
-                        <option value="2">2 Star</option>
-                        <option value="3">3 Star</option>
-                        <option value="4">4 Star</option>
-                        <option value="5">5 Star</option>
-                      </select>
-                    </div>
+                  <form id="reviewFilterForm">
+                      <div class="form-group">
+                          <i class="fas fa-chevron-down select-icon"></i>
+                          <select class="form-control" id="reviewFilter">
+                              <option value="">All Reviews</option>
+                              <option value="1">1 Star</option>
+                              <option value="2">2 Stars</option>
+                              <option value="3">3 Stars</option>
+                              <option value="4">4 Stars</option>
+                              <option value="5">5 Stars</option>
+                          </select>
+                      </div>
                   </form>
-                </div>
-                <!-- reviews filter end -->
+              </div>
+              <!-- reviews filter end -->
 
-                <!-- reviews list start -->
-                <div class="reviews-list">
-                  <!-- reviews item start -->
-
+              <!-- course reviews list start -->
+              <div class="reviews-list" id="reviewsList">
                   @foreach ($planDetails->ratings as $rating)
-                    <div class="reviews-item">
-                    <div class="img-box">
-                      <img src="{{ asset('') }}frontend/assets/img/review/1.png" alt="review img">
-                    </div>
-                    <h4>{{ $rating->clientName }}</h4>
-                    <div class="stars-rating">
-                      {{-- <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i> --}}
-                      {{-- Stars --}}
-                      @for ($i = 1; $i <= 5; $i++)
-                          @if ($i <= $rating->planRating)
-                              <i class="fas fa-star"></i> {{-- filled star --}}
-                          @else
-                              <i class="far fa-star"></i> {{-- empty star --}}
-                          @endif
-                      @endfor
-                      {{-- <span class="date">1 week ago</span> --}}
-                    </div>
-                    <p>{{ $rating->clientReview }}</p>
-                  </div>
+                      <div class="reviews-item" data-rating="{{ $rating->planRating }}">
+                          <div class="img-box">
+                              <img src="{{ asset('frontend/assets/img/review/1.png') }}" alt="review img">
+                          </div>
+                          <h4>{{ $rating->clientName }}</h4>
+                          <div class="stars-rating">
+                              @for ($i = 1; $i <= 5; $i++)
+                                  @if ($i <= $rating->planRating)
+                                      <i class="fas fa-star"></i>
+                                  @else
+                                      <i class="far fa-star"></i>
+                                  @endif
+                              @endfor
+                          </div>
+                          <p>{{ $rating->clientReview }}</p>
+                      </div>
                   @endforeach
-                  <!-- reviews item end -->
-                </div>
-                <!-- reviews list end -->
-                <button type="button" class="btn btn-theme">more reviews</button>
+              </div>
+
+              <button type="button" class="btn btn-theme" id="loadMoreBtn">More Reviews</button>
+
               </div>
             </div>
             <!-- course reviews end -->
@@ -247,3 +246,46 @@
   <!-- course details section end -->
 
 @endsection
+
+{{-- filter reviews and load more functionality  --}}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const filterSelect = document.getElementById("reviewFilter");
+      const reviews = Array.from(document.querySelectorAll(".reviews-item"));
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+
+      let visibleCount = 3; // initial reviews shown
+
+      function updateDisplay() {
+          let selectedRating = filterSelect.value;
+          let filteredReviews = selectedRating
+              ? reviews.filter(r => r.dataset.rating === selectedRating)
+              : reviews;
+
+          reviews.forEach(r => r.style.display = "none");
+
+          filteredReviews.slice(0, visibleCount).forEach(r => {
+              r.style.display = "block";
+          });
+
+          // Hide load more if no more to show
+          loadMoreBtn.style.display = filteredReviews.length > visibleCount ? "block" : "none";
+      }
+
+      // Filter change
+      filterSelect.addEventListener("change", function () {
+          visibleCount = 3; // reset count on filter change
+          updateDisplay();
+      });
+
+      // Load more
+      loadMoreBtn.addEventListener("click", function () {
+          visibleCount += 3;
+          updateDisplay();
+      });
+
+      // Initial
+      updateDisplay();
+  });
+</script>
+

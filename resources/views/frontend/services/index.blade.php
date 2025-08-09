@@ -11,7 +11,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb mb-0">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">podcast promotion</li>
+          <li class="breadcrumb-item active" aria-current="page">service</li>
         </ol>
       </nav>
     </div>
@@ -21,9 +21,16 @@
   <!-- pricing section start -->
   <section class="service-pricing" id="pricing">
     <div class="container">
+      <div class="section-title text-center m-0 p-0">
+        <span class="title" data-aos="fade-up" data-aos-duration="600">Service Details</span>
+        <h2 class="sub-title" data-aos="fade-up" data-aos-duration="600">Service Details</h2>
+      </div>
+      <div>
+        <p>{!! ucfirst($service->serviceDetails) !!}</p>
+      </div>
       <div class="section-title text-center">
         <span class="title" data-aos="fade-up" data-aos-duration="600">pricing</span>
-        <h2 class="sub-title" data-aos="fade-up" data-aos-duration="600">podcast promotion pricing plans</h2>
+        <h2 class="sub-title" data-aos="fade-up" data-aos-duration="600">{{ ucwords($service->serviceName) }} pricing plans</h2>
       </div>
       <div class="grid mb-5">
         @foreach ($service->plans as $plan)

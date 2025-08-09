@@ -116,14 +116,13 @@
 
   {{-- loop to get services  --}}
   @foreach ($services as $service)
-    <section class="service-pricing" id="pricing">
+    <section class="service-pricing mb-5" id="pricing">
     <div class="container">
       <div class="section-title text-center">
         <span class="title" data-aos="fade-up" data-aos-duration="600">pricing</span>
-        <h2 class="sub-title" data-aos="fade-up" data-aos-duration="600">{{$service->serviceName}} pricing plans</h2>
+        <h2 class="sub-title" data-aos="fade-up" data-aos-duration="600">{{ ucwords($service->serviceName) }} Pricing Plans</h2>
       </div>
       <div class="grid">
-
         {{-- loop to et plan under each service  --}}
         @foreach ($service->plans as $plan)
           <div class="pricing-item" data-aos="fade-up" data-aos-duration="1000">

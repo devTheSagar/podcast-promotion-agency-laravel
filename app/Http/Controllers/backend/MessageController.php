@@ -5,8 +5,13 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Mail\ReplyToMessage;
 use App\Models\Message;
+use App\Models\MessageReply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
+
+use function Pest\Laravel\delete;
 
 class MessageController extends Controller
 {
@@ -63,35 +68,75 @@ class MessageController extends Controller
         return view('backend.messages.reply', compact('message'));
     }
 
+
+    // message reply 
     public function sendReply(Request $request, $id)
     {
         $message = Message::findOrFail($id);
 
-        $request->validate([
-            'to' => 'required|email',
-            'subject' => 'required|string',
-            'reply_body' => 'required|string',
-            'attachments.*' => 'file|mimes:jpg,jpeg,png,pdf,doc,docx|max:10240', // adjust as needed
-        ]);
+        $uploadedFiles = [];
+        $storedPaths = [];
 
-        $attachments = [];
         if ($request->hasFile('attachments')) {
             foreach ($request->file('attachments') as $file) {
-                if ($file->isValid()) {
-                    $attachments[] = $file;
+                $path = $file->store('message-reply', 'public');
+                $storedPaths[] = $path;
+                $uploadedFiles[] = $file;
+            }
+        }
+
+        $reply = MessageReply::create([
+            'message_id' => $message->id,
+            'to_email' => $request->to,
+            'subject' => $request->subject,
+            'body' => $request->reply_body,
+            'attachments' => json_encode($storedPaths),
+        ]);
+
+        Mail::to($request->to)->send(new ReplyToMessage(
+            $request->subject,
+            $request->reply_body,
+            $uploadedFiles
+        ));
+
+        return redirect()->route('admin.show-messages')->with('success', 'Reply sent successfully.');
+    }
+
+
+    
+    // delete message 
+    public function deleteMessage($id)
+    {
+        $message = Message::with('replies')->findOrFail($id);
+
+        // Delete attachments from replies
+        foreach ($message->replies as $reply) {
+            if ($reply->attachments) {
+                $attachments = json_decode($reply->attachments, true) ?? [];
+                foreach ($attachments as $path) {
+                    Storage::disk('public')->delete($path); // delete file from storage
                 }
             }
         }
 
-        Mail::send(new ReplyToMessage(
-            $request->to,
-            $request->subject,
-            $request->reply_body,
-            $attachments
-        ));
+        // Delete the replies
+        $message->replies()->delete();
 
-        return redirect()->back()->with('success', 'Reply sent successfully!');
+        // Finally delete the message itself
+        $message->delete();
+
+        Alert::success('Success', 'Message and related replies deleted successfully.');
+        return back();
     }
+
+
+    
+    public function viewReply($id)
+    {
+        $message = Message::with('replies')->findOrFail($id);
+        return view('backend.messages.view-reply', compact('message'));
+    }
+
 
 
 

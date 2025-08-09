@@ -216,12 +216,16 @@ Route::prefix('admin')->group(function () {
         // admin messages
         Route::get('messages', [BackendMessageController::class, 'showMessages'])->name('admin.show-messages');
         Route::get('view-messages/{id}', [BackendMessageController::class, 'viewMessage'])->name('admin.view-message');
+        Route::get('messages/{id}/reply', [BackendMessageController::class, 'showReplyForm'])->name('messages.replyForm');
+        Route::post('messages/{id}/send-reply', [BackendMessageController::class, 'sendReply'])->name('messages.sendReply');
+        Route::get('messages/{id}/view-reply', [BackendMessageController::class, 'viewReply'])->name('messages.viewReply');
+        Route::delete('delete-message/{id}', [BackendMessageController::class, 'deleteMessage'])->name('message.delete');
         // for real time message counter and lists 
         Route::get('messages/unseen-count', [BackendMessageController::class, 'getUnseenCount'])->name('admin.messages.unseenCount');
         Route::get('messages/unseen-dropdown', [BackendMessageController::class, 'unseenDropdown'])->name('admin.messages.unseenDropdown');
         Route::post('messages/mark-seen/{id}', [BackendMessageController::class, 'markSeen'])->name('admin.messages.markSeen');
-        Route::get('messages/{id}/reply', [BackendMessageController::class, 'showReplyForm'])->name('messages.replyForm');
-        Route::post('messages/{id}/send-reply', [BackendMessageController::class, 'sendReply'])->name('messages.sendReply');
+        
+
 
 
 

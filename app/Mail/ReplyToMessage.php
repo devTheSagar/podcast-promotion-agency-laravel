@@ -10,25 +10,23 @@ class ReplyToMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $subject;
     public $bodyContent;
-    public $subjectLine;
-    protected $files;
+    public $files;
 
-    public function __construct($to, $subject, $bodyContent, $files = [])
+    public function __construct($subject, $bodyContent, $files = [])
     {
-        $this->to($to);
-        $this->subjectLine = $subject;
+        $this->subject = $subject;
         $this->bodyContent = $bodyContent;
-        $this->files = $files; // Store UploadedFile objects here
+        $this->files = $files;
     }
 
     public function build()
     {
-        $email = $this->subject($this->subjectLine)
+        $email = $this->subject($this->subject)
                       ->view('emails.message-reply')
                       ->with('bodyContent', $this->bodyContent);
 
-        // Attach each file manually with proper method
         foreach ($this->files as $file) {
             $email->attach(
                 $file->getRealPath(),

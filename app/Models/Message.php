@@ -16,4 +16,10 @@ class Message extends Model
         self::$message->senderMessage = $request->senderMessage;
         self::$message->save();
     }
+
+    public function replies()
+    {
+        return $this->hasMany(MessageReply::class);
+    }
+
 }

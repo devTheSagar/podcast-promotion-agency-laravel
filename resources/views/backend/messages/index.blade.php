@@ -70,12 +70,17 @@
                                                 <a href="{{ route('messages.replyForm', $message->id) }}" class="btn btn-secondary" data-bs-toggle="tooltip" title="Send Mail">
                                                     <i class="fa fa-envelope"></i>
                                                 </a>
+                                                @if($message->replies->count() > 0)
+                                                    <a href="{{ route('messages.viewReply', $message->id) }}" class="btn btn-info" data-bs-toggle="tooltip" title="View Reply">
+                                                        <i class="fa fa-reply"></i>
+                                                    </a>
+                                                @endif
 
-                                                {{-- <form action="#" method="POST" onsubmit="return confirm('Confirm deleting the contact information?');" style="display:inline;">
+                                                <form action="{{ route('message.delete', ['id' => $message->id]) }}" method="POST" onsubmit="return confirm('Confirm deleting the message?');" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
-                                                </form> --}}
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

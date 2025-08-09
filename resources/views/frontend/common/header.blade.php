@@ -29,7 +29,7 @@
     <div class="container">
       <div class="header-main d-flex justify-content-between align-items-center">
         <div class="header-logo">
-          <a href="{{ route('user.dashboard') }}"><span>podcast</span>promotion</a>
+          <a href="{{ route('user.dashboard') }}"><span>podcast</span>rank</a>
         </div>
         <button type="button" class="header-hamburger-btn js-header-menu-toggler">
           <span></span>
@@ -55,20 +55,7 @@
             </li>
             <li class="menu-item"><a href="{{ route('user.message') }}">contact</a></li>
             <li class="menu-item"><a href="{{ route('user.testimonials') }}">Testimonials</a></li>
-            {{-- <li class="menu-item menu-item-has-children">
-              <a href="#" class="js-toggle-sub-menu">account <i class="fas fa-chevron-down"></i></a>
-              <ul class="sub-menu js-sub-menu">
-                  <li class="sub-menu-item"><a href="{{ route('login') }}">log in</a></li>
-                  <li class="sub-menu-item"><a href="{{ route('signup.user') }}">sign up</a></li>
-                  <li class="sub-menu-item">
-                    <form method="POST" action="{{ route('logout.user') }}">
-                        @csrf
-                        <button type="submit">Logout</button>
-                    </form>
-                  </li>
-              </ul>
-            </li> --}}
-
+            
             <li class="menu-item menu-item-has-children">
               @auth
                   <a href="#" class="js-toggle-sub-menu">

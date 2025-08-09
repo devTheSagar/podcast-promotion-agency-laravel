@@ -57,6 +57,9 @@
           </div>
         @endforeach
       </div>
+      <div class="mb-5">
+        <p>Looking for a custom plan tailored specifically to your unique needs? We’re here to help! Please reach out to us with your requirements and any specific details you have in mind. Our team will work closely with you to design a personalized plan that fits your goals perfectly. Don’t hesitate to <a href="{{ route('user.send-message') }}">contact us</a> — let’s create the ideal solution together!</p>
+      </div>
     </div>
   </section>
   <!-- pricing section end -->

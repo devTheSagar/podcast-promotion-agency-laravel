@@ -99,7 +99,7 @@
               <a href="{{ route('user.service-details', ['id' => $service->id]) }}" class="link">
                 <div class="courses-item-inner">
                   <div class="img-box">
-                    <img src="{{ asset($service->serviceImage) }}" alt="service img">
+                    <img src="{{ asset($service->serviceImage) }}" alt="service img" height="200px">
                   </div>
                   <h3 class="title text-center">{{ $service->serviceName }}</h3>
                 </div>
@@ -115,11 +115,14 @@
 
 
   {{-- loop to get services  --}}
+  <div class="section-title text-center mb-0 pb-0">
+    <span class="title" data-aos="fade-up" data-aos-duration="600">pricing</span>
+  </div>
   @foreach ($services as $service)
-    <section class="service-pricing mb-5" id="pricing">
+    <section class="service-pricing mb-5 pb-5" id="pricing">
     <div class="container">
       <div class="section-title text-center">
-        <span class="title" data-aos="fade-up" data-aos-duration="600">pricing</span>
+        {{-- <span class="title" data-aos="fade-up" data-aos-duration="600">pricing</span> --}}
         <h2 class="sub-title" data-aos="fade-up" data-aos-duration="600">{{ ucwords($service->serviceName) }} Pricing Plans</h2>
       </div>
       <div class="grid">
@@ -152,7 +155,7 @@
     </div>
     <div class="row">
         <div class="col-12 text-center mt-3">
-          <a href="{{ route('user.service-details', ['id' => $service->id]) }}" class="btn btn-theme">view all</a>
+          <a href="{{ route('user.service-details', ['id' => $service->id]) }}" class="btn btn-theme">view all {{ $service->serviceName }} plans</a>
         </div>
       </div>
   </section>

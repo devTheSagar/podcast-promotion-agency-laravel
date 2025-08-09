@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-sm-6 col-lg-3">
             <div class="footer-item">
-              <h3 class="footer-logo"><span>podcast</span>promotion</h3>
+              <h3 class="footer-logo"><span>podcast</span>rank</h3>
               <ul>
                 <li><a href="{{ route('user.about-us') }}">about us</a></li>
                 {{-- <li><a href="#">what we offer</a></li> --}}
@@ -69,7 +69,7 @@
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <p class="m-0 py-4 text-center">Copyright &copy;2025 Podcast Promotion Agency | Developed by <a href="https://devsagar.online/" target="_blank">Sagar</a></p>
+        <p class="m-0 py-4 text-center">Copyright &copy;2025 Podcast Promotion Agency | Developed by <a href="https://devsagar.online/" target="_blank">Avijit Sagar</a></p>
       </div>
     </div>
   </footer>

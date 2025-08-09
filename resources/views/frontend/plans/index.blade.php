@@ -216,25 +216,31 @@
           <!-- course sidebar start -->
           <div class="course-sidebar box">
             <div class="img-box position-relative" data-bs-toggle="modal" data-bs-target="#video-modal">
-              <img src="{{ asset('') }}frontend/assets/img/courses/web-development/3.jpg" class="w-100" alt="course img">
-              <div class="play-icon">
+              <img src="{{ asset($planDetails->service->serviceImage) }}" class="w-100" alt="course img">
+              {{-- <div class="play-icon">
                 <i class="fas fa-play"></i>
               </div>
-              <p class="text-center">Course Preview</p>
+              <p class="text-center">Course Preview</p> --}}
             </div>
+
+            {{-- showing price with 20% discount  --}}
             <div class="price d-flex align-items-center mb-3">
-              {{-- <span class="price-old text-decoration-line-through">$100</span> --}}
-              <span class="price-new">$ {{$planDetails->planPrice}}</span>
-              {{-- <span class="price-discount">51% Off</span> --}}
+              @php
+                  $newPrice = $planDetails->planPrice;
+                  $oldPrice = $newPrice + ($newPrice * 0.20); // 20% higher than new price
+              @endphp
+              <span class="price-old text-decoration-line-through">${{ number_format($oldPrice, 0) }}</span>
+              <span class="price-new"> ${{ number_format($newPrice, 0) }}</span>
+              <span class="price-discount">20% Off</span>
             </div>
+
             <h3 class="mb-3">Plan Features</h3>
             <ul>
               @foreach (json_decode($planDetails->planFeatures, true) as $feature)
                 <li><i class="fas fa-check"></i> {{ $feature }}</li>
               @endforeach
             </ul>
-            <div class="btn-wrap">
-              <!-- <button type="button" class="btn btn-theme btn-block">enroll now</button> -->
+            <div class="btn-wrap mt-4">
               <a href="{{ route('user.checkout', ['id' => $planDetails->id]) }}" type="button" class="btn btn-theme btn-block">buy this plan</a>
             </div>
           </div>

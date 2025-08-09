@@ -268,6 +268,9 @@ Route::prefix('admin')->group(function () {
         // admin custom email 
         Route::get('/custom-email', [CustomEmailController::class, 'create'])->name('admin.custom-email.create');
         Route::post('/custom-email', [CustomEmailController::class, 'send'])->name('admin.custom-email.send');
+        Route::get('custom-emails', [CustomEmailController::class, 'index'])->name('admin.view-custom-email');
+        Route::get('custom-email/{id}/view', [CustomEmailController::class, 'view'])->name('admin.view-custom-email-details');
+        Route::delete('custom-email/{id}/delete', [CustomEmailController::class, 'destroy'])->name('admin.delete-custom-email');
 
 
     });

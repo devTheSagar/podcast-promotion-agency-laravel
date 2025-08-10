@@ -69,7 +69,7 @@
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <p class="m-0 py-4 text-center">Copyright &copy;2025 Podcast Promotion Agency | Developed by <a href="https://devsagar.online/" target="_blank">Avijit Sagar</a></p>
+        <p class="m-0 py-4 text-center">Copyright &copy;2025 Podcast Rank | Developed by <a href="https://devsagar.online" target="_blank">Avijit Sagar</a></p>
       </div>
     </div>
   </footer>

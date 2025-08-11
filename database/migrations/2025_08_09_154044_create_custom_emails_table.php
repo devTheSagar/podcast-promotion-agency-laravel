@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('subject');
             $table->longText('message');
             $table->json('attachments')->nullable();
+
+            $table->string('source')->nullable(); // 'custom' | 'reply'
+            $table->string('in_reply_to')->nullable();
+            $table->text('references')->nullable();
+            $table->unsignedBigInteger('replied_inbox_id')->nullable(); // your IMAP msg id (optional)
+
             $table->timestamps();
         });
     }

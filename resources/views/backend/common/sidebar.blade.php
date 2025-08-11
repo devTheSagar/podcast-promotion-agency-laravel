@@ -122,8 +122,8 @@
                                 <ul class="slide-menu">
                                     <li class="side-menu-label1"><a href="javascript:void(0)">Custom Email</a></li>
                                     <li><a href="{{ route('inbox.index') }}" class="slide-item">inbox</a></li>
-                                    <li><a href="{{ route('admin.custom-email.create') }}" class="slide-item">Send Custom Email</a></li>
-                                    <li><a href="{{ route('admin.view-custom-email') }}" class="slide-item">Email Records</a></li>
+                                    <li><a href="{{ route('admin.custom-email.create') }}" class="slide-item">Compose</a></li>
+                                    <li><a href="{{ route('admin.view-custom-email') }}" class="slide-item">Sent</a></li>
                                 </ul>
                             </li>
 

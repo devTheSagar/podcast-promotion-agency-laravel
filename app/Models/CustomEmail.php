@@ -11,5 +11,10 @@ class CustomEmail extends Model
         'subject',
         'message',
         'attachments',
+
+        'source',           // NEW
+        'in_reply_to',      // NEW
+        'references',       // NEW
+        'replied_inbox_id', // NEW
     ];
 }

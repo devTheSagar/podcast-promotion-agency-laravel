@@ -84,6 +84,11 @@
                                                     <i class="fa fa-eye"></i>
                                                 </a>
 
+                                                {{-- Reply button --}}
+                                                <a href="{{ route('inbox.reply.form', $m['id']) }}" class="btn btn-success btn-sm" data-bs-toggle="tooltip" title="Reply">
+                                                    <i class="fa fa-reply"></i>
+                                                </a>
+
                                                 {{-- ডিলিট রুট তৈরি করলে নিচের ফর্মটি অন করুন --}}
                                                 {{-- 
                                                 <form action="{{ route('inbox.destroy', $m['id']) }}" method="POST" onsubmit="return confirm('Confirm deleting the email?');" style="display:inline;">

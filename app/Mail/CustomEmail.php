@@ -1,47 +1,48 @@
 <?php
 
+// app/Mail/CustomEmail.php
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Symfony\Component\Mime\Header\Headers;
 
 class CustomEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subjectLine;
-    public $messageContent;
-    public $attachments;
-
-    public function __construct($subjectLine, $messageContent, $attachments = [])
-    {
-        $this->subjectLine = $subjectLine;
-        $this->messageContent = $messageContent;
-
-        $this->attachments = [];
-        foreach ($attachments as $file) {
-            $this->attachments[] = [
-                'file' => $file->getRealPath(),
-                'options' => [
-                    'as' => $file->getClientOriginalName(),
-                    'mime' => $file->getMimeType(),
-                ],
-            ];
-        }
-    }
+    public function __construct(
+        public string $subjectLine,
+        public string $htmlBody,
+        public array  $uploadedFiles = [], // array of UploadedFile (from request)
+        public ?string $inReplyTo = null,
+        public ?string $references = null
+    ) {}
 
     public function build()
     {
-        $email = $this->subject($this->subjectLine)
-                    ->view('emails.custom')
-                    ->with(['messageContent' => $this->messageContent]);
+        $mail = $this->subject($this->subjectLine)
+                     ->html($this->htmlBody);
 
-        // Attach files if any
-        foreach ($this->attachments as $attachment) {
-            $email->attach($attachment['file'], $attachment['options']);
+        // Attach uploaded files (if any)
+        foreach ($this->uploadedFiles as $file) {
+            if ($file && $file->isValid()) {
+                $mail->attach(
+                    $file->getRealPath(),
+                    ['as' => $file->getClientOriginalName(), 'mime' => $file->getMimeType()]
+                );
+            }
         }
 
-        return $email;
+        // Threading headers
+        $mail->withSymfonyMessage(function ($message) {
+            /** @var Headers $headers */
+            $headers = $message->getHeaders();
+            if (!empty($this->inReplyTo))  $headers->addTextHeader('In-Reply-To', $this->inReplyTo);
+            if (!empty($this->references)) $headers->addTextHeader('References', $this->references);
+        });
+
+        return $mail;
     }
 }

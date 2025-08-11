@@ -25,43 +25,38 @@
                     <div class="alert alert-success mb-3">{{ session('success') }}</div>
                 @endif
 
-                <form action="{{ route('inbox.reply.send', $id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.custom-email.send') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+
+                    <input type="hidden" name="is_reply" value="1">
+                    <input type="hidden" name="in_reply_to" value="{{ $inReplyTo }}">    {{-- from headerinfo --}}
+                    <input type="hidden" name="references" value="{{ $inReplyTo }}">     {{-- or existing refs --}}
+                    <input type="hidden" name="replied_inbox_id" value="{{ $id }}">      {{-- IMAP msg no (optional) --}}
 
                     <div class="mb-3">
                         <label class="form-label">To</label>
-                        <input type="email" name="to" class="form-control" value="{{ old('to', $to) }}" required>
-                        @error('to') <small class="text-danger">{{ $message }}</small> @enderror
+                        <input type="email" name="to" class="form-control" value="{{ $to }}" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Subject</label>
-                        <input type="text" name="subject" class="form-control" value="{{ old('subject', $subject) }}" required>
-                        @error('subject') <small class="text-danger">{{ $message }}</small> @enderror
+                        <input type="text" name="subject" class="form-control" value="{{ Str::startsWith($subject,'Re:')?$subject:'Re: '.$subject }}" required>
                     </div>
-
-                    {{-- Hidden threading headers --}}
-                    <input type="hidden" name="in_reply_to" value="{{ $inReplyTo }}">
-                    <input type="hidden" name="references" value="{{ $inReplyTo }}">
 
                     <div class="mb-3">
                         <label class="form-label">Message</label>
-                        <textarea name="body" class="form-control" rows="12" required>{{ old('body', "<p></p>\n\n".$quoted) }}</textarea>
-                        @error('body') <small class="text-danger">{{ $message }}</small> @enderror
-                        <small class="text-muted d-block mt-1">You can write HTML. Quoted original is included below.</small>
+                        <textarea name="message" class="form-control" rows="10" required>{{ old('message') }}</textarea>
+                        <small class="text-muted d-block mt-1">You can write HTML if you want.</small>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Attachments</label>
                         <input type="file" name="attachments[]" class="form-control" multiple>
-                        <small class="text-muted">You can attach multiple files.</small>
                     </div>
 
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary btn-sm">Send Reply</button>
-                        <a href="{{ route('inbox.show', $id) }}" class="btn btn-outline-secondary btn-sm">Cancel</a>
-                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Send Reply</button>
                 </form>
+
 
             </div>
         </div>

@@ -281,6 +281,8 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/inbox/{id}/attachment/{index}', [EmailInboxController::class, 'downloadAttachment'])->name('inbox.download');
 
+        Route::get('/inbox/{id}/reply', [EmailInboxController::class, 'replyForm'])->name('inbox.reply.form');
+        Route::post('/inbox/{id}/reply', [EmailInboxController::class, 'sendReply'])->name('inbox.reply.send');
 
     });
     

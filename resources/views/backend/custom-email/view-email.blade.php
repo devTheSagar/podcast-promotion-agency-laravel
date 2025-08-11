@@ -67,7 +67,8 @@
                 @endif
 
                 <div class="mt-4 d-flex gap-2">
-                    <a class="btn btn-outline-primary btn-sm" href="mailto:{{ $from }}?subject={{ urlencode('Re: ' . $subject) }}">Reply</a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ route('inbox.reply.form', $id) }}">Reply</a>
+
                     <a class="btn btn-outline-secondary btn-sm" href="{{ route('inbox.index') }}">Back to Inbox</a>
                 </div>
             </div>

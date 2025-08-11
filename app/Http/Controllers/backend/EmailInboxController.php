@@ -5,6 +5,8 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class EmailInboxController extends Controller
 {
@@ -329,4 +331,91 @@ class EmailInboxController extends Controller
             ->header('Content-Type', $att['mime'] ?? 'application/octet-stream')
             ->header('Content-Disposition', 'attachment; filename="'.$att['filename'].'"');
     }
+
+
+
+
+    public function replyForm($id)
+    {
+        $inbox = $this->connect();
+        $total = imap_num_msg($inbox);
+        if ($id < 1 || $id > $total) abort(404);
+
+        $h = imap_headerinfo($inbox, $id);
+
+        $fromEmail = isset($h->from) ? ($h->from[0]->mailbox.'@'.$h->from[0]->host) : '';
+        $toEmail   = isset($h->to)   ? ($h->to[0]->mailbox.'@'.$h->to[0]->host)   : '';
+        $subject   = isset($h->subject) ? imap_utf8($h->subject) : '(no subject)';
+        $messageId = isset($h->message_id) ? $h->message_id : null;
+
+        // মূল বডি নিয়ে কোট দেখানোর জন্য
+        $bodyInfo = $this->fetchBody($inbox, $id);
+        $origBody = $bodyInfo['is_html'] ? strip_tags($bodyInfo['body']) : $bodyInfo['body'];
+        $origBody = trim(preg_replace('/\s+/u', ' ', $origBody));
+        $origBodyShort = Str::limit($origBody, 800, "\n..."); // কোট কমপ্যাক্ট
+
+        imap_close($inbox);
+
+        return view('backend.custom-email.reply-email', [
+            'id' => $id,
+            'to' => $fromEmail, // আমরা প্রেরককেই রিপ্লাই দেব
+            'fromHeaderTo' => $toEmail,
+            'subject' => Str::startsWith($subject, 'Re:') ? $subject : 'Re: '.$subject,
+            'inReplyTo' => $messageId,
+            'quoted' => "> ".str_replace("\n", "\n> ", $origBodyShort),
+        ]);
+    }
+
+    public function sendReply(Request $request, $id)
+    {
+        $data = $request->validate([
+            'to'          => 'required|email',
+            'subject'     => 'required|string|max:255',
+            'body'        => 'required|string',
+            'in_reply_to' => 'nullable|string',
+            'references'  => 'nullable|string',
+            'attachments.*' => 'file|max:5120', // each file max 5MB (adjust as needed)
+        ]);
+
+        $isHtml = true; // send as HTML email
+
+        Mail::send([], [], function (\Illuminate\Mail\Message $message) use ($data, $request, $isHtml) {
+            $message->to($data['to'])
+                    ->subject($data['subject']);
+
+            if ($isHtml) {
+                $message->html($data['body']);
+            } else {
+                $message->text($data['body']);
+            }
+
+            // Add attachments if any
+            if ($request->hasFile('attachments')) {
+                foreach ($request->file('attachments') as $file) {
+                    if ($file->isValid()) {
+                        $message->attach(
+                            $file->getRealPath(),
+                            [
+                                'as'   => $file->getClientOriginalName(),
+                                'mime' => $file->getMimeType(),
+                            ]
+                        );
+                    }
+                }
+            }
+
+            // Threading headers for Gmail/Outlook
+            $symfony = $message->getSymfonyMessage()->getHeaders();
+            if (!empty($data['in_reply_to'])) {
+                $symfony->addTextHeader('In-Reply-To', $data['in_reply_to']);
+            }
+            if (!empty($data['references'])) {
+                $symfony->addTextHeader('References', $data['references']);
+            }
+        });
+
+        return redirect()->route('inbox.show', $id)->with('success', 'Reply sent successfully.');
+    }
+
+
 }

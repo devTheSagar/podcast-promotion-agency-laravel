@@ -47,58 +47,34 @@
                                 </thead>
                                 <tbody>
                                     @forelse($items as $index => $m)
-                                        <tr>
+                                        <tr class="{{ empty($m['is_seen']) ? 'table-warning' : '' }}">
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $m['from'] }}</td>
-                                            {{-- <td>{{ $m['to'] }}</td> --}}
-                                            <td>{{ $m['subject'] }}</td>
+                                            <td class="{{ empty($m['is_seen']) ? 'fw-bold text-dark' : '' }}">
+                                                {{-- ঐচ্ছিক: ব্লু ডট ইন্ডিকেটর --}}
+                                                @if(empty($m['is_seen']))
+                                                    <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#1e88e5;margin-right:6px;"></span>
+                                                @endif
+                                                {{ $m['subject'] }}
+                                            </td>
                                             <td>{{ $m['date'] }}</td>
                                             <td>
                                                 @php
-                                                    // 1) HTML entity -> UTF-8 chars (e.g., &nbsp; -> U+00A0)
                                                     $plainPreview = html_entity_decode($m['preview'], ENT_QUOTES | ENT_HTML5, 'UTF-8');
-
-                                                    // 2) Non-breaking space (U+00A0) -> normal space
-                                                    // (cover both UTF-8 and ISO-8859-1 forms)
                                                     $plainPreview = str_replace(["\xC2\xA0", chr(160)], ' ', $plainPreview);
-
-                                                    // 3) Remove tags just in case
                                                     $plainPreview = strip_tags($plainPreview);
-
-                                                    // 4) Collapse all whitespace to single spaces
                                                     $plainPreview = preg_replace('/\s+/u', ' ', $plainPreview);
-
-                                                    // 5) Trim
                                                     $plainPreview = trim($plainPreview);
                                                 @endphp
-
                                                 {{ \Illuminate\Support\Str::limit($plainPreview, 100, '...') }}
                                             </td>
-
-
-                                            {{-- <td>
-                                                {{ $m['preview'] }}
-                                            </td> --}}
                                             <td class="text-nowrap">
                                                 <a href="{{ route('inbox.show', $m['id']) }}" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" title="Show">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-
-                                                {{-- Reply button --}}
                                                 <a href="{{ route('inbox.reply.form', $m['id']) }}" class="btn btn-success btn-sm" data-bs-toggle="tooltip" title="Reply">
                                                     <i class="fa fa-reply"></i>
                                                 </a>
-
-                                                {{-- ডিলিট রুট তৈরি করলে নিচের ফর্মটি অন করুন --}}
-                                                {{-- 
-                                                <form action="{{ route('inbox.destroy', $m['id']) }}" method="POST" onsubmit="return confirm('Confirm deleting the email?');" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" title="Delete">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                                --}}
                                             </td>
                                         </tr>
                                     @empty

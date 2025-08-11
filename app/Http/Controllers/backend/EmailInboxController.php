@@ -32,6 +32,19 @@ class EmailInboxController extends Controller
         throw new \RuntimeException('POP3/IMAP connect failed: '.$err);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Decode a fetched body chunk with given encoding, and convert charset to UTF-8 if provided.
      */
@@ -61,6 +74,17 @@ class EmailInboxController extends Controller
         return is_string($data) ? $data : '';
     }
 
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Extract charset from a part's parameters/dparameters.
      */
@@ -85,6 +109,19 @@ class EmailInboxController extends Controller
         }
         return $charset;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Recursively walk parts to find best body.
@@ -129,6 +166,21 @@ class EmailInboxController extends Controller
         return $best;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Public API: returns ['body' => string, 'is_html' => bool]
      */
@@ -168,6 +220,20 @@ class EmailInboxController extends Controller
 
         return ['body' => $decoded, 'is_html' => (strtolower($first->subtype ?? '') === 'html')];
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Recursively collect attachments with section numbers.
@@ -232,6 +298,14 @@ class EmailInboxController extends Controller
         }
     }
 
+
+
+
+
+
+
+
+
     protected function fetchAttachments($inbox, int $msgno): array
     {
         $structure = imap_fetchstructure($inbox, $msgno);
@@ -241,6 +315,16 @@ class EmailInboxController extends Controller
         }
         return $attachments;
     }
+
+
+
+
+
+
+
+
+
+
 
     public function index(Request $request)
     {
@@ -260,37 +344,74 @@ class EmailInboxController extends Controller
             $from = isset($h->from) ? ($h->from[0]->mailbox.'@'.$h->from[0]->host) : '';
             $to   = isset($h->to)   ? ($h->to[0]->mailbox.'@'.$h->to[0]->host)   : '';
             $subject = isset($h->subject) ? imap_utf8($h->subject) : '(no subject)';
-            $date = $h->date ?? '';
+            $dateRaw = $h->date ?? '';
 
+            // Seen / Recent flags from IMAP overview (POP3 হলে নাও আসতে পারে)
+            $overview = @imap_fetch_overview($inbox, $i, 0);
+            $seen   = false;
+            $recent = false;
+            if ($overview && isset($overview[0])) {
+                $o = $overview[0];
+                $seen   = property_exists($o, 'seen')   ? (bool)$o->seen   : false;
+                $recent = property_exists($o, 'recent') ? (bool)$o->recent : false;
+            }
+
+            // Body & preview
             $bodyInfo = $this->fetchBody($inbox, $i);
-            $body = $bodyInfo['body'];
-            $isHtml = $bodyInfo['is_html'];
+            $body = $bodyInfo['body'] ?? '';
+            $isHtml = (bool)($bodyInfo['is_html'] ?? false);
 
             $previewText = $isHtml ? trim(strip_tags($body)) : trim($body);
+            // HTML entities ডিকোড + nbsp → space + whitespace normalize
+            $previewText = html_entity_decode($previewText, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $previewText = str_replace(["\xC2\xA0", chr(160)], ' ', $previewText);
+            $previewText = preg_replace('/\s+/u', ' ', $previewText);
+            $previewText = trim($previewText);
             $preview = mb_strimwidth($previewText, 0, 140, '…', 'UTF-8');
 
-            $dateBD = Carbon::parse($date)->timezone('Asia/Dhaka')->format('j F Y g:i a');
+            // Date parse safe
+            try {
+                $dateBD = $dateRaw ? Carbon::parse($dateRaw)->timezone('Asia/Dhaka')->format('j F Y g:i a') : '';
+            } catch (\Throwable $e) {
+                $dateBD = $dateRaw;
+            }
 
             $items[] = [
-                'id' => $i,
-                'from' => $from,
-                'to' => $to,
-                'subject' => $subject,
-                'date' => $dateBD,
-                'preview' => $preview,
+                'id'        => $i,
+                'from'      => $from,
+                'to'        => $to,
+                'subject'   => $subject,
+                'date'      => $dateBD,
+                'preview'   => $preview,
+                'is_seen'   => $seen,    // <-- Blade-এ রঙ/স্টাইলের জন্য
+                'is_recent' => $recent,  // <-- দরকার হলে ইউজ করবেন
             ];
         }
         imap_close($inbox);
 
-        // Already formatted dates, but to be safe, sort by timestamp
+        // sort by timestamp (date already formatted, so re-parse safely)
         usort($items, function ($a, $b) {
-            return strtotime($b['date']) <=> strtotime($a['date']);
+            $ta = strtotime($a['date']) ?: 0;
+            $tb = strtotime($b['date']) ?: 0;
+            return $tb <=> $ta;
         });
 
         $totalPages = max(1, (int)ceil($total / $perPage));
 
         return view('backend.custom-email.inbox', compact('items','page','totalPages','total'));
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function show($id)
     {
@@ -316,6 +437,12 @@ class EmailInboxController extends Controller
         return view('backend.custom-email.view-email', compact('id','from','to','subject','dateBD','body','isHtml','attachments'));
     }
 
+
+
+
+
+
+
     public function downloadAttachment($id, $index)
     {
         $inbox = $this->connect();
@@ -331,6 +458,12 @@ class EmailInboxController extends Controller
             ->header('Content-Type', $att['mime'] ?? 'application/octet-stream')
             ->header('Content-Disposition', 'attachment; filename="'.$att['filename'].'"');
     }
+
+
+
+
+
+
 
 
 
@@ -365,6 +498,18 @@ class EmailInboxController extends Controller
             'quoted' => "> ".str_replace("\n", "\n> ", $origBodyShort),
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function sendReply(Request $request, $id)
     {

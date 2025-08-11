@@ -6,6 +6,7 @@ use App\Http\Controllers\backend\ContactInfoController;
 use App\Http\Controllers\backend\CustomEmailController;
 use App\Http\Controllers\backend\CustomInvoiceController;
 use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\backend\EmailInboxController;
 use App\Http\Controllers\backend\FaqController;
 use App\Http\Controllers\backend\MessageController as BackendMessageController;
 use App\Http\Controllers\backend\OrderController as BackendOrderController;
@@ -271,6 +272,14 @@ Route::prefix('admin')->group(function () {
         Route::get('custom-emails', [CustomEmailController::class, 'index'])->name('admin.view-custom-email');
         Route::get('custom-email/{id}/view', [CustomEmailController::class, 'view'])->name('admin.view-custom-email-details');
         Route::delete('custom-email/{id}/delete', [CustomEmailController::class, 'destroy'])->name('admin.delete-custom-email');
+
+        
+        Route::prefix('inbox')->group(function () {
+            Route::get('/', [EmailInboxController::class, 'index'])->name('inbox.index');
+            Route::get('/{id}', [EmailInboxController::class, 'show'])->name('inbox.show');
+        });
+
+        Route::get('/inbox/{id}/attachment/{index}', [EmailInboxController::class, 'downloadAttachment'])->name('inbox.download');
 
 
     });

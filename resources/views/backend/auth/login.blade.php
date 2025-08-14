@@ -46,43 +46,60 @@
 
 			<!-- PAGE -->
 			<div class="page">
-				<div>
-				    <!-- CONTAINER OPEN -->
-					<div class="col col-login mx-auto text-center">
-						<a href="#" class="text-center">
-							<img src="{{ asset('') }}backend/assets/images/brand/logo.png" class="header-brand-img" alt="">
-						</a>
-					</div>
-					<div class="container-login100">
-						<div class="wrap-login100 p-0">
-							<div class="card-body">
-								<form class="login100-form validate-form" method="POST" action="{{ route('admin.login') }}">
-                                    @csrf
-									<span class="login100-form-title">
-										Admin Login
+				<div class="container-login100">
+					<div class="wrap-login100 p-0">
+						<div class="card-body">
+							<form class="login100-form validate-form" method="POST" action="{{ route('admin.login') }}">
+								@csrf
+								<span class="login100-form-title">
+									Admin Login
+								</span>
+
+								{{-- Show all errors in one place --}}
+								@if ($errors->any())
+									<div class="alert alert-danger text-center" style="font-size: 14px;">
+										@foreach ($errors->all() as $error)
+											<div>{{ $error }}</div>
+										@endforeach
+									</div>
+								@endif
+								{{-- Email --}}
+								<div class="wrap-input100 validate-input" data-bs-validate="Valid email is required: ex@abc.xyz">
+									<input class="input100" 
+										type="text" 
+										name="email" 
+										value="{{ old('email') }}" 
+										placeholder="Email">
+									<span class="focus-input100"></span>
+									<span class="symbol-input100">
+										<i class="zmdi zmdi-email" aria-hidden="true"></i>
 									</span>
-									<div class="wrap-input100 validate-input" data-bs-validate = "Valid email is required: ex@abc.xyz">
-										<input class="input100" type="text" name="email" placeholder="Email">
-										<span class="focus-input100"></span>
-										<span class="symbol-input100">
-											<i class="zmdi zmdi-email" aria-hidden="true"></i>
-										</span>
-									</div>
-									<div class="wrap-input100 validate-input" data-bs-validate = "Password is required">
-										<input class="input100" type="password" name="password" placeholder="Password">
-										<span class="focus-input100"></span>
-										<span class="symbol-input100">
-											<i class="zmdi zmdi-lock" aria-hidden="true"></i>
-										</span>
-									</div>
-									<div class="container-login100-form-btn">
-                                        <button  class="login100-form-btn btn-primary" type="submit">Login</button>
-									</div>
-								</form>
-							</div>
+								</div>
+
+								{{-- Password --}}
+								<div class="wrap-input100 validate-input" data-bs-validate="Password is required" style="position: relative;">
+									<input class="input100" 
+										type="password" 
+										name="password" 
+										id="password" 
+										placeholder="Password">
+									<span class="focus-input100"></span>
+									<span class="symbol-input100">
+										<i class="zmdi zmdi-lock" aria-hidden="true"></i>
+									</span>
+									
+									{{-- Eye icon for show/hide password --}}
+									<span id="togglePassword" style="position: absolute; right: 15px; top: 12px; cursor: pointer; font-size: 18px;">
+										<i class="zmdi zmdi-eye-off"></i>
+									</span>
+								</div>
+
+								<div class="container-login100-form-btn">
+									<button class="login100-form-btn btn-primary" type="submit">Login</button>
+								</div>
+							</form>
 						</div>
 					</div>
-					<!-- CONTAINER CLOSED -->
 				</div>
 			</div>
 			<!-- End PAGE -->
@@ -112,5 +129,21 @@
         <!-- SWITCHER JS -->
         <script src="{{ asset('') }}backend/assets/switcher/js/switcher.js"></script>
 
+
+		{{-- Script to toggle password visibility --}}
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				const passwordInput = document.getElementById("password");
+				const togglePassword = document.getElementById("togglePassword");
+				const eyeIcon = togglePassword.querySelector("i");
+
+				togglePassword.addEventListener("click", function () {
+					const isPassword = passwordInput.getAttribute("type") === "password";
+					passwordInput.setAttribute("type", isPassword ? "text" : "password");
+					eyeIcon.classList.toggle("zmdi-eye");
+					eyeIcon.classList.toggle("zmdi-eye-off");
+				});
+			});
+		</script>
     </body>
 </html>

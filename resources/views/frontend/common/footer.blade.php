@@ -113,5 +113,272 @@
 
 <script src="{{ asset('') }}frontend/assets/js/bootstrap.bundle.min.js"></script>  
 <script src="{{ asset('') }}frontend/assets/js/main.js"></script>
+<script src="{{ asset('') }}frontend/assets/js/aos.js"></script>
+<script>
+  window.addEventListener('load', () => {
+    AOS.init({
+      // key bits for scroll-up behavior:
+      once: false,      // allow re-animations
+      mirror: true,     // animate out while scrolling past & back up
+      offset: 80,
+      duration: 700,
+      easing: 'ease-out-cubic',
+      anchorPlacement: 'top-bottom'
+    });
+
+    // refresh after images/fonts load (optional but helpful)
+    setTimeout(() => AOS.refreshHard(), 300);
+  });
+</script>
+
+{{-- login page js  --}}
+<script>
+  // Auto-dismiss status alert
+  (function(){
+    const alertEl = document.querySelector('#message-area .alert');
+    if(alertEl){
+      setTimeout(() => {
+        alertEl.classList.add('hide');
+        alertEl.addEventListener('transitionend', () => alertEl.remove());
+      }, 3500);
+    }
+  })();
+
+  // Password show/hide + CapsLock detection
+  (function(){
+    const pwd = document.getElementById('passwordField');
+    const btn = document.getElementById('togglePasswordBtn');
+    const icon = document.getElementById('togglePasswordIcon');
+    const caps = document.getElementById('capsHint');
+
+    if(btn && pwd){
+      btn.addEventListener('click', function(){
+        const show = pwd.type === 'password';
+        pwd.type = show ? 'text' : 'password';
+        icon.classList.toggle('fa-eye', !show);
+        icon.classList.toggle('fa-eye-slash', show);
+        btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      });
+
+      const checkCaps = (e) => {
+        if (!e.getModifierState) return;
+        caps.classList.toggle('show', e.getModifierState('CapsLock'));
+      };
+      ['keyup','keydown','focus'].forEach(ev => pwd.addEventListener(ev, checkCaps));
+      pwd.addEventListener('blur', () => caps.classList.remove('show'));
+    }
+  })();
+</script>
+
+
+{{-- signup page  --}}
+<script>
+  // Toggle password visibility
+  (function(){
+    const toggle = (inputId, btnId, iconId) => {
+      const input = document.getElementById(inputId);
+      const btn   = document.getElementById(btnId);
+      const icon  = document.getElementById(iconId);
+      if(!input || !btn || !icon) return;
+      btn.addEventListener('click', () => {
+        const show = input.type === 'password';
+        input.type = show ? 'text' : 'password';
+        icon.classList.toggle('fa-eye', !show);
+        icon.classList.toggle('fa-eye-slash', show);
+        btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      });
+    };
+    toggle('password','togglePwd','togglePwdIcon');
+    toggle('password_confirmation','toggleConfirm','toggleConfirmIcon');
+  })();
+
+  // Caps Lock detection
+  (function(){
+    const pwd = document.getElementById('password');
+    const caps = document.getElementById('capsPwd');
+    if(!pwd || !caps) return;
+    const check = e => { if(e.getModifierState) caps.classList.toggle('show', e.getModifierState('CapsLock')); };
+    ['keyup','keydown','focus'].forEach(ev=> pwd.addEventListener(ev, check));
+    pwd.addEventListener('blur', ()=> caps.classList.remove('show'));
+  })();
+
+  // Password strength meter
+  (function(){
+    const pwd = document.getElementById('password');
+    const bars = [ 'b1','b2','b3','b4' ].map(id=> document.getElementById(id));
+    const label = document.getElementById('strengthLabel');
+    if(!pwd || bars.some(b=>!b) || !label) return;
+
+    const score = (val) => {
+      let s = 0;
+      if(val.length >= 8) s++;
+      if(/[A-Z]/.test(val) && /[a-z]/.test(val)) s++;
+      if(/\d/.test(val)) s++;
+      if(/[^A-Za-z0-9]/.test(val)) s++;
+      return s;
+    };
+
+    const update = (s) => {
+      bars.forEach((b,i)=>{
+        b.classList.toggle('active', i < s);
+        b.classList.remove('s-1','s-2','s-3','s-4');
+        if(i < s) b.classList.add(`s-${s}`);
+      });
+      label.textContent = ['weak','fair','good','strong'][Math.max(0,s-1)];
+    };
+
+    pwd.addEventListener('input', ()=> update(score(pwd.value)));
+    update(0);
+  })();
+
+  // Confirm password match hint
+  (function(){
+    const pwd = document.getElementById('password');
+    const conf = document.getElementById('password_confirmation');
+    const hint = document.getElementById('matchHint');
+    if(!pwd || !conf || !hint) return;
+    const check = ()=>{
+      if(conf.value.length === 0){ hint.className='match-hint'; return; }
+      const ok = conf.value === pwd.value;
+      hint.className = 'match-hint show ' + (ok ? 'ok' : 'bad');
+      hint.innerHTML = ok
+        ? '<i class="fas fa-check-circle me-1"></i> Passwords match'
+        : '<i class="fas fa-info-circle me-1"></i> Passwords must match';
+    };
+    ['input','blur'].forEach(ev => { pwd.addEventListener(ev, check); conf.addEventListener(ev, check); });
+    check();
+  })();
+</script>
+
+
+
+{{-- for checkour page  --}}
+<script>
+  // Copy PayPal email
+  (function(){
+    const btn = document.getElementById('copyEmail');
+    const el  = document.getElementById('paypalEmail');
+    if(btn && el){
+      btn.addEventListener('click', async () => {
+        try{
+          await navigator.clipboard.writeText(el.textContent.trim());
+          btn.innerHTML = '<i class="far fa-check-circle me-1"></i> Copied';
+          setTimeout(()=> btn.innerHTML = '<i class="far fa-copy me-1"></i> Copy', 1400);
+        }catch(e){ /* fallback */ }
+      });
+    }
+  })();
+
+  // Limit + live counter for notes (500 chars)
+  (function(){
+    const textarea = document.getElementById('additional-text');
+    const counter  = document.getElementById('chars');
+    if(!textarea || !counter) return;
+
+    const MAX = 500;
+    const update = () => {
+      if(textarea.value.length > MAX){
+        textarea.value = textarea.value.slice(0, MAX);
+      }
+      counter.textContent = textarea.value.length + ' / ' + MAX;
+    };
+    textarea.addEventListener('input', update);
+    update();
+  })();
+</script>
+
+
+{{-- for message page  --}}
+<script>
+  // Copy helpers (address/phone/email)
+  (function(){
+    document.querySelectorAll('.copy-btn').forEach(btn=>{
+      btn.addEventListener('click', async ()=>{
+        const sel = btn.getAttribute('data-copy');
+        const el  = sel ? document.querySelector(sel) : null;
+        if(!el) return;
+        const text = (el.innerText || el.textContent || '').trim();
+        try{
+          await navigator.clipboard.writeText(text);
+          const old = btn.innerHTML;
+          btn.innerHTML = '<i class="far fa-check-circle"></i> Copied';
+          setTimeout(()=> btn.innerHTML = old, 1400);
+        }catch(e){}
+      });
+    });
+  })();
+
+  // Live message counter (max 600)
+  (function(){
+    const field = document.getElementById('msgField');
+    const out   = document.getElementById('msgChars');
+    if(!field || !out) return;
+    const MAX = 600;
+    const update = ()=>{
+      if(field.value.length > MAX) field.value = field.value.slice(0, MAX);
+      out.textContent = field.value.length + ' / ' + MAX;
+    };
+    field.addEventListener('input', update);
+    update();
+  })();
+</script>
+
+
+
+{{-- for testimonial page --}}
+<script>
+    (function(){
+      const grid   = document.getElementById('tGrid');
+      const cards  = Array.from(grid.querySelectorAll('.t-item'));
+      const search = document.getElementById('tSearch');
+      const filter = document.getElementById('tFilter');
+      const loadBtn= document.getElementById('tLoadBtn');
+
+      let visible = 6; // initial cards
+      const step  = 6;
+
+      function passesFilter(card){
+        const q = (search.value || '').trim().toLowerCase();
+        const min = parseInt(filter.value || '0', 10);
+        const rating = parseInt(card.dataset.rating || '0', 10);
+        const hay = card.dataset.search || '';
+        const okText = !q || hay.includes(q);
+        const okRating = !min || rating >= min;
+        return okText && okRating;
+      }
+
+      function render(){
+        const filtered = cards.filter(passesFilter);
+        cards.forEach(c => c.style.display = 'none');
+        filtered.slice(0, visible).forEach(c => c.style.display = '');
+        loadBtn.style.display = filtered.length > visible ? '' : 'none';
+      }
+
+      // events
+      search.addEventListener('input', () => { visible = step; render(); });
+      filter.addEventListener('change', () => { visible = step; render(); });
+      loadBtn.addEventListener('click', () => { visible += step; render(); });
+
+      // read more toggle
+      grid.addEventListener('click', (e) => {
+        const btn = e.target.closest('.t-read');
+        if(!btn) return;
+        const body = btn.closest('.t-body');
+        const quote = body.querySelector('.t-quote');
+        quote.style.display = (quote.style.display === 'none') ? '' : 'none';
+        const more = body.querySelector('.t-more');
+        if(!more.dataset.full){
+          more.dataset.full = '1';
+          more.textContent = quote.textContent; // keep a copy (simple)
+        }
+        more.style.display = (more.style.display === 'block') ? 'none' : 'block';
+        btn.textContent = (more.style.display === 'block') ? 'Show less' : 'Read more';
+        btn.setAttribute('aria-expanded', more.style.display === 'block' ? 'true' : 'false');
+      });
+
+      // initial
+      render();
+    })();
+  </script>
 </body>
 </html>

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{ asset('') }}frontend/assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ asset('') }}frontend/assets/css/style.css">
   <link rel="stylesheet" href="{{ asset('') }}frontend/assets/css/responsive.css">
+  <link rel="stylesheet" href="{{ asset('') }}frontend/assets/css/aos.css">
   <link rel="stylesheet" class="js-color-style" href="{{ asset('') }}frontend/assets/css/colors/color-1.css">
   <link rel="stylesheet" class="js-glass-style" href="{{ asset('') }}frontend/assets/css/glass.css" disabled>
 </head>

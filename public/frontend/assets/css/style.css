@@ -2442,3 +2442,228 @@ body.t-dark .badge.success { background: color-mix(in srgb, #16a34a 20%, transpa
 body.t-dark .badge.warning { background: color-mix(in srgb, #f59e0b 20%, transparent); color:#fff7e6; }
 body.t-dark .badge.danger  { background: color-mix(in srgb, #ef4444 20%, transparent); color:#ffecec; }
 
+
+
+
+
+/* Circular service image */
+.service-avatar{
+  inline-size: clamp(96px, 40vw, 160px); /* responsive size */
+  aspect-ratio: 1 / 1;                   /* perfect square */
+  border-radius: 50%;                    /* make it a circle */
+  overflow: hidden;                      /* clip overflow */
+  position: relative;
+  margin-inline: auto;                   /* center in card */
+  box-shadow: 0 8px 18px rgba(0,0,0,.08);
+  border: 1px solid rgba(0,0,0,.06);
+  background: var(--bg-white);
+}
+
+.service-avatar img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;                     /* crop tall/wide images */
+  object-position: center;
+}
+
+/* Subtle ring + gloss (optional polish) */
+.service-avatar::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
+  pointer-events:none;
+}
+
+/* Hover lift (desktop only) */
+@media (hover: hover){
+  .courses-item:hover .service-avatar{
+    transform: translateY(-2px) scale(1.02);
+    transition: transform .18s ease, box-shadow .18s ease;
+    box-shadow: 0 12px 26px rgba(0,0,0,.12);
+  }
+}
+
+/* Dark mode tweaks */
+body.t-dark .service-avatar{
+  background: color-mix(in srgb, var(--white) 96%, transparent);
+  border-color: rgba(255,255,255,.18);
+  box-shadow: 0 8px 18px rgba(0,0,0,.22);
+}
+body.t-dark .service-avatar::before{
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.22);
+}
+
+/* Title size on small screens */
+@media (max-width: 575.98px){
+  .courses-item .title{ font-size: 14px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Service Pricing – polished cards, mobile-friendly, dark-mode aware ===== */
+
+.service-pricing { position: relative; }
+.service-pricing::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(1200px 380px at 50% -10%, color-mix(in srgb, var(--main-color) 6%, transparent), transparent 60%),
+    radial-gradient(800px 300px at 10% 100%, color-mix(in srgb, var(--main-color) 4%, transparent), transparent 60%),
+    radial-gradient(800px 300px at 90% 100%, color-mix(in srgb, var(--main-color) 4%, transparent), transparent 60%);
+  pointer-events:none;
+  opacity:.7;
+}
+
+/* Grid spacing refinements (keeps your existing .grid) */
+.service-pricing .grid { gap: 28px; }
+
+/* Card */
+.service-pricing .pricing-item{
+  position: relative;
+  border-radius: 16px;
+  background: var(--bg-white);
+  border: 1px solid var(--border-color-1);
+  box-shadow: 0 14px 34px rgba(0,0,0,.06);
+  padding: 22px 20px;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  overflow: hidden;
+}
+.service-pricing .pricing-item::before{
+  /* soft gradient ring */
+  content:"";
+  position:absolute; inset:-1px; border-radius:inherit; padding:1px;
+  background: linear-gradient(135deg, var(--main-color), transparent 30%, transparent 70%, var(--main-color));
+  opacity:.10;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  pointer-events:none;
+}
+.service-pricing .pricing-item:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 22px 54px rgba(0,0,0,.10);
+}
+
+/* Optional ribbon via data attribute */
+.service-pricing .pricing-item[data-badge]::after{
+  content: attr(data-badge);
+  position: absolute;
+  top: 14px; right: -36px;
+  transform: rotate(35deg);
+  background: var(--main-color);
+  color: #fff;
+  font-size: 12px; font-weight: 700; letter-spacing:.3px;
+  padding: 6px 56px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.18);
+}
+
+/* Featured card emphasis */
+.service-pricing .pricing-item.featured{
+  border-color: color-mix(in srgb, var(--main-color) 28%, var(--border-color-1));
+  transform: translateY(-2px);
+  box-shadow: 0 26px 60px rgba(0,0,0,.12);
+}
+
+/* Header */
+.service-pricing .pricing-header h3{
+  margin: 0 0 16px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+/* Circular price with conic ring */
+.service-pricing .service-price{
+  height: 140px; width: 140px; margin: 0 auto;
+  border-radius: 50%;
+  display:flex; flex-direction: column; align-items:center; justify-content:center;
+  background: color-mix(in srgb, var(--white) 94%, transparent);
+  position: relative;
+  text-transform: capitalize;
+  font-size: 13px; color: var(--black-70);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.05);
+}
+.service-pricing .service-price::before{
+  content:"";
+  position: absolute; inset: -8px; border-radius: inherit;
+  background: conic-gradient(from 140deg, var(--main-color), transparent 40%, var(--main-color));
+  filter: blur(10px);
+  opacity:.25; z-index:-1;
+}
+.service-pricing .service-price span{
+  display:block;
+  font-size: clamp(26px, 2.8vw, 34px);
+  font-weight: 800;
+  color: var(--main-color);
+  line-height: 1.1;
+}
+
+/* Body (features) */
+.service-pricing .pricing-body{ padding: 18px 0 6px; }
+.service-pricing .pricing-body ul{ margin:0; padding:0; list-style:none; }
+.service-pricing .pricing-body li{
+  position: relative; padding-left: 26px; margin: 10px 0;
+  color: var(--black-90);
+}
+.service-pricing .pricing-body li i{
+  position: absolute; left: 0; top: 2px; font-size: 13px;
+  height: 18px; width: 18px; border-radius: 50%;
+  background: color-mix(in srgb, var(--main-color) 16%, transparent);
+  display:grid; place-items:center; color: var(--main-color);
+}
+
+/* Footer button */
+.service-pricing .pricing-footer { margin-top: 6px; text-align:center; }
+.service-pricing .pricing-footer .btn{
+  border-radius: 999px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, var(--main-color), color-mix(in srgb, var(--main-color) 70%, #ffffff));
+  color:#fff; border: 0;
+  box-shadow: 0 10px 22px rgba(0,0,0,.10);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+@media (hover: hover){
+  .service-pricing .pricing-footer .btn:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.03);
+    box-shadow: 0 14px 32px rgba(0,0,0,.16);
+  }
+}
+
+/* Mobile tweaks */
+@media (max-width: 575.98px){
+  .service-pricing .grid{ gap: 18px; }
+  .service-pricing .pricing-item{ padding: 18px 16px; border-radius: 14px; }
+  .service-pricing .service-price{ height: 120px; width: 120px; }
+}
+
+/* Dark mode */
+body.t-dark .service-surface,
+body.t-dark .service-pricing .pricing-item{
+  background: color-mix(in srgb, var(--white) 96%, transparent);
+  border-color: var(--border-color-2);
+  box-shadow: 0 16px 42px rgba(0,0,0,.28);
+}
+body.t-dark .service-pricing::before{
+  opacity:.45;
+}
+body.t-dark .service-pricing .service-price{
+  background: color-mix(in srgb, var(--white) 92%, transparent);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+}
+body.t-dark .service-pricing .pricing-body li i{
+  background: color-mix(in srgb, var(--main-color) 22%, transparent);
+  color: #fff;
+}
+body.t-dark .service-pricing .pricing-footer .btn{
+  box-shadow: 0 12px 28px rgba(0,0,0,.36);
+}
+ 

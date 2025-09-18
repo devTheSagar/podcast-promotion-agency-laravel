@@ -96,23 +96,23 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="services row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-4">
         @foreach ($services as $service)
-          <div class="col-md-6 col-lg-3 mx-5"
-               data-aos="fade-up" data-aos-delay="{{ ($loop->index % 4) * 120 }}">
-            <div class="courses-item">
-              <a href="{{ route('user.service-details', ['id' => $service->id]) }}" class="link">
-                <div class="courses-item-inner">
-                  <div class="img-box">
-                    <img src="{{ asset($service->serviceImage) }}" alt="service img" height="200px" loading="lazy">
+          <div class="col" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 4) * 120 }}">
+            <div class="courses-item h-100 text-center">
+              <a href="{{ route('user.service-details', ['id' => $service->id]) }}" class="link d-block h-100">
+                <div class="courses-item-inner d-flex flex-column align-items-center h-100">
+                  <div class="img-box service-avatar">
+                    <img src="{{ asset($service->serviceImage) }}" alt="service img" loading="lazy">
                   </div>
-                  <h3 class="title text-center">{{ $service->serviceName }}</h3>
+                  <h3 class="title mt-2 mb-0">{{ $service->serviceName }}</h3>
                 </div>
               </a>
             </div>
           </div>
         @endforeach
       </div>
+
     </div>
   </section>
   <!-- services section end -->

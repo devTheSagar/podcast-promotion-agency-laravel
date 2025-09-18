@@ -56,7 +56,7 @@
         <div class="row text-center">
           <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
             <div class="fun-facts-item">
-              <h2 class="style-4">2</h2>
+              <h2 class="style-4">{{ count($services) }}</h2>
               <p>services we've</p>
             </div>
           </div>

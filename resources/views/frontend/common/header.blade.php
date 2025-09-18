@@ -71,15 +71,12 @@
                           <a href="{{ route('user.track-order') }}">Track Order</a>
                       </li>
                       <li class="sub-menu-item">
-                        <form method="POST" action="{{ route('logout.user') }}" style="margin: 0;">
-                            @csrf
-                            <button type="submit"
-                                style="background: none; border: none; padding: 0; width: 100%; text-align: left; color: #007bff; display: block; font: inherit; cursor: pointer;"
-                                class="ms-4" >
-                                Logout
-                            </button>
-                        </form>
-                    </li>
+  <form method="POST" action="{{ route('logout.user') }}" class="sub-menu-form">
+    @csrf
+    <button type="submit" class="sub-menu-link logout">Logout</button>
+  </form>
+</li>
+
                   </ul>
               @endauth
 

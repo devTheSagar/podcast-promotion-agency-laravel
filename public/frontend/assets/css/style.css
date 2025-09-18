@@ -2667,3 +2667,114 @@ body.t-dark .service-pricing .pricing-footer .btn{
   box-shadow: 0 12px 28px rgba(0,0,0,.36);
 }
  
+
+
+
+
+
+
+
+
+
+/* Fun Facts — slow, all animate */
+.fun-facts-item{
+  transform: translateY(10px) scale(.98);
+  opacity:.85;
+  transition: transform .8s ease, opacity .8s ease, box-shadow .3s ease;
+  /* subtle stagger so they don't pop at the exact same frame */
+  --delay: 0ms;
+  transition-delay: var(--delay);
+}
+.fun-facts-item.in-view{
+  transform:none;
+  opacity:1;
+}
+
+/* gentle stagger */
+.fun-facts-item:nth-child(1){ --delay: 0ms; }
+.fun-facts-item:nth-child(2){ --delay: 120ms; }
+.fun-facts-item:nth-child(3){ --delay: 240ms; }
+.fun-facts-item:nth-child(4){ --delay: 360ms; }
+
+.fun-facts-item h2{
+  position: relative;
+  display: inline-block;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+
+/* slower “shine” sweep */
+.fun-facts-item h2::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(90deg, rgba(255,255,255,.45), rgba(255,255,255,0) 40%);
+  transform: translateX(-120%);
+  mix-blend-mode: screen;
+  opacity:.35;
+  animation: funfacts-shine 4.8s cubic-bezier(.25,.1,.25,1) infinite;
+}
+@keyframes funfacts-shine{
+  to { transform: translateX(120%); }
+}
+
+@media (hover: hover){
+  .fun-facts-item:hover{
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 12px 26px rgba(0,0,0,.10);
+  }
+}
+body.t-dark .fun-facts-item h2{ text-shadow: 0 2px 14px rgba(0,0,0,.28); }
+
+@media (prefers-reduced-motion: reduce){
+  .fun-facts-item, .fun-facts-item.in-view{ transform:none !important; }
+  .fun-facts-item h2::after{ animation:none !important; opacity:.15; }
+}
+
+
+
+
+
+
+/* Same layout as links */
+.sub-menu .sub-menu-item .sub-menu-link,
+.sub-menu .sub-menu-item > a {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  text-align: left;
+  text-transform: capitalize;
+  font: inherit;
+  font-weight: 400;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--black-90);
+  transition: color .3s ease, background-color .3s ease;
+}
+
+/* Global hover for normal items */
+.sub-menu .sub-menu-item > a:hover { color: var(--main-color); }
+
+/* 🔴 Logout in red */
+.sub-menu .sub-menu-item .sub-menu-link.logout {
+  color: #dc2626;            /* red-600 */
+  font-weight: 500;
+}
+
+/* Hover/focus states for Logout (override generic hover) */
+.sub-menu .sub-menu-item .sub-menu-link.logout:hover {
+  color: #b91c1c;            /* red-700 */
+  background: #fee2e2;       /* red-100 */
+}
+.sub-menu .sub-menu-item .sub-menu-link.logout:focus-visible {
+  outline: none;
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, .35);
+}
+
+/* Dark mode hover background for Logout */
+body.t-dark .sub-menu .sub-menu-item .sub-menu-link.logout:hover {
+  background: color-mix(in srgb, #dc2626 18%, transparent);
+}

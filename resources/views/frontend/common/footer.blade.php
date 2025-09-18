@@ -380,5 +380,104 @@
       render();
     })();
   </script>
+
+
+
+
+<script>
+(() => {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nums = document.querySelectorAll('.fun-facts-item h2');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(({ isIntersecting, target }) => {
+      if (!isIntersecting) return;
+      target.closest('.fun-facts-item')?.classList.add('in-view');
+      if (!prefersReduced && !target.dataset.animated) {
+        target.dataset.animated = '1';
+        countUp(target);
+      }
+      observer.unobserve(target);
+    });
+  }, { threshold: 0.5 });
+
+  nums.forEach(el => observer.observe(el));
+
+  function countUp(el){
+    const raw = el.textContent.trim();
+    // capture number + any suffix (e.g., "+", "%")
+    const m = raw.match(/^([\d.,]+)([^\d]*)$/);
+    if (!m) return;
+
+    const numPart = m[1].replace(/,/g, '');
+    const end = parseFloat(numPart) || 0;
+    const suffix = m[2] || '';
+    const useComma = /,/.test(m[1]);
+
+    // duration scales with magnitude (bounds: 900–2000ms)
+    const duration = Math.max(900, Math.min(2000, end * 3));
+    const start = performance.now();
+
+    function tick(now){
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);   // easeOutCubic
+      const current = Math.round(end * eased);
+      el.textContent = (useComma ? current.toLocaleString() : String(current)) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+})();
+</script>
+
+
+
+<script>
+  (() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = document.querySelectorAll('.fun-facts-item');
+    const nums  = document.querySelectorAll('.fun-facts-item h2');
+
+    // Mark all as "in view" so every card animates
+    items.forEach(el => el.classList.add('in-view'));
+
+    // Slow count-up for all numbers
+    if (!prefersReduced) {
+      nums.forEach(el => {
+        if (!el.dataset.animated) {
+          el.dataset.animated = '1';
+          countUp(el);
+        }
+      });
+    }
+
+    function countUp(el){
+      const raw = el.textContent.trim();
+      const m = raw.match(/^([\d.,]+)([^\d]*)$/);  // number + suffix (e.g., "+")
+      if (!m) return;
+
+      const numPart = m[1].replace(/,/g, '');
+      const end = parseFloat(numPart) || 0;
+      const suffix = m[2] || '';
+      const useComma = /,/.test(m[1]);
+
+      // SLOWER: 3.0s base + scale with value (cap at 7s)
+      const base = 3000;            // ms
+      const perUnit = 25;           // ms per unit
+      const duration = Math.max(base, Math.min(7000, base + end * perUnit));
+
+      const start = performance.now();
+      function tick(now){
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);   // easeOutCubic
+        const current = Math.round(end * eased);
+        el.textContent = (useComma ? current.toLocaleString() : String(current)) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+  })();
+</script>
+
 </body>
 </html>

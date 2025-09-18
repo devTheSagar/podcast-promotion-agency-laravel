@@ -181,24 +181,40 @@
                 <!-- course reviews list start -->
                 <div class="reviews-list" id="reviewsList">
                   @foreach ($planDetails->ratings as $rating)
-                    <div class="reviews-item" data-rating="{{ $rating->planRating }}" data-aos="fade-up" data-aos-delay="{{ 160 + ($loop->index * 80) }}">
-                      <div class="img-box">
-                        <img src="{{ asset('frontend/assets/img/review/1.png') }}" alt="review img" loading="lazy">
+                      @php
+                          $nameParts = explode(' ', trim($rating->clientName));
+                          $count = count($nameParts);
+
+                          if ($count === 1) {
+                              $initials = strtoupper(substr($nameParts[0], 0, 1));
+                          } elseif ($count === 2) {
+                              $initials = strtoupper(substr($nameParts[0], 0, 1) . substr($nameParts[1], 0, 1));
+                          } else {
+                              $initials = strtoupper(substr($nameParts[0], 0, 1) . substr(end($nameParts), 0, 1));
+                          }
+                      @endphp
+
+                      <div class="reviews-item" data-rating="{{ $rating->planRating }}" data-aos="fade-up" data-aos-delay="{{ 160 + ($loop->index * 80) }}">
+                          <div class="img-box">
+                              <div class="client-initials">
+                                  {{ $initials }}
+                              </div>
+                          </div>
+                          <h4>{{ $rating->clientName }}</h4>
+                          <div class="stars-rating">
+                              @for ($i = 1; $i <= 5; $i++)
+                                  @if ($i <= $rating->planRating)
+                                      <i class="fas fa-star"></i>
+                                  @else
+                                      <i class="far fa-star"></i>
+                                  @endif
+                              @endfor
+                          </div>
+                          <p>{{ $rating->clientReview }}</p>
                       </div>
-                      <h4>{{ $rating->clientName }}</h4>
-                      <div class="stars-rating">
-                        @for ($i = 1; $i <= 5; $i++)
-                          @if ($i <= $rating->planRating)
-                            <i class="fas fa-star"></i>
-                          @else
-                            <i class="far fa-star"></i>
-                          @endif
-                        @endfor
-                      </div>
-                      <p>{{ $rating->clientReview }}</p>
-                    </div>
                   @endforeach
                 </div>
+
 
                 <button type="button" class="btn btn-theme" id="loadMoreBtn" data-aos="zoom-in" data-aos-delay="120">More Reviews</button>
               </div>

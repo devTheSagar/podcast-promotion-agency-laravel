@@ -30,7 +30,8 @@
     <div class="container">
       <div class="header-main d-flex justify-content-between align-items-center">
         <div class="header-logo">
-          <a href="{{ route('user.dashboard') }}"><span>podcast</span>rank</a>
+          <a href="{{ route('user.dashboard') }}"><span>podcast</span>ranker</a>
+          <small class="slogan">Rank Higher. Grow Faster.</small>
         </div>
         <button type="button" class="header-hamburger-btn js-header-menu-toggler">
           <span></span>

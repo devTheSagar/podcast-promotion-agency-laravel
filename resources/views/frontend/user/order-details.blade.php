@@ -67,7 +67,7 @@
         </h3>
 
         <div class="table-wrap mt-10">
-          <table class="table">
+          <table class="order-details table">
             <tbody>
               <tr>
                 <th style="width:240px;">Order Date</th>

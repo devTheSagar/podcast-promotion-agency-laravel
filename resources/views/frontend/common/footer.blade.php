@@ -118,8 +118,8 @@
   window.addEventListener('load', () => {
     AOS.init({
       // key bits for scroll-up behavior:
-      once: false,      // allow re-animations
-      mirror: true,     // animate out while scrolling past & back up
+      once: true,      // allow re-animations
+      mirror: false,     // animate out while scrolling past & back up
       offset: 80,
       duration: 700,
       easing: 'ease-out-cubic',

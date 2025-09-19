@@ -46,16 +46,17 @@
                                 <td>${{ $order->plan->planPrice }}</td>
                                 <td>{{ $order->created_at->timezone('Asia/Dhaka')->format('d M, Y') }}</td>
                                 <td>{{ $order->created_at->copy()->addDays($order->plan->planDuration)->timezone('Asia/Dhaka')->format('d M, Y ') }}</td>
+                                @php
+                                  $status = strtolower(trim($order->status)); // normalize
+                                  $classMap = [
+                                    'completed' => 'status-completed',
+                                    'pending'   => 'status-pending',
+                                    'received'  => 'status-received',
+                                  ];
+                                  $badgeClass = $classMap[$status] ?? 'status-neutral';
+                                @endphp
                                 <td>
-                                  @if ($order->status === 'Completed')
-                                    <span class="status-completed">Completed</span>
-                                  @elseif ($order->status === 'Pending')
-                                    <span class="status-pending">Pending</span>
-                                  @elseif ($order->status === 'Cancelled')
-                                    <span class="status-cancelled">Cancelled</span>
-                                  @else
-                                    <span>{{ $order->status }}</span>
-                                  @endif
+                                  <span class="status-badge {{ $badgeClass }}">{{ ucfirst($status) }}</span>
                                 </td>
                                 <td>
                                     <a href="{{ route('user.order-details', ['id' => $order->id]) }}" type="submit">View Details</a>

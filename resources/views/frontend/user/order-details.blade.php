@@ -37,6 +37,7 @@
             'pending', 'processing'   => 'warning',
             'delivered', 'completed'  => 'success',
             'cancelled', 'failed'     => 'danger',
+            'received'                => 'received',   // <-- add this
             default                    => ''
           };
 

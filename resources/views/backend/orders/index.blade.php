@@ -86,7 +86,7 @@
 
                                             <td>
                                                 <a href="{{ route('admin.view-order', ['id' => $order->id]) }}" class="btn btn-primary" data-bs-toggle="tooltip" title="show"><i class="fa fa-eye"></i></a>
-                                                <a href="{{ route('admin.download-invoice', ['id' => $order->id]) }}" class="btn btn-sm btn-secondary">Download Invoice</a>
+                                                <a href="{{ route('admin.download-invoice', ['id' => $order->id]) }}" class="btn btn btn-secondary">Download Invoice</a>
                                                 <form action="{{ route('admin.send-invoice', ['id' => $order->id]) }}" method="POST" style="display: inline-block;">
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary" onclick="return confirm('Send invoice to {{$order->user->name}}?')">Send Invoice via Email</button>

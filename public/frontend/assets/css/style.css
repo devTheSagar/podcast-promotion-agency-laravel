@@ -2715,26 +2715,6 @@ body.t-dark .service-pricing .pricing-footer .btn{
   text-shadow: 0 2px 10px rgba(0,0,0,.08);
 }
 
-/* slower “shine” sweep */
-.fun-facts-item h2::after{
-  content:"";
-  position:absolute; inset:0;
-  background: linear-gradient(90deg, rgba(255,255,255,.45), rgba(255,255,255,0) 40%);
-  transform: translateX(-120%);
-  mix-blend-mode: screen;
-  opacity:.35;
-  animation: funfacts-shine 4.8s cubic-bezier(.25,.1,.25,1) infinite;
-}
-@keyframes funfacts-shine{
-  to { transform: translateX(120%); }
-}
-
-@media (hover: hover){
-  .fun-facts-item:hover{
-    transform: translateY(-3px) scale(1.01);
-    box-shadow: 0 12px 26px rgba(0,0,0,.10);
-  }
-}
 body.t-dark .fun-facts-item h2{ text-shadow: 0 2px 14px rgba(0,0,0,.28); }
 
 @media (prefers-reduced-motion: reduce){

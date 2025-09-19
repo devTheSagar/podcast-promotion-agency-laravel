@@ -48,7 +48,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $team->plan->service->serviceName }}</td>
                                             <td>{{ $team->plan->planName }}</td>
-                                            <td>{{ $team->position === 1 ? 'Team Lead' : 'Team Member' }}</td>
+                                            <td>{{ $team->position == 1 ? 'Team Lead' : 'Team Member' }}</td>
                                             <td>{{ $team->memberName }}</td>
                                             <td>
                                                 <img src="{{ asset($team->memberImage) }}" alt="image" class="img-fluid" style="width: 50px; height: 50px; border-radius: 50%;">

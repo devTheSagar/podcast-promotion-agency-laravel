@@ -45,7 +45,12 @@
                                 <td>{{ $order->plan->planName }}</td>
                                 <td>${{ $order->plan->planPrice }}</td>
                                 <td>{{ $order->created_at->timezone('Asia/Dhaka')->format('d M, Y') }}</td>
-                                <td>{{ $order->created_at->copy()->addDays($order->plan->planDuration)->timezone('Asia/Dhaka')->format('d M, Y ') }}</td>
+                                {{-- <td>{{ $order->created_at->copy()->addDays($order->plan->planDuration)->timezone('Asia/Dhaka')->format('d M, Y ') }}</td> --}}
+                                <td>
+                                  {{ optional($order->created_at)
+                                      ? $order->created_at->copy()->addDays((int) data_get($order,'plan.planDuration',0))->timezone('Asia/Dhaka')->format('d M, Y')
+                                      : '—' }}
+                                </td>
                                 @php
                                   $status = strtolower(trim($order->status)); // normalize
                                   $classMap = [

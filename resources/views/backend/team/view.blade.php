@@ -44,7 +44,7 @@
                                     </tr>
                                     <tr>
                                         <td>Position</td>
-                                        <td>{{ $team->position === 1 ? 'Team Lead' : 'Team Member' }}</td>
+                                        <td>{{ $team->position == 1 ? 'Team Lead' : 'Team Member' }}</td>
                                     </tr>
                                     <tr>
                                         <td>Service</td>

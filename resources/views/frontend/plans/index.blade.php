@@ -93,7 +93,7 @@
             <div class="tab-pane fade" id="course-instructor" role="tabpanel" aria-labelledby="course-instructor-tab">
               @foreach ($planDetails->teams as $team)
                 <div class="course-instructor box mb-4" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 140 }}">
-                  <h3 class="mb-3 text-capitalize">{{ $team->position === 1 ? 'Team Lead' : 'Team Member' }}</h3>
+                  <h3 class="mb-3 text-capitalize">{{ $team->position == 1 ? 'Team Lead' : 'Team Member' }}</h3>
                   <div class="instructor-details">
                     <div class="details-wrap d-flex align-items-center flex-wrap">
                       <div class="left-box me-4" data-aos="zoom-in" data-aos-delay="120">
